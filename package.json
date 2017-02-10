@@ -1,0 +1,49 @@
+{
+  "name": "map-finder",
+  "version": "1.0.0",
+  "description": " ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server --colors --progress --inline --hot"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/artyomtrityak/map-finder.git"
+  },
+  "author": "Artyom Trityak <art.trityak@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/artyomtrityak/map-finder/issues"
+  },
+  "homepage": "https://github.com/artyomtrityak/map-finder#readme",
+  "devDependencies": {
+    "babel": "^6.5.2",
+    "babel-core": "^6.22.1",
+    "babel-eslint": "^7.1.1",
+    "babel-loader": "^6.2.10",
+    "babel-polyfill": "^6.22.0",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-react": "^6.22.0",
+    "bootstrap": "^4.0.0-alpha.6",
+    "css-loader": "^0.26.1",
+    "eslint": "^3.15.0",
+    "eslint-loader": "^1.6.1",
+    "eslint-plugin-react": "^6.9.0",
+    "file-loader": "^0.10.0",
+    "image-webpack-loader": "^3.2.0",
+    "leaflet": "^1.0.3",
+    "leaflet.markercluster": "^1.0.3",
+    "node-sass": "^4.5.0",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-redux": "^5.0.2",
+    "redux": "^3.6.0",
+    "sass-loader": "^5.0.1",
+    "style-loader": "^0.13.1",
+    "url-loader": "^0.5.7",
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.3.0"
+  },
+  "dependencies": {}
+}
