@@ -1,5 +1,5 @@
 {
-  "name": "map-finder",
+  "name": "stats-d3",
   "version": "1.0.0",
   "description": " ",
   "main": "index.js",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/artyomtrityak/map-finder.git"
+    "url": "git+https://github.com/artyomtrityak/stats-d3.git"
   },
   "author": "Artyom Trityak <art.trityak@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/artyomtrityak/map-finder/issues"
+    "url": "https://github.com/artyomtrityak/stats-d3/issues"
   },
-  "homepage": "https://github.com/artyomtrityak/map-finder#readme",
+  "homepage": "https://github.com/artyomtrityak/stats-d3#readme",
   "devDependencies": {
     "babel": "^6.5.2",
     "babel-core": "^6.22.1",
@@ -42,7 +42,7 @@
     "react-router": "^4.0.0-beta.5",
     "redux": "^3.6.0",
     "rxjs": "^5.1.0",
-    "sass-loader": "^5.0.1",
+    "sass-loader": "^6.0.3",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
     "webpack": "^2.2.1",
