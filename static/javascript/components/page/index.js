@@ -1,6 +1,7 @@
-import React from 'react';
-import Rx from 'rxjs/Rx';
-import { connect } from 'react-redux';
+import React from "react";
+import Rx from "rxjs/Rx";
+import { connect } from "react-redux";
+import StatsD3 from '../stats';
 
 class Page extends React.Component {
   constructor(props) {
@@ -8,21 +9,15 @@ class Page extends React.Component {
     this.state = {};
   }
 
-  componentWillMount() {
-  }
-
-  componentWillUnmount() {
-  }
-
   render() {
     return (
       <div>
         Hello
+        <StatsD3 />
       </div>
     );
   }
 }
-
 
 function mapStateToProps(state) {
   return {
@@ -30,17 +25,11 @@ function mapStateToProps(state) {
   };
 }
 
-
 function mapDispatchToProps(dispatch) {
   return {
-    dispatchLogin: (data) => (
-      dispatch({action: 'LOGIN:REQUEST', data})
-    ),
-    dispatchLogout: () => (
-      dispatch({action: 'LOGOUT:REQUEST'})
-    )
+    dispatchLogin: data => dispatch({ action: "LOGIN:REQUEST", data }),
+    dispatchLogout: () => dispatch({ action: "LOGOUT:REQUEST" })
   };
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Page);
