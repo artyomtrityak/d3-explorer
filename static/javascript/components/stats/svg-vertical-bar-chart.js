@@ -17,7 +17,7 @@ export default class SvgVerticalBarChart extends React.Component {
   }
 
   componentDidMount() {
-    const margin = {top: 20, right: 30, bottom: 30, left: 40};
+    const margin = { top: 20, right: 30, bottom: 30, left: 40 };
     const width = 500 - margin.left - margin.right;
     const height = 500 - margin.top - margin.bottom;
 
