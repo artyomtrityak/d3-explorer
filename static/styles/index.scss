@@ -7,3 +7,13 @@
   width: 0px;
   text-align: right;
 }
+
+.chart rect {
+  fill: steelblue;
+}
+
+.chart text {
+  fill: white;
+  font: 10px sans-serif;
+  text-anchor: end;
+}

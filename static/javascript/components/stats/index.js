@@ -14,7 +14,7 @@ export default class Stats extends React.Component {
 
     const scale = d3.scaleLinear()
       .domain([0, d3.max(data)])
-      .range([0, window.innerWidth]);
+      .range([0, window.innerWidth-100]);
 
     var p = d3.select(this.chart)
     .selectAll("div")
@@ -36,6 +36,22 @@ export default class Stats extends React.Component {
 
     // Exit…
     p.exit().remove();
+
+
+    const chart2 = d3.select(this.chart2)
+      .attr('height', 50 * data.length)
+      .attr('width', window.innerWidth-50);
+
+    const bar = chart2.selectAll('g')
+      .data(data)
+      .enter()
+        .append('g')
+        .attr('transform', (el, i) => `translate(0, ${i * 40})`);
+
+    bar
+      .append('rect')
+      .attr("width", (x) => scale(x))
+      .attr("height", 30);
   }
 
   render() {
@@ -43,7 +59,7 @@ export default class Stats extends React.Component {
       <div>
         Stats D3
         <div style={{border: '1px solid red'}} ref={(r) => this.chart = r}></div>
-        <div style={{border: '1px green red'}} ref={(r) => this.chart2 = r}></div>
+        <svg className="chart" ref={(r) => this.chart2 = r}></svg>
       </div>
     );
   }
