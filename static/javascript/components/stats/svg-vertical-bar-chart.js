@@ -1,7 +1,7 @@
 import React from 'react';
 import * as d3 from "d3";
 
-export default class SvgHorisontalBarChart extends React.Component {
+export default class SvgVerticalBarChart extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -17,29 +17,33 @@ export default class SvgHorisontalBarChart extends React.Component {
   }
 
   componentDidMount() {
+    const width = 500;
+    const height = 500;
+    const oneBarWidth = width / this.state.data.length;
+
     const scale = d3.scaleLinear()
       .domain([0, d3.max(this.state.data, x => x.val)])
-      .range([0, window.innerWidth-100]);
+      .range([height, 0]);
 
     const chart = d3.select(this.chart)
-      .attr('height', 50 * this.state.data.length)
-      .attr('width', window.innerWidth-100);
+      .attr('height', height)
+      .attr('width', width);
 
     const bar = chart.selectAll('g')
       .data(this.state.data)
       .enter()
         .append('g')
-        .attr('transform', (el, i) => `translate(0, ${i * 40})`);
+        .attr('transform', (el, i) => `translate(${i * oneBarWidth}, 0)`);
 
     bar.append('rect')
-      .attr("width", (x) => scale(x.val))
-      .attr("height", 30);
+      .attr("width", oneBarWidth - 1)
+      .attr("height", (x) => height - scale(x.val))
+      .attr('y', (x) => scale(x.val));
 
     bar.append('text')
-      .attr('x', (x) => scale(x.val) - 10)
-      .attr('y', 15)
-      .attr('dy', '0.35em')
-      .text((x) => `${x.label} - ${x.val}`);
+      .attr('x', (x, i) => `${oneBarWidth/2}`)
+      .attr('y', (x) => scale(x.val) + 20)
+      .text((x) => x.val);
   }
 
   render() {
