@@ -19,9 +19,13 @@ export default class SvgVerticalBarChart extends React.Component {
   componentDidMount() {
     const width = 500;
     const height = 500;
-    const oneBarWidth = width / this.state.data.length;
 
-    const scale = d3.scaleLinear()
+    const xScale = d3.scaleBand()
+      .range([0, width])
+      .padding(0.1)
+      .domain(this.state.data.map((x) => x.label));
+
+    const yScale = d3.scaleLinear()
       .domain([0, d3.max(this.state.data, x => x.val)])
       .range([height, 0]);
 
@@ -33,16 +37,16 @@ export default class SvgVerticalBarChart extends React.Component {
       .data(this.state.data)
       .enter()
         .append('g')
-        .attr('transform', (el, i) => `translate(${i * oneBarWidth}, 0)`);
+        .attr('transform', (x, i) => `translate(${xScale(x.label)}, 0)`);
 
     bar.append('rect')
-      .attr("width", oneBarWidth - 1)
-      .attr("height", (x) => height - scale(x.val))
-      .attr('y', (x) => scale(x.val));
+      .attr("width", xScale.bandwidth())
+      .attr("height", (x) => height - yScale(x.val))
+      .attr('y', (x) => yScale(x.val));
 
     bar.append('text')
-      .attr('x', (x, i) => `${oneBarWidth/2}`)
-      .attr('y', (x) => scale(x.val) + 20)
+      .attr('x', xScale.bandwidth() / 2)
+      .attr('y', (x) => yScale(x.val) + 20)
       .text((x) => x.val);
   }
 
