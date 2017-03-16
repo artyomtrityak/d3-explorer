@@ -38,20 +38,41 @@ export default class Stats extends React.Component {
     p.exit().remove();
 
 
+    const data2 = [
+      { val: 11, label: "A1" },
+      { val: 33, label: "A2" },
+
+      { val: 55, label: "A3" },
+      { val: 64, label: "A4" },
+
+      { val: 14, label: "A5" },
+      { val: 5, label: "A6" }
+    ];
+
+    const scale2 = d3.scaleLinear()
+      .domain([0, d3.max(data2, x => x.val)])
+      .range([0, window.innerWidth-100]);
+
+
     const chart2 = d3.select(this.chart2)
-      .attr('height', 50 * data.length)
-      .attr('width', window.innerWidth-50);
+      .attr('height', 50 * data2.length)
+      .attr('width', window.innerWidth-100);
 
     const bar = chart2.selectAll('g')
-      .data(data)
+      .data(data2)
       .enter()
         .append('g')
         .attr('transform', (el, i) => `translate(0, ${i * 40})`);
 
-    bar
-      .append('rect')
-      .attr("width", (x) => scale(x))
+    bar.append('rect')
+      .attr("width", (x) => scale2(x.val))
       .attr("height", 30);
+
+    bar.append('text')
+      .attr('x', (x) => scale2(x.val) - 10)
+      .attr('y', 15)
+      .attr('dy', '0.35em')
+      .text((x) => `${x.label} - ${x.val}`);
   }
 
   render() {
