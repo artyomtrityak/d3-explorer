@@ -17,27 +17,37 @@ export default class SvgVerticalBarChart extends React.Component {
   }
 
   componentDidMount() {
-    const width = 500;
-    const height = 500;
+    const margin = {top: 20, right: 30, bottom: 30, left: 40};
+    const width = 500 - margin.left - margin.right;
+    const height = 500 - margin.top - margin.bottom;
 
-    const xScale = d3.scaleBand()
-      .range([0, width])
-      .padding(0.1)
-      .domain(this.state.data.map((x) => x.label));
-
-    const yScale = d3.scaleLinear()
-      .domain([0, d3.max(this.state.data, x => x.val)])
-      .range([height, 0]);
+    const { xScale, yScale } = this.getScales(width, height);
+    const xAxis = d3.axisBottom(xScale);
+    const yAxis = d3.axisLeft(yScale);
 
     const chart = d3.select(this.chart)
-      .attr('height', height)
-      .attr('width', width);
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+        .attr('class', 'chart-inner')
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    const bar = chart.selectAll('g')
+    chart
+      .append('g')
+        .attr("class", "x axis")
+        .attr('transform', `translate(0, ${height})`)
+        .call(xAxis);
+
+    chart
+      .append('g')
+        .attr("class", "y axis")
+        .call(yAxis);
+
+    const bar = chart.selectAll('.chart-inner')
       .data(this.state.data)
       .enter()
         .append('g')
-        .attr('transform', (x, i) => `translate(${xScale(x.label)}, 0)`);
+          .attr('transform', (x, i) => `translate(${xScale(x.label)}, 0)`);
 
     bar.append('rect')
       .attr("width", xScale.bandwidth())
@@ -48,6 +58,21 @@ export default class SvgVerticalBarChart extends React.Component {
       .attr('x', xScale.bandwidth() / 2)
       .attr('y', (x) => yScale(x.val) + 20)
       .text((x) => x.val);
+  }
+
+  getScales(width, height) {
+    const xScale = d3.scaleBand()
+      .range([0, width])
+      .padding(0.1)
+      .domain(this.state.data.map((x) => x.label));
+
+    const yScale = d3.scaleLinear()
+      .domain([0, d3.max(this.state.data, x => x.val)])
+      .range([height, 0]);
+
+    return {
+      xScale, yScale
+    };
   }
 
   render() {

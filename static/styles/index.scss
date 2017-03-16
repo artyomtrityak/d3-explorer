@@ -17,3 +17,16 @@
   font: 10px sans-serif;
   text-anchor: end;
 }
+
+.axis {
+  path,
+  line {
+    fill: none;
+    stroke: #000;
+  }
+  
+  text {
+    font: 10px sans-serif;
+    fill: #000;
+  }
+}
