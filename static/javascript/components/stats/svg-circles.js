@@ -30,7 +30,15 @@ export default class SvgCircles extends React.Component {
           .attr('class', 'booble')
           .attr('cy', 100)
           .attr('cx', (el, i) => i*100 + 50)
+          .transition()
+          .duration(1000)
           .attr('r', (el) => el.val);
+
+    circles
+      .exit()
+        .transition()
+        .attr('r', 0)
+        .remove();
   }
 
   render() {
