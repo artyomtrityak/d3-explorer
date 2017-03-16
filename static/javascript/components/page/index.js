@@ -12,7 +12,6 @@ class Page extends React.Component {
   render() {
     return (
       <div>
-        Hello
         <StatsD3 />
       </div>
     );
