@@ -3,6 +3,7 @@ import Rx from "rxjs/Rx";
 import { connect } from "react-redux";
 import BarCharts from '../bar-charts';
 import CircleCharts from '../circles-charts';
+import DynamicBarCharts from '../dynamic-data-charts';
 
 class Page extends React.Component {
   constructor(props) {
@@ -15,6 +16,7 @@ class Page extends React.Component {
       <div>
         <BarCharts />
         <CircleCharts />
+        <DynamicBarCharts />
       </div>
     );
   }
