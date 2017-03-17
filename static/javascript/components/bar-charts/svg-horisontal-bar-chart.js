@@ -44,8 +44,8 @@ export default class SvgHorisontalBarChart extends React.Component {
 
   render() {
     return (
-      <div>
-        <svg className="chart" style={{border: '1px solid red'}} ref={(r) => this.chart = r}></svg>
+      <div className="chart-container">
+        <svg className="chart" ref={(r) => this.chart = r}></svg>
       </div>
     );
   }

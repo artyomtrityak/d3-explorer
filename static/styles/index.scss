@@ -1,36 +1,7 @@
-@import '../../node_modules/leaflet/dist/leaflet.css';
 @import '../../node_modules/bootstrap/scss/bootstrap.scss';
+@import './bar-charts.scss';
+@import './circle-charts.scss';
 
-.my-class {
-  background-color: green;
-  border: 1px solid white;
-  width: 0px;
-  text-align: right;
-}
-
-.chart rect {
-  fill: steelblue;
-}
-
-.chart text {
-  fill: white;
-  font: 10px sans-serif;
-  text-anchor: end;
-}
-
-.axis {
-  path,
-  line {
-    fill: none;
-    stroke: #000;
-  }
-
-  text {
-    font: 10px sans-serif;
-    fill: #000;
-  }
-}
-
-.booble {
-  fill: steelblue;
+.chart-container {
+  padding: 10px;
 }

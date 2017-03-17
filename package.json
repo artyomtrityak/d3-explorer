@@ -34,8 +34,6 @@
     "file-loader": "^0.10.0",
     "image-webpack-loader": "^3.2.0",
     "jquery": "^3.1.1",
-    "leaflet": "^1.0.3",
-    "leaflet.markercluster": "^1.0.3",
     "node-sass": "^4.5.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",

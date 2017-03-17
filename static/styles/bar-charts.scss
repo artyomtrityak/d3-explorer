@@ -1,0 +1,31 @@
+.bar-charts {
+  .div-chart {
+    background-color: green;
+    border: 1px solid white;
+    width: 0px;
+    text-align: right;
+  }
+
+  .chart rect {
+    fill: steelblue;
+  }
+
+  .chart text {
+    fill: white;
+    font: 10px sans-serif;
+    text-anchor: end;
+  }
+
+  .axis {
+    path,
+    line {
+      fill: none;
+      stroke: #000;
+    }
+
+    text {
+      font: 10px sans-serif;
+      fill: #000;
+    }
+  }
+}

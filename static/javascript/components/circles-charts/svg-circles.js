@@ -27,9 +27,10 @@ export default class SvgCircles extends React.Component {
     circles
       .enter()
         .append('circle')
-          .attr('class', 'booble')
+          .attr('class', 'circle-element')
           .attr('cy', 100)
           .attr('cx', (el, i) => i*100 + 50)
+        .merge(circles) //merges enter() and update()
           .transition()
           .duration(1000)
           .attr('r', (el) => el.val);
@@ -43,8 +44,8 @@ export default class SvgCircles extends React.Component {
 
   render() {
     return (
-      <div>
-        <svg className="chart" style={{border: '1px solid red'}} ref={(r) => this.chart = r}></svg>
+      <div className="chart-container">
+        <svg className="chart" ref={(r) => this.chart = r}></svg>
       </div>
     );
   }

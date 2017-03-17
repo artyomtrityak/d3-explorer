@@ -1,7 +1,8 @@
 import React from "react";
 import Rx from "rxjs/Rx";
 import { connect } from "react-redux";
-import StatsD3 from '../stats';
+import BarCharts from '../bar-charts';
+import CircleCharts from '../circles-charts';
 
 class Page extends React.Component {
   constructor(props) {
@@ -12,7 +13,8 @@ class Page extends React.Component {
   render() {
     return (
       <div>
-        <StatsD3 />
+        <BarCharts />
+        <CircleCharts />
       </div>
     );
   }
@@ -26,8 +28,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatchLogin: data => dispatch({ action: "LOGIN:REQUEST", data }),
-    dispatchLogout: () => dispatch({ action: "LOGOUT:REQUEST" })
+    dispatchLogin: data => dispatch({ action: "CATEGORY:CHANGE", data }),
   };
 }
 
