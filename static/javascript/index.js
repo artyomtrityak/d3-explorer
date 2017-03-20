@@ -2,17 +2,13 @@ import '../styles/index.scss';
 
 import ReactDOM from 'react-dom';
 import React from 'react';
-import { createStore } from 'redux';
-import { Provider } from 'react-redux';
-
-import rootReducer from './reducers';
 import Page from './components/page';
+import { HashRouter, Route } from 'react-router-dom';
 
 
-const store = createStore(rootReducer);
 ReactDOM.render(
-  <Provider store={store}>
+  <HashRouter>
     <Page />
-  </Provider>,
+  </HashRouter>,
   document.getElementById(('root'))
 );

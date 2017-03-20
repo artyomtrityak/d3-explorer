@@ -1,41 +1,34 @@
 import React from "react";
 import Rx from "rxjs/Rx";
 import { connect } from "react-redux";
+import { HashRouter, Route } from 'react-router-dom';
 
-import MainMenu from './main-menu';
-import BarCharts from '../bar-charts';
-import CircleCharts from '../circles-charts';
-import DynamicBarCharts from '../dynamic-data-charts';
+import MainMenu from "./main-menu";
+import BarCharts from "../bar-charts";
+import CircleCharts from "../circles-charts";
+import DynamicBarCharts from "../dynamic-data-charts";
 
-class Page extends React.Component {
+export default class Page extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
 
   render() {
-    return (
-      <div>
-        <MainMenu />
+    console.log('this.props:', this.props);
 
-        <BarCharts />
-        <CircleCharts />
-        <DynamicBarCharts />
-      </div>
+    return (
+      <HashRouter>
+        <div>
+          <Route path="/" component={MainMenu}/>
+
+          <Route exact={true} path="/" component={BarCharts}/>
+          <Route path="/bar" component={BarCharts}/>
+          <Route path="/pie" component={null}/>
+          <Route path="/circle" component={CircleCharts}/>
+          <Route path="/dynamic" component={DynamicBarCharts}/>
+        </div>
+      </HashRouter>
     );
   }
 }
-
-function mapStateToProps(state) {
-  return {
-    viewer: state.viewer
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatchLogin: data => dispatch({ action: "CATEGORY:CHANGE", data }),
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Page);

@@ -52,7 +52,8 @@ var webpackConfig = {
   stats: true,
 
   devServer: {
-    port: 9000
+    port: 9000,
+    contentBase: 'static/'
   },
 
   resolve: {
