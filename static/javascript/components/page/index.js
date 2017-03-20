@@ -7,6 +7,7 @@ import MainMenu from "./main-menu";
 import BarCharts from "../bar-charts";
 import CircleCharts from "../circles-charts";
 import DynamicBarCharts from "../dynamic-data-charts";
+import PieCharts from "../pie-charts";
 
 export default class Page extends React.Component {
   constructor(props) {
@@ -15,8 +16,6 @@ export default class Page extends React.Component {
   }
 
   render() {
-    console.log('this.props:', this.props);
-
     return (
       <HashRouter>
         <div>
@@ -24,7 +23,7 @@ export default class Page extends React.Component {
 
           <Route exact={true} path="/" component={BarCharts}/>
           <Route path="/bar" component={BarCharts}/>
-          <Route path="/pie" component={null}/>
+          <Route path="/pie" component={PieCharts}/>
           <Route path="/circle" component={CircleCharts}/>
           <Route path="/dynamic" component={DynamicBarCharts}/>
         </div>

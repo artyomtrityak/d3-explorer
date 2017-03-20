@@ -4,8 +4,9 @@ import { connect } from "react-redux";
 import DivHorisontalBar from './div-horisontal-bar-chart';
 import SvgHorisontalBar from './svg-horisontal-bar-chart';
 import SvgVerticalBar from './svg-vertical-bar-chart';
+import { NavLink, Route } from 'react-router-dom';
 
-export default class BarSubcategory extends React.Component {
+export default class BarCharts extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -15,24 +16,26 @@ export default class BarSubcategory extends React.Component {
   }
 
   render() {
+    const { match } = this.props;
+
     return (
       <div>
         <ul className="nav nav-tabs">
           <li className="nav-item">
-            <a className="nav-link active" href="#">Div Horisontal</a>
+            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/div`}>Div Horisontal</NavLink>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#">Svg Horisontal</a>
+            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/svg`}>Svg Horisontal</NavLink>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#">Vertical</a>
+            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/vertical`}>Vertical</NavLink>
           </li>
         </ul>
 
         <div className="bar-charts">
-          <DivHorisontalBar />
-          <SvgHorisontalBar />
-          <SvgVerticalBar />
+          <Route path={`${match.url}/div`} component={DivHorisontalBar}/>
+          <Route path={`${match.url}/svg`} component={SvgHorisontalBar}/>
+          <Route path={`${match.url}/vertical`} component={SvgVerticalBar}/>
         </div>
       </div>
     );

@@ -1,9 +1,8 @@
 import React from 'react';
 import * as d3 from "d3";
 import { NavLink, Route } from 'react-router-dom';
-import DynamicBarChart from './dynamic-bar-chart';
 
-export default class DynamicCharts extends React.Component {
+export default class PieCharts extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -23,8 +22,8 @@ export default class DynamicCharts extends React.Component {
           </li>
         </ul>
 
-        <div className="dynamic-chart">
-          <Route path={`${match.url}/basic`} component={DynamicBarChart}/>
+        <div className="pie-chart">
+          <Route path={`${match.url}/basic`} component={null}/>
         </div>
       </div>
     );

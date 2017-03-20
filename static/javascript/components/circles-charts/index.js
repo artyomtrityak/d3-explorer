@@ -1,8 +1,9 @@
 import React from 'react';
 import * as d3 from "d3";
+import { NavLink, Route } from 'react-router-dom';
 import SvgCircles from './svg-circles';
 
-export default class Stats extends React.Component {
+export default class CirclesCharts extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -12,9 +13,19 @@ export default class Stats extends React.Component {
   }
 
   render() {
+    const { match } = this.props;
+
     return (
       <div>
-        <SvgCircles />
+        <ul className="nav nav-tabs">
+          <li className="nav-item">
+            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/basic`}>Basic</NavLink>
+          </li>
+        </ul>
+
+        <div className="circle-chart">
+          <Route path={`${match.url}/basic`} component={SvgCircles}/>
+        </div>
       </div>
     );
   }
