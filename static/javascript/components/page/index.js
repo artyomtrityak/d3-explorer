@@ -1,6 +1,8 @@
 import React from "react";
 import Rx from "rxjs/Rx";
 import { connect } from "react-redux";
+
+import MainMenu from './main-menu';
 import BarCharts from '../bar-charts';
 import CircleCharts from '../circles-charts';
 import DynamicBarCharts from '../dynamic-data-charts';
@@ -14,6 +16,8 @@ class Page extends React.Component {
   render() {
     return (
       <div>
+        <MainMenu />
+
         <BarCharts />
         <CircleCharts />
         <DynamicBarCharts />
