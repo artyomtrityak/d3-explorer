@@ -1,18 +1,12 @@
 import React from 'react';
 import * as d3 from "d3";
+import { generateArray } from '../../data-layer/array-processors';
 
 export default class SvgHorisontalBarChart extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: [
-        { val: 11, label: "A1" },
-        { val: 33, label: "A2" },
-        { val: 55, label: "A3" },
-        { val: 64, label: "A4" },
-        { val: 14, label: "A5" },
-        { val: 5, label: "A6" }
-      ]
+      data: generateArray()
     };
   }
 
