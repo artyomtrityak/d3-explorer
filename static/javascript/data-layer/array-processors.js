@@ -1,6 +1,15 @@
-export function getRandomlyChangedArray(basicArray) {
-  return basicArray.filter(() => Math.round(Math.random()));
+export function getRandomlyChangedValuesArray(basicArray) {
+  return basicArray.map(obj => {
+    if (Math.round(Math.random())) {
+      return {
+        label: Math.random(),
+        val: parseInt(Math.random() * 100 + 10, 10)
+      };
+    }
+    return Object.assign({}, obj, { val: obj.val + Math.random() * 1000 });
+  });
 }
+
 
 export function generateArray(size = 10) {
   let result = [];
