@@ -21,12 +21,14 @@ export default class SvgVerticalBarChart extends React.Component {
 
     const chart = d3.select(this.chart)
       .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom)
+      .attr("height", height + margin.top + margin.bottom);
+
+    chart
       .append("g")
         .attr('class', 'chart-inner')
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    chart
+    chart.select('.chart-inner')
       .append('g')
         .attr("class", "x axis")
         .attr('transform', `translate(0, ${height})`)
@@ -36,17 +38,21 @@ export default class SvgVerticalBarChart extends React.Component {
         .attr("x", width + 20)
         .text("Labels");
 
-    chart
+    chart.select('.chart-inner')
       .append('g')
         .attr("class", "y axis")
         .call(yAxis)
-        .append("text")
-          .attr("transform", "rotate(-90)")
-          .attr("y", 6)
-          .attr("dy", ".71em")
-          .text("Frequency");
+      .append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 6)
+        .attr("dy", ".71em")
+        .text("Frequency");
 
-    const bar = chart.selectAll('.chart-inner')
+    const barsContainer = chart.select('.chart-inner')
+      .append("g")
+        .attr('class', 'chart-content');
+
+    const bar = barsContainer.selectAll('g')
       .data(this.state.data)
       .enter()
         .append('g')
@@ -73,9 +79,7 @@ export default class SvgVerticalBarChart extends React.Component {
       .domain([0, d3.max(this.state.data, x => x.val)])
       .range([height, 0]);
 
-    return {
-      xScale, yScale
-    };
+    return { xScale, yScale };
   }
 
   render() {

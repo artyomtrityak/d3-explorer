@@ -42,29 +42,32 @@ export default class DynamicBarChart extends React.Component {
   processing() {
     const { xScale, yScale } = this.getScales();
 
-    const bars = this.svg.selectAll('rect')
+    const bars = this.svg.selectAll('g')
       .data(this.state.data, (d) => {
         return d.label;
       });
 
-    bars
+    const enterGElements = bars
       .enter()
-        .append('rect')
+        .append('g')
           .attr('class', 'added')
-          .attr('transform', (x, i) => `translate(${xScale(x.label)}, 0)`)
-          .attr("width", xScale.bandwidth())
-      .merge(bars)
-        .transition()
-        .duration(1000)
-        .attr('y', (d) => yScale(d.val))
-        .attr("height", (d) => this.state.height - yScale(d.val));
+          .attr('transform', (x, i) => `translate(${xScale(x.label)}, 0)`);
 
     bars
       .attr('class', 'updated');
 
+    enterGElements
+      .append('rect')
+        .attr("width", xScale.bandwidth())
+        .attr('y', (d) => yScale(d.val))
+        .attr("height", (d) => this.state.height - yScale(d.val));
+
     bars
       .exit()
         .remove();
+
+    bars.selectAll('g')
+      .attr('class', 'upd2');
   }
 
   getScales() {
