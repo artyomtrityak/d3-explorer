@@ -9,7 +9,9 @@ export default class DynamicBarChart extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: BASE_DATA
+      data: BASE_DATA,
+      width: 600,
+      height: 400
     };
   }
 
@@ -20,11 +22,9 @@ export default class DynamicBarChart extends React.Component {
       this.setState({data});
     });
 
-    const width = 600;
-    const height = 300;
     this.svg = d3.select(this.chartRef)
-      .attr("width", width)
-      .attr("height", height)
+      .attr("width", this.state.width)
+      .attr("height", this.state.height)
       .append('g')
         .attr('class', 'chart-inner');
 
@@ -36,14 +36,11 @@ export default class DynamicBarChart extends React.Component {
   }
 
   componentDidUpdate() {
-    console.log(this.state.data);
     this.processing();
   }
 
   processing() {
-    const width = 600;
-    const height = 300;
-    const { xScale, yScale } = this.getScales(width, height);
+    const { xScale, yScale } = this.getScales();
 
     const bars = this.svg.selectAll('rect')
       .data(this.state.data, (d) => {
@@ -59,8 +56,8 @@ export default class DynamicBarChart extends React.Component {
       .merge(bars)
         .transition()
         .duration(1000)
-        .attr("height", (d) => height - yScale(d.val))
-        .attr('y', (d) => yScale(d.val));
+        .attr('y', (d) => yScale(d.val))
+        .attr("height", (d) => this.state.height - yScale(d.val));
 
     bars
       .attr('class', 'updated');
@@ -70,15 +67,15 @@ export default class DynamicBarChart extends React.Component {
         .remove();
   }
 
-  getScales(width, height) {
+  getScales() {
     const xScale = d3.scaleBand()
-      .range([0, width])
+      .range([0, this.state.width])
       .padding(0.1)
       .domain(this.state.data.map((d) => d.label));
 
     const yScale = d3.scaleLinear()
       .domain([0, d3.max(this.state.data, d => d.val)])
-      .range([height, 0]);
+      .range([this.state.height, 0]);
 
     return { xScale, yScale };
   }
