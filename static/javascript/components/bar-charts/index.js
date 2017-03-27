@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import DivHorisontalBar from './div-horisontal-bar-chart';
 import SvgHorisontalBar from './svg-horisontal-bar-chart';
 import SvgVerticalBar from './svg-vertical-bar-chart';
+import DynamicBar from './dynamic-bar-chart';
 import { NavLink, Route } from 'react-router-dom';
 
 export default class BarCharts extends React.Component {
@@ -30,12 +31,16 @@ export default class BarCharts extends React.Component {
           <li className="nav-item">
             <NavLink activeClassName="active" className="nav-link" to={`${match.url}/vertical`}>Vertical</NavLink>
           </li>
+          <li className="nav-item">
+            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/dynamic`}>Vertical</NavLink>
+          </li>
         </ul>
 
         <div className="bar-charts">
           <Route path={`${match.url}/div`} component={DivHorisontalBar}/>
           <Route path={`${match.url}/svg`} component={SvgHorisontalBar}/>
           <Route path={`${match.url}/vertical`} component={SvgVerticalBar}/>
+          <Route path={`${match.url}/dynamic`} component={DynamicBar}/>
         </div>
       </div>
     );

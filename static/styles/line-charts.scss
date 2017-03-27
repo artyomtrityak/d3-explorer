@@ -1,0 +1,14 @@
+.line-charts-container {
+  .line-chart {
+    path {
+      fill: none;
+      stroke: black;
+    }
+  }
+
+  .area-chart {
+    path {
+      fill: cadetblue;
+    }
+  }
+}

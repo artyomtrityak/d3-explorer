@@ -16,12 +16,6 @@ export default class DynamicBarChart extends React.Component {
   }
 
   componentDidMount() {
-    this._subscription = Rx.Observable.interval(5000)
-    .map(() => (getRandomlyChangedValuesArray(BASE_DATA)))
-    .subscribe((data) => {
-      this.setState({data});
-    });
-
     this.svg = d3.select(this.chartRef)
       .attr("width", this.state.width)
       .attr("height", this.state.height)
@@ -29,6 +23,12 @@ export default class DynamicBarChart extends React.Component {
         .attr('class', 'chart-inner');
 
     this.processing();
+
+    this._subscription = Rx.Observable.interval(5000)
+      .map(() => (getRandomlyChangedValuesArray(BASE_DATA)))
+      .subscribe((data) => {
+        this.setState({data});
+      });
   }
 
   componentWillUnmount() {
@@ -65,9 +65,6 @@ export default class DynamicBarChart extends React.Component {
     bars
       .exit()
         .remove();
-
-    bars.selectAll('g')
-      .attr('class', 'upd2');
   }
 
   getScales() {
@@ -85,8 +82,7 @@ export default class DynamicBarChart extends React.Component {
 
   render() {
     return (
-      <svg className="chart-container" ref={(r) => this.chartRef = r}>
-      </svg>
+      <svg className="chart-container" ref={(r) => this.chartRef = r}></svg>
     );
   }
 };

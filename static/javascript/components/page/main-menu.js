@@ -2,9 +2,6 @@ import React from "react";
 import Rx from "rxjs/Rx";
 import cn from 'classnames';
 import { connect } from "react-redux";
-import BarCharts from '../bar-charts';
-import CircleCharts from '../circles-charts';
-import DynamicBarCharts from '../dynamic-data-charts';
 import { Link, matchPath } from 'react-router-dom';
 
 
@@ -36,8 +33,8 @@ export default class MainMenu extends React.Component {
               <Link className="nav-link" to="/pie">Pie charts</Link>
             </li>
 
-            <li className={cn("nav-item", {"active": matchPath(pathname, {path: '/dynamic'})})}>
-              <Link className="nav-link" to="/dynamic">Dynamic data</Link>
+            <li className={cn("nav-item", {"active": matchPath(pathname, {path: '/line'})})}>
+              <Link className="nav-link" to="/line">Line charts</Link>
             </li>
 
           </ul>
