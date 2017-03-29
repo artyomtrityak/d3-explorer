@@ -1,5 +1,4 @@
 import React from "react";
-import Rx from "rxjs/Rx";
 import { HashRouter, Route } from 'react-router-dom';
 
 import MainMenu from "./main-menu";

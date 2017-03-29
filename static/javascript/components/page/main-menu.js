@@ -1,5 +1,4 @@
 import React from "react";
-import Rx from "rxjs/Rx";
 import cn from 'classnames';
 import { Link, matchPath } from 'react-router-dom';
 

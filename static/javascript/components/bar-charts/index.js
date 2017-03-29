@@ -33,7 +33,7 @@ export default class BarCharts extends React.Component {
             <NavLink activeClassName="active" className="nav-link" to={`${match.url}/vertical`}>Vertical</NavLink>
           </li>
           <li className="nav-item">
-            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/dynamic`}>Vertical</NavLink>
+            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/dynamic`}>Dynanic</NavLink>
           </li>
           <li className="nav-item">
             <NavLink activeClassName="active" className="nav-link" to={`${match.url}/stack`}>Stack</NavLink>

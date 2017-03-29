@@ -1,6 +1,5 @@
 import React from 'react';
 import * as d3 from "d3";
-import Rx from "rxjs/Rx";
 import { getRandomlyChangedValuesArray, generateArray } from '../../data-layer/array-processors';
 
 const BASE_DATA = generateArray();
@@ -24,15 +23,13 @@ export default class DynamicBarChart extends React.Component {
 
     this.processing();
 
-    this._subscription = Rx.Observable.interval(5000)
-      .map(() => (getRandomlyChangedValuesArray(BASE_DATA)))
-      .subscribe((data) => {
-        this.setState({data});
-      });
+    this._interval = setInterval(() => {
+      this.setState({data: getRandomlyChangedValuesArray(BASE_DATA)});
+    }, 2000);
   }
 
   componentWillUnmount() {
-    this._subscription.unsubscribe();
+    clearInterval(this._interval);
   }
 
   componentDidUpdate() {
