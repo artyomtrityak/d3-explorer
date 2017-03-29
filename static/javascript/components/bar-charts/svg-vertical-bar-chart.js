@@ -26,7 +26,7 @@ export default class SvgVerticalBarChart extends React.Component {
     chart
       .append("g")
         .attr('class', 'chart-inner')
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        .attr("transform", `translate(${margin.left},${margin.top})`);
 
     chart.select('.chart-inner')
       .append('g')

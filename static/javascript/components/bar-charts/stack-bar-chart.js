@@ -20,7 +20,7 @@ export default class SvgVerticalBarChart extends React.Component {
     const width = 500 - margin.left - margin.right;
     const height = 500 - margin.top - margin.bottom;
 
-    const { xScale, yScale } = this.getScales(width, height);
+    const { xScale, yScale } = this.getScales(width, height, margin);
 
     const chart = d3.select(this.chartRef)
       .attr("width", width + margin.left + margin.right)
@@ -29,17 +29,27 @@ export default class SvgVerticalBarChart extends React.Component {
     this.chartInner = chart
       .append("g")
         .attr('class', 'chart-inner')
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        .attr("transform", `translate(${margin.left},${margin.top})`);
+
+    const series = d3.stack()
+      .keys(["apples", "bananas", "cherries"])
+      (this.state.data);
+
+    console.log(xScale('Q2-2017'));
 
     this.processing();
   }
 
   processing() {
-
   }
 
-  getScales(width, height) {
+  getScales(width, height, margin) {
+    const xScale = d3.scaleBand()
+      .domain(this.state.data.map((d) => d.month))
+      .rangeRound([margin.left, width - margin.right])
+      .padding(0.1);
 
+    return { xScale };
   }
 
   render() {
