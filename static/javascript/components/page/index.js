@@ -1,6 +1,5 @@
 import React from "react";
 import Rx from "rxjs/Rx";
-import { connect } from "react-redux";
 import { HashRouter, Route } from 'react-router-dom';
 
 import MainMenu from "./main-menu";

@@ -1,11 +1,12 @@
 import React from 'react';
 import * as d3 from "d3";
-import { connect } from "react-redux";
+import { NavLink, Route } from 'react-router-dom';
 import DivHorisontalBar from './div-horisontal-bar-chart';
 import SvgHorisontalBar from './svg-horisontal-bar-chart';
 import SvgVerticalBar from './svg-vertical-bar-chart';
 import DynamicBar from './dynamic-bar-chart';
-import { NavLink, Route } from 'react-router-dom';
+import StackBar from './stack-bar-chart';
+
 
 export default class BarCharts extends React.Component {
   constructor(props) {
@@ -34,6 +35,9 @@ export default class BarCharts extends React.Component {
           <li className="nav-item">
             <NavLink activeClassName="active" className="nav-link" to={`${match.url}/dynamic`}>Vertical</NavLink>
           </li>
+          <li className="nav-item">
+            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/stack`}>Stack</NavLink>
+          </li>
         </ul>
 
         <div className="bar-charts">
@@ -41,6 +45,7 @@ export default class BarCharts extends React.Component {
           <Route path={`${match.url}/svg`} component={SvgHorisontalBar}/>
           <Route path={`${match.url}/vertical`} component={SvgVerticalBar}/>
           <Route path={`${match.url}/dynamic`} component={DynamicBar}/>
+          <Route path={`${match.url}/stack`} component={StackBar}/>
         </div>
       </div>
     );

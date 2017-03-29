@@ -1,7 +1,6 @@
 import React from "react";
 import Rx from "rxjs/Rx";
 import cn from 'classnames';
-import { connect } from "react-redux";
 import { Link, matchPath } from 'react-router-dom';
 
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import * as d3 from "d3";
+import Rx from "rxjs/Rx";
 
 export default class SvgLine extends React.Component {
   constructor(props) {
@@ -23,12 +24,20 @@ export default class SvgLine extends React.Component {
       .append('g')
         .attr('transform', 'translate(100, 0)');
 
+    this._subscription = Rx.Observable.interval(1000)
+      .subscribe(() => {
+        this.transformData();
+      });
+
     this.processing();
-    setInterval(() => this.transformData(), 1000);
   }
 
   componentDidUpdate() {
     this.processing();
+  }
+
+  componentWillUnmount() {
+    this._subscription.unsubscribe();
   }
 
   processing() {
@@ -42,6 +51,10 @@ export default class SvgLine extends React.Component {
         .append('path')
       .merge(line)
         .attr('d', (d) => lineGenerator(d.value));
+
+    line
+      .exit()
+        .remove();
   }
 
   transformData() {
