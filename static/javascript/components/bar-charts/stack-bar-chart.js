@@ -2,6 +2,15 @@ import React from 'react';
 import * as d3 from "d3";
 import { generateArray } from '../../data-layer/array-processors';
 
+
+function stackMin(serie) {
+  return d3.min(serie, (d) => d[0]);
+}
+
+function stackMax(serie) {
+  return d3.max(serie, (d) => d[1]);
+}
+
 export default class SvgVerticalBarChart extends React.Component {
   constructor(props) {
     super(props);
@@ -20,8 +29,6 @@ export default class SvgVerticalBarChart extends React.Component {
     const width = 500 - margin.left - margin.right;
     const height = 500 - margin.top - margin.bottom;
 
-    const { xScale, yScale } = this.getScales(width, height, margin);
-
     const chart = d3.select(this.chartRef)
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom);
@@ -35,7 +42,33 @@ export default class SvgVerticalBarChart extends React.Component {
       .keys(["apples", "bananas", "cherries"])
       (this.state.data);
 
-    console.log(xScale('Q2-2017'));
+    const { xScale, yScale } = this.getScales(width, height, margin, series);
+
+    this.chartInner.append("g")
+      .attr("transform", "translate(0," + yScale(0) + ")")
+      .call(d3.axisBottom(xScale));
+
+    this.chartInner.append("g")
+      .attr("transform", "translate(" + margin.left + ",0)")
+      .call(d3.axisLeft(yScale));
+
+    const colors = d3.scaleOrdinal(d3.schemeCategory10);
+
+    this.chartInner
+      .append('g')
+        .selectAll("g")
+        .data(series)
+        .enter()
+          .append("g")
+            .attr("fill", (d) => colors(d.key))
+            .selectAll("rect")
+            .data((d) => d)
+            .enter()
+              .append("rect")
+                .attr("width", xScale.bandwidth)
+                .attr("x", (d) => xScale(d.data.month))
+                .attr("y", (d) => yScale(d[1]))
+                .attr("height", (d) => yScale(d[0]) - yScale(d[1]));
 
     this.processing();
   }
@@ -43,19 +76,23 @@ export default class SvgVerticalBarChart extends React.Component {
   processing() {
   }
 
-  getScales(width, height, margin) {
+  getScales(width, height, margin, series) {
     const xScale = d3.scaleBand()
       .domain(this.state.data.map((d) => d.month))
       .rangeRound([margin.left, width - margin.right])
       .padding(0.1);
 
-    return { xScale };
+    const yScale = d3.scaleLinear()
+      .domain([d3.min(series, stackMin), d3.max(series, stackMax)])
+      .rangeRound([height - margin.bottom, margin.top]);
+
+    return { xScale, yScale };
   }
 
   render() {
     return (
-      <div className="chart-container">
-        <svg className="chart" ref={(r) => this.chartRef = r}></svg>
+      <div className="stack-chart-container">
+        <svg className="stack-chart" ref={(r) => this.chartRef = r}></svg>
       </div>
     );
   }
