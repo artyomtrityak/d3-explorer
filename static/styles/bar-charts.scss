@@ -29,6 +29,13 @@
     }
   }
 
+  .stack-chart {
+    rect:hover {
+      stroke: blueviolet;
+      stroke-width: 2;
+    }
+  }
+
   .added {
     fill: blueviolet;
   }

@@ -2,6 +2,7 @@ import React from 'react';
 import * as d3 from "d3";
 import { NavLink, Route } from 'react-router-dom';
 import SvgCircles from './svg-circles';
+import SvgCirclesDragNDrop from './circles-drag-n-drop';
 
 export default class CirclesCharts extends React.Component {
   constructor(props) {
@@ -21,10 +22,14 @@ export default class CirclesCharts extends React.Component {
           <li className="nav-item">
             <NavLink activeClassName="active" className="nav-link" to={`${match.url}/basic`}>Basic</NavLink>
           </li>
+          <li className="nav-item">
+            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/drag`}>Drag'n'Drop</NavLink>
+          </li>
         </ul>
 
         <div className="circle-chart">
           <Route path={`${match.url}/basic`} component={SvgCircles}/>
+          <Route path={`${match.url}/drag`} component={SvgCirclesDragNDrop}/>
         </div>
       </div>
     );
