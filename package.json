@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/artyomtrityak/stats-d3.git"
+    "url": "git+https://github.com/artyomtrityak/d3-explorer.git"
   },
   "author": "Artyom Trityak <art.trityak@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/artyomtrityak/stats-d3/issues"
+    "url": "https://github.com/artyomtrityak/d3-explorer/issues"
   },
-  "homepage": "https://github.com/artyomtrityak/stats-d3#readme",
+  "homepage": "https://github.com/artyomtrityak/d3-explorer#readme",
   "devDependencies": {
     "babel": "^6.5.2",
     "babel-core": "^6.22.1",
