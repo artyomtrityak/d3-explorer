@@ -1,7 +1,11 @@
 import React from 'react';
 import * as d3 from "d3";
 
-export default class BasicPieChart extends React.Component {
+
+const colors = d3.scaleOrdinal(d3.schemeCategory10);
+
+
+export default class InteractivePieChart extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -33,8 +37,6 @@ export default class BasicPieChart extends React.Component {
       innerRadius = outerRadius / 3,
       cornerRadius = 10;
 
-    const colors = d3.scaleOrdinal(d3.schemeCategory10);
-
     const chart = d3.select(this.chartRef)
       .attr("width", window.innerWidth - 100)
       .attr("height", 500)
@@ -47,7 +49,7 @@ export default class BasicPieChart extends React.Component {
       .padAngle(.02);
 
     var arc = d3.arc()
-      .outerRadius(outerRadius - 20)
+      .padRadius(outerRadius)
       .innerRadius(innerRadius);
 
     chart.selectAll("path")
@@ -55,12 +57,34 @@ export default class BasicPieChart extends React.Component {
       .enter()
         .append("path")
           .attr("fill", (d, i) => colors(i))
-          .attr("d", arc);
+          .each((d) => { d.outerRadius = outerRadius - 20; })
+          .attr("d", arc)
+          .on("mouseover", this.arcTween(arc, outerRadius, true))
+          .on("mouseout", this.arcTween(arc, outerRadius - 20));
+  }
+
+  arcTween(arc, newOuterRadius, isMouseOver) {
+    return function interpolateFn(data, i) {
+      d3.select(this)
+        .transition()
+        .duration(1000)
+        .attrTween("d", (d) => {
+          const interpolator = d3.interpolate(d.outerRadius, newOuterRadius);
+          return (t) => {
+            d.outerRadius = interpolator(t);
+            return arc(d);
+          };
+        })
+        .attrTween('fill', (d) => {
+          let to = isMouseOver ? 'blue' : colors(i);
+          return d3.interpolateRgb(this.getAttribute("fill"), to);
+        });
+    };
   }
 
   render() {
     return (
-      <svg className="basic-pie" ref={(r) => this.chartRef = r}></svg>
+      <svg className="interactive-pie" ref={(r) => this.chartRef = r}></svg>
     );
   }
 }
