@@ -71,7 +71,6 @@ export default class InteractivePieChart extends React.Component {
     arcContainer
       .append("text")
         .attr("transform", (d) => {
-          console.log('zzz:', d, arc.centroid(d));
           return `translate(${arc.centroid(d)})`;
         })
         .attr("dy", "0.35em")
