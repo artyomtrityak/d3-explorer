@@ -37,6 +37,10 @@ export default class InteractivePieChart extends React.Component {
       innerRadius = outerRadius / 3,
       cornerRadius = 10;
 
+    const arc = d3.arc()
+      .padRadius(outerRadius)
+      .innerRadius(innerRadius);
+
     const chart = d3.select(this.chartRef)
       .attr("width", window.innerWidth - 100)
       .attr("height", 500)
@@ -48,19 +52,30 @@ export default class InteractivePieChart extends React.Component {
       .value((d) => +d.apps_by_deployment_doc_count)
       .padAngle(.02);
 
-    var arc = d3.arc()
-      .padRadius(outerRadius)
-      .innerRadius(innerRadius);
-
-    chart.selectAll("path")
+    const arcContainer = chart.selectAll("path")
       .data(pie(this.state.data))
       .enter()
-        .append("path")
-          .attr("fill", (d, i) => colors(i))
-          .each((d) => { d.outerRadius = outerRadius - 20; })
-          .attr("d", arc)
-          .on("mouseover", this.arcTween(arc, outerRadius, true))
-          .on("mouseout", this.arcTween(arc, outerRadius - 20));
+        .append('g')
+          .attr('class', 'arc');
+
+    arcContainer
+      .append("path")
+        .attr("fill", (d, i) => colors(i))
+        .each((d) => {
+          d.outerRadius = outerRadius - 20;
+        })
+        .attr("d", arc)
+        .on("mouseover", this.arcTween(arc, outerRadius, true))
+        .on("mouseout", this.arcTween(arc, outerRadius - 20));
+
+    arcContainer
+      .append("text")
+        .attr("transform", (d) => {
+          console.log('zzz:', d, arc.centroid(d));
+          return `translate(${arc.centroid(d)})`;
+        })
+        .attr("dy", "0.35em")
+        .text(d => d.data.apps_by_deployment_doc_count);
   }
 
   arcTween(arc, newOuterRadius, isMouseOver) {
