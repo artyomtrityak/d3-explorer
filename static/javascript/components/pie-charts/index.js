@@ -1,6 +1,7 @@
 import React from 'react';
 import * as d3 from "d3";
 import { NavLink, Route } from 'react-router-dom';
+import BasicPieChart from './basic-pie';
 
 export default class PieCharts extends React.Component {
   constructor(props) {
@@ -23,7 +24,7 @@ export default class PieCharts extends React.Component {
         </ul>
 
         <div className="pie-chart">
-          <Route path={`${match.url}/basic`} component={null}/>
+          <Route path={`${match.url}/basic`} component={BasicPieChart}/>
         </div>
       </div>
     );
