@@ -1,7 +1,7 @@
 import React from 'react';
 import * as d3 from "d3";
 
-export default class SvgLine extends React.Component {
+export default class BasicPieChart extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -15,11 +15,36 @@ export default class SvgLine extends React.Component {
   }
 
   componentDidMount() {
+    const width = 960,
+      height = 500,
+      outerRadius = height / 2 - 20,
+      innerRadius = outerRadius / 3,
+      cornerRadius = 10;
+
+    const colors = d3.scaleOrdinal(d3.schemeCategory10);
+
     const chart = d3.select(this.chartRef)
       .attr('width', window.innerWidth-100)
       .attr('height', 500)
       .append('g')
-        .attr('transform', 'translate(100, 0)');
+        .attr('transform', `translate(${width/2}, ${height/2})`);
+
+    const pie = d3.pie()
+      .sort(null)
+      .value((d) => d.apples)
+      .padAngle(.02);
+
+    var arc = d3.arc()
+      .padRadius(outerRadius)
+      .innerRadius(innerRadius);
+
+    chart.selectAll("path")
+      .data(pie(this.state.data))
+      .enter()
+        .append("path")
+          .attr('fill', (d, i) => colors(i))
+          .each((d) => { d.outerRadius = outerRadius - 20; })
+          .attr("d", arc);
   }
 
   render() {
