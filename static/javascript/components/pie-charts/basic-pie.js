@@ -6,10 +6,22 @@ export default class BasicPieChart extends React.Component {
     super(props);
     this.state = {
       data: [
-        { month: "Q1-2017", apples: 3840, bananas: 1920, cherries: 1960},
-        { month: "Q2-2017", apples: 1600, bananas: 1440, cherries: 960},
-        { month: "Q3-2017", apples: 640, bananas: 960, cherries: 640},
-        { month: "Q4-2017", apples: 320, bananas: 480, cherries: 640}
+        {
+          apps_by_deployment: "error",
+          apps_by_deployment_doc_count: "5"
+        },
+        {
+          apps_by_deployment: "success",
+          apps_by_deployment_doc_count: "15"
+        },
+        {
+          apps_by_deployment: "warning",
+          apps_by_deployment_doc_count: "3"
+        },
+        {
+          apps_by_deployment: "aborted",
+          apps_by_deployment_doc_count: "2"
+        }
       ]
     };
   }
@@ -31,11 +43,11 @@ export default class BasicPieChart extends React.Component {
 
     const pie = d3.pie()
       .sort(null)
-      .value((d) => d.apples)
+      .value((d) => +d.apps_by_deployment_doc_count)
       .padAngle(.02);
 
     var arc = d3.arc()
-      .padRadius(outerRadius)
+      .outerRadius(outerRadius - 20)
       .innerRadius(innerRadius);
 
     chart.selectAll("path")
@@ -43,7 +55,6 @@ export default class BasicPieChart extends React.Component {
       .enter()
         .append("path")
           .attr('fill', (d, i) => colors(i))
-          .each((d) => { d.outerRadius = outerRadius - 20; })
           .attr("d", arc);
   }
 
