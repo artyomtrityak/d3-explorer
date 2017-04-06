@@ -6,6 +6,7 @@ import BarCharts from "../bar-charts";
 import CircleCharts from "../circles-charts";
 import PieCharts from "../pie-charts";
 import LineCharts from "../line-charts";
+import ForceCharts from "../force-charts";
 
 export default class Page extends React.Component {
   constructor(props) {
@@ -24,6 +25,7 @@ export default class Page extends React.Component {
           <Route path="/pie" component={PieCharts}/>
           <Route path="/circle" component={CircleCharts}/>
           <Route path="/line" component={LineCharts}/>
+          <Route path="/force" component={ForceCharts}/>
         </div>
       </HashRouter>
     );
