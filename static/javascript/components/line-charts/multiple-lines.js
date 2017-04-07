@@ -99,6 +99,7 @@ export default class SvgMultipleLines extends React.Component {
       })
       .attr("d", (parentData) => {
         return (d3.line()
+          .curve(d3.curveBasis) // make points round, not sharp
           .x(d => x(d.date))
           .y(d => y(d.value))
         )(parentData.values);
