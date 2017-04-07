@@ -62,14 +62,16 @@ export default class SvgMultipleLines extends React.Component {
   }
 
   componentDidMount() {
+    //TODO: add margins to display axis nicer
+
     const width = 700,
           height = 500;
 
     const chart = d3.select(this.chartRef)
-      .attr('width', width)
+      .attr('width', width+100)
       .attr('height', height)
       .append('g')
-        .attr('transform', 'translate(20, 0)');
+        .attr('transform', 'translate(100, 0)');
 
     const x = d3.scaleTime()
       .domain([new Date(2013, 0, 1), new Date(2017, 0, 1)]) // min max dates
@@ -101,6 +103,16 @@ export default class SvgMultipleLines extends React.Component {
           .y(d => y(d.value))
         )(parentData.values);
       });
+
+    chart.append("g")
+      .attr("class", "axis axis--x")
+      .attr("transform", `translate(0,${height-20})`)
+      .call(d3.axisBottom(x));
+
+    chart.append("g")
+      .attr("class", "axis axis--y")
+      .attr("transform", `translate(0,0)`)
+      .call(d3.axisLeft(y));
   }
 
   render() {
