@@ -6,33 +6,24 @@ export default class BasicForceChart extends React.Component {
     super(props);
     this.state = {
       data: [
-        [0, 80],
-        [100, 100],
-        [200, 30],
-        [300, 50],
-        [400, 40],
-        [500, 80]
       ]
     };
   }
 
   componentDidMount() {
-    const lineGenerator = d3.line();
+    const width = 700,
+          height = 500;
 
-    const chart = d3.select(this.chart)
-      .attr('width', window.innerWidth-100)
-      .attr('height', 500)
+    const chart = d3.select(this.chartRef)
+      .attr('width', width+100)
+      .attr('height', height)
       .append('g')
         .attr('transform', 'translate(100, 0)');
-
-    chart
-      .append('path')
-        .attr('d', lineGenerator(this.state.data));
   }
 
   render() {
     return (
-      <svg className="line-chart" ref={(r) => this.chart = r}></svg>
+      <svg className="force-chart-1" ref={(r) => this.chartRef = r}></svg>
     );
   }
 }

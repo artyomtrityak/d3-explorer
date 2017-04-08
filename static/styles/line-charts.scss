@@ -1,23 +1,22 @@
-.line-charts-container {
-  .line-chart {
+.line-charts {
+  &__base {
     path {
       fill: none;
       stroke: black;
     }
   }
 
-  .area-chart {
+  &__area {
     path {
       fill: cadetblue;
     }
   }
 
-  .multiple-line-chart {
+  &__multiple {
     .axis path,
     .axis line {
       fill: none;
       stroke: #000;
-      shape-rendering: crispEdges;
     }
 
     .line {

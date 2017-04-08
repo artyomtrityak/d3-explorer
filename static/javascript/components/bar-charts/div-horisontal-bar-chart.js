@@ -14,7 +14,7 @@ export default class DivHorisontalBarChart extends React.Component {
       .domain([0, d3.max(this.state.data)])
       .range([0, window.innerWidth-100]);
 
-    var p = d3.select(this.chart)
+    const p = d3.select(this.chart)
       .selectAll("div")
       .data(this.state.data)
       .text(d => {
@@ -23,7 +23,7 @@ export default class DivHorisontalBarChart extends React.Component {
 
     p.enter()
      .append("div")
-     .attr('class', 'div-chart')
+     .attr('class', 'bar-charts__div')
      .transition()
      .duration(1000)
      .style("width", d => scale(d) + "px")
@@ -35,7 +35,7 @@ export default class DivHorisontalBarChart extends React.Component {
 
   render() {
     return (
-      <div className="chart-container" ref={(r) => this.chart = r}></div>
+      <div ref={(r) => this.chart = r}></div>
     );
   }
 }

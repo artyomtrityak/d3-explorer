@@ -23,7 +23,7 @@ export default class ForceCharts extends React.Component {
           </li>
         </ul>
 
-        <div className="line-charts-container">
+        <div className="force-charts-container">
           <Route path={`${match.url}/basic`} component={BasicChart}/>
         </div>
       </div>

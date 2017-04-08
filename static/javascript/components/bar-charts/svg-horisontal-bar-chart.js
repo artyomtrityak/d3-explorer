@@ -15,7 +15,7 @@ export default class SvgHorisontalBarChart extends React.Component {
       .domain([0, d3.max(this.state.data, x => x.val)])
       .range([0, window.innerWidth-100]);
 
-    const chart = d3.select(this.chart)
+    const chart = d3.select(this.chartRef)
       .attr('height', 50 * this.state.data.length)
       .attr('width', window.innerWidth-100);
 
@@ -39,7 +39,7 @@ export default class SvgHorisontalBarChart extends React.Component {
   render() {
     return (
       <div className="chart-container">
-        <svg className="chart" ref={(r) => this.chart = r}></svg>
+        <svg ref={(r) => this.chartRef = r}></svg>
       </div>
     );
   }

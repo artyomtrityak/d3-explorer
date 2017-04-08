@@ -90,7 +90,7 @@ export default class InteractivePieChart extends React.Component {
           };
         })
         .attrTween('fill', (d) => {
-          let to = isMouseOver ? 'blue' : colors(i);
+          const to = isMouseOver ? 'blue' : colors(i);
           return d3.interpolateRgb(this.getAttribute("fill"), to);
         });
     };
@@ -98,7 +98,7 @@ export default class InteractivePieChart extends React.Component {
 
   render() {
     return (
-      <svg className="interactive-pie" ref={(r) => this.chartRef = r}></svg>
+      <svg className="pie-chart__interactive" ref={(r) => this.chartRef = r}></svg>
     );
   }
 }

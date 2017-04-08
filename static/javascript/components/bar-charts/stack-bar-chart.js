@@ -91,8 +91,8 @@ export default class SvgVerticalBarChart extends React.Component {
 
   render() {
     return (
-      <div className="stack-chart-container">
-        <svg className="stack-chart" ref={(r) => this.chartRef = r}></svg>
+      <div>
+        <svg className="bar-charts__stack" ref={(r) => this.chartRef = r}></svg>
       </div>
     );
   }

@@ -107,7 +107,7 @@ export default class SvgMultipleLines extends React.Component {
 
     chart.append("g")
       .attr("class", "axis axis--x")
-      .attr("transform", `translate(0,${height-20})`)
+      .attr("transform", `translate(0,${y(0)-20})`)
       .call(d3.axisBottom(x));
 
     chart.append("g")
@@ -118,7 +118,7 @@ export default class SvgMultipleLines extends React.Component {
 
   render() {
     return (
-      <svg className="multiple-line-chart" ref={(r) => this.chartRef = r}></svg>
+      <svg className="line-charts__multiple" ref={(r) => this.chartRef = r}></svg>
     );
   }
 }

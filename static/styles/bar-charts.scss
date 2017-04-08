@@ -1,9 +1,16 @@
 .bar-charts {
-  .div-chart {
+  &__div {
     background-color: green;
     border: 1px solid white;
     width: 0px;
     text-align: right;
+  }
+
+  &__stack {
+    rect:hover {
+      stroke: blueviolet;
+      stroke-width: 2;
+    }
   }
 
   .chart rect {
@@ -26,13 +33,6 @@
     text {
       font: 10px sans-serif;
       fill: #000;
-    }
-  }
-
-  .stack-chart {
-    rect:hover {
-      stroke: blueviolet;
-      stroke-width: 2;
     }
   }
 

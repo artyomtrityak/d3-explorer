@@ -79,7 +79,7 @@ export default class DynamicBarChart extends React.Component {
 
   render() {
     return (
-      <svg className="chart-container" ref={(r) => this.chartRef = r}></svg>
+      <svg ref={(r) => this.chartRef = r}></svg>
     );
   }
 };
