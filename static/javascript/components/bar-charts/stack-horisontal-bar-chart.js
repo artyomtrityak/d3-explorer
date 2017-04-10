@@ -1,7 +1,5 @@
 import React from 'react';
 import * as d3 from "d3";
-import { generateArray } from '../../data-layer/array-processors';
-
 
 function stackMin(serie) {
   return d3.min(serie, (d) => d[0]);
@@ -46,7 +44,7 @@ export default class SvgVerticalBarChart extends React.Component {
 
     this.chartInner.append("g")
       .attr("transform", `translate(0,${height - margin.bottom - 15})`)
-      .call(d3.axisBottom(xScale));
+      .call(d3.axisBottom(xScale).ticks(8));
 
     this.chartInner.append("g")
       .attr("transform", "translate(" + margin.left + ",0)")
@@ -54,27 +52,43 @@ export default class SvgVerticalBarChart extends React.Component {
 
     const colors = d3.scaleOrdinal(d3.schemeCategory10);
 
-    this.chartInner
+    const gContainer = this.chartInner
       .append('g')
         .selectAll("g")
         .data(series)
         .enter()
           .append("g")
-            .attr("fill", (d) => colors(d.key))
-            .selectAll("rect")
-            .data((d) => d)
-            .enter()
-              .append("rect")
-                .attr("width", (d) => {
-                  return xScale(d[1]) - xScale(d[0]);
-                })
-                .attr("x", (d) => {
-                  return xScale(d[0]);
-                })
-                .attr("y", (d) => {
-                  return yScale(d.data.month);
-                })
-                .attr("height", yScale.bandwidth);
+            .attr("fill", (d) => colors(d.key));
+
+    gContainer.selectAll("rect")
+      .data((d) => d)
+      .enter()
+        .append("rect")
+          .attr("width", (d) => {
+            return xScale(d[1]) - xScale(d[0]);
+          })
+          .attr("x", (d) => {
+            return xScale(d[0]);
+          })
+          .attr("y", (d) => {
+            return yScale(d.data.month);
+          })
+          .attr("height", yScale.bandwidth);
+
+    gContainer.selectAll('.line')
+      .data((d) => d)
+      .enter()
+        .append('rect')
+          .attr('class', 'line')
+          .style('fill', 'gray')
+          .attr('height', 1)
+          .attr('width', width - margin.right)
+          .attr('x', 0)
+          .attr('y', (d, i) => {
+            return yScale(d.data.month) + yScale.bandwidth();
+          });
+
+
   }
 
   getScales(width, height, margin, series) {
