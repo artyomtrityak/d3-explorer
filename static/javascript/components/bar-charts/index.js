@@ -5,7 +5,8 @@ import DivHorisontalBar from './div-horisontal-bar-chart';
 import SvgHorisontalBar from './svg-horisontal-bar-chart';
 import SvgVerticalBar from './svg-vertical-bar-chart';
 import DynamicBar from './dynamic-bar-chart';
-import StackBar from './stack-bar-chart';
+import StackVerticalBar from './stack-vertical-bar-chart';
+import StackHorisontalBar from './stack-horisontal-bar-chart';
 
 
 export default class BarCharts extends React.Component {
@@ -33,10 +34,13 @@ export default class BarCharts extends React.Component {
             <NavLink activeClassName="active" className="nav-link" to={`${match.url}/vertical`}>Vertical</NavLink>
           </li>
           <li className="nav-item">
-            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/dynamic`}>Dynanic</NavLink>
+            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/dynamic`}>Dynamic</NavLink>
           </li>
           <li className="nav-item">
-            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/stack`}>Stack</NavLink>
+            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/stack-vertical`}>Stack Vertical</NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/stack-horisontal`}>Stack Horisontal</NavLink>
           </li>
         </ul>
 
@@ -45,7 +49,8 @@ export default class BarCharts extends React.Component {
           <Route path={`${match.url}/svg`} component={SvgHorisontalBar}/>
           <Route path={`${match.url}/vertical`} component={SvgVerticalBar}/>
           <Route path={`${match.url}/dynamic`} component={DynamicBar}/>
-          <Route path={`${match.url}/stack`} component={StackBar}/>
+          <Route path={`${match.url}/stack-vertical`} component={StackVerticalBar}/>
+          <Route path={`${match.url}/stack-horisontal`} component={StackHorisontalBar}/>
         </div>
       </div>
     );

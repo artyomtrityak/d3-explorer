@@ -23,6 +23,12 @@ export default class StackedAreaLine extends React.Component {
           successfull: 9,
           failed: 2,
           warning: 7
+        },
+        {
+          date: new Date(2018, 0, 1),
+          successfull: 17,
+          failed: 3,
+          warning: 9
         }
       ]
     };
@@ -40,7 +46,7 @@ export default class StackedAreaLine extends React.Component {
         .attr('transform', `translate(${margin.left},${margin.top})`);
 
     const x = d3.scaleTime()
-      .domain([new Date(2015, 0, 1), new Date(2017, 0, 1)]) // min max dates
+      .domain([new Date(2015, 0, 1), new Date(2018, 0, 1)]) // min max dates
       .range([0, width]);
 
     const y = d3.scaleLinear()
@@ -55,9 +61,15 @@ export default class StackedAreaLine extends React.Component {
       .keys(['successfull', 'failed', 'warning']);
 
     const area = d3.area()
-      .x((d, i) => { return x(d.data.date); })
-      .y0((d) => { return y(d[0]); })
-      .y1((d) => { return y(d[1]); });
+      .x((d, i) => {
+        return x(d.data.date);
+      })
+      .y0((d) => {
+        return y(d[0]);
+      })
+      .y1((d) => {
+        return y(d[1]);
+      });
 
     const layer = chart.selectAll(".layer")
       .data(stack(this.state.data))

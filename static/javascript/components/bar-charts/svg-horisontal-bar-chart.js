@@ -30,7 +30,7 @@ export default class SvgHorisontalBarChart extends React.Component {
       .attr("height", 30);
 
     bar.append('text')
-      .attr('x', (x) => scale(x.val) - 10)
+      .attr('x', (x) => scale(x.val))
       .attr('y', 15)
       .attr('dy', '0.35em')
       .text((x) => `${x.label} - ${x.val}`);

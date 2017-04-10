@@ -19,8 +19,6 @@ export default class Page extends React.Component {
       <HashRouter>
         <div>
           <Route path="/" component={MainMenu}/>
-
-          <Route exact={true} path="/" component={BarCharts}/>
           <Route path="/bar" component={BarCharts}/>
           <Route path="/pie" component={PieCharts}/>
           <Route path="/circle" component={CircleCharts}/>
