@@ -87,8 +87,6 @@ export default class SvgVerticalBarChart extends React.Component {
           .attr('y', (d, i) => {
             return yScale(d.data.month) + yScale.bandwidth();
           });
-
-
   }
 
   getScales(width, height, margin, series) {

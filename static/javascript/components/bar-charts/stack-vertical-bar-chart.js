@@ -46,7 +46,7 @@ export default class SvgVerticalBarChart extends React.Component {
 
     this.chartInner.append("g")
       .attr("transform", "translate(0," + yScale(0) + ")")
-      .call();
+      .call(d3.axisBottom(xScale));
 
     this.chartInner.append("g")
       .attr("transform", "translate(" + margin.left + ",0)")

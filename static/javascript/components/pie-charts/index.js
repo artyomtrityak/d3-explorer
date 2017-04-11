@@ -3,6 +3,7 @@ import * as d3 from "d3";
 import { NavLink, Route } from 'react-router-dom';
 import BasicPieChart from './basic-pie';
 import InteractivePieChart from './interactive-pie';
+import LabelsPieChart from './pie-with-labels';
 
 export default class PieCharts extends React.Component {
   constructor(props) {
@@ -25,11 +26,15 @@ export default class PieCharts extends React.Component {
           <li className="nav-item">
             <NavLink activeClassName="active" className="nav-link" to={`${match.url}/interactive`}>Interactive Pie</NavLink>
           </li>
+          <li className="nav-item">
+            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/with-labels`}>Pie with labels</NavLink>
+          </li>
         </ul>
 
         <div className="pie-chart">
           <Route path={`${match.url}/basic`} component={BasicPieChart}/>
           <Route path={`${match.url}/interactive`} component={InteractivePieChart}/>
+          <Route path={`${match.url}/with-labels`} component={LabelsPieChart}/>
         </div>
       </div>
     );

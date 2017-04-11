@@ -61,6 +61,7 @@ export default class StackedAreaLine extends React.Component {
       .keys(['successfull', 'failed', 'warning']);
 
     const area = d3.area()
+      .curve(d3.curveMonotoneX) //remove sharp connections, flatten and curve thnem.
       .x((d, i) => {
         return x(d.data.date);
       })
