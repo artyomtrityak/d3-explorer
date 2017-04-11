@@ -33,8 +33,8 @@ export default class BasicPieChart extends React.Component {
       innerRadius = outerRadius / 3,
       cornerRadius = 10;
 
-    const r = Math.min(width, height) / 2,
-    labelr = r - 10; // radius for label anchor
+    const radius = Math.min(width, height) / 2,
+          labelRadius = radius - 10;
 
     const colors = d3.scaleOrdinal(d3.schemeCategory10);
 
@@ -65,42 +65,24 @@ export default class BasicPieChart extends React.Component {
         .attr("fill", (d, i) => colors(i))
         .attr("d", arc);
 
+    //Add outside labels
     gContainer
       .append('text')
-    //   .attr("transform", function(d) {
-    //       var c = arc.centroid(d),
-    //           x = c[0],
-    //           y = c[1],
-    //           // pythagorean theorem for hypotenuse
-    //           h = Math.sqrt(x*x + y*y);
-    //       return "translate(" + (x/h * labelr) +  ',' +
-    //         (y/h * labelr) +  ")";
-    //   })
-    //       .attr("text-anchor", function(d) {
-    //     // are we past the center?
-    //     return (d.endAngle + d.startAngle)/2 > Math.PI ?
-    //         "end" : "start";
-    // })
-      // .attr("transform", function(d) {
-      //   return "translate(" +
-      //     ( (outerRadius + 10) * Math.sin( ((d.endAngle - d.startAngle) / 2) + d.startAngle ) ) +
-      //     ", " +
-      //     ( -1 * (outerRadius + 10) * Math.cos( ((d.endAngle - d.startAngle) / 2) + d.startAngle ) ) +
-      //   ")";
-      // })
-      // .style("text-anchor", function(d) {
-      //   var rads = ((d.endAngle - d.startAngle) / 2) + d.startAngle;
-      //   if ( (rads > 7 * Math.PI / 4 && rads < Math.PI / 4) || (rads > 3 * Math.PI / 4 && rads < 5 * Math.PI / 4) ) {
-      //     return "middle";
-      //   } else if (rads >= Math.PI / 4 && rads <= 3 * Math.PI / 4) {
-      //     return "start";
-      //   } else if (rads >= 5 * Math.PI / 4 && rads <= 7 * Math.PI / 4) {
-      //     return "end";
-      //   } else {
-      //     return "middle";
-      //   }
-      // })
-      .text('hello hello hello');
+      .attr("transform", (d) => {
+        const c = arc.centroid(d);
+        const x = c[0];
+        const y = c[1];
+        const h = Math.sqrt(x*x + y*y);
+        return `translate(${x/h * labelRadius},${y/h * labelRadius})`;
+      })
+      .attr("text-anchor", (d) => {
+        // are we past the center?
+        return (d.endAngle + d.startAngle) / 2 > Math.PI ? "end" : "start";
+      })
+      .attr("dy", ".35em")
+      .text((d) => {
+        return `${d.data.apps_by_deployment}: ${d.data.apps_by_deployment_doc_count}`;
+      });
   }
 
   render() {
