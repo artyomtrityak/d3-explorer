@@ -27,7 +27,7 @@ export default class PieCharts extends React.Component {
             <NavLink activeClassName="active" className="nav-link" to={`${match.url}/interactive`}>Interactive Pie</NavLink>
           </li>
           <li className="nav-item">
-            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/with-labels`}>Pie with labels</NavLink>
+            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/with-labels`}>Pie with outside labels</NavLink>
           </li>
         </ul>
 

@@ -36,7 +36,7 @@ export default class CirclesCharts extends React.Component {
             <NavLink activeClassName="active" className="nav-link" to={`${match.url}/line-over-time`}>Line over time</NavLink>
           </li>
           <li className="nav-item">
-            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/multiple`}>Multiple lines</NavLink>
+            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/multiple`}>Multiple lines with legend</NavLink>
           </li>
           <li className="nav-item">
             <NavLink activeClassName="active" className="nav-link" to={`${match.url}/stack-area`}>Stacked area</NavLink>

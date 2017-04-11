@@ -68,8 +68,8 @@ export default class SvgMultipleLines extends React.Component {
           height = 500;
 
     const chart = d3.select(this.chartRef)
-      .attr('width', width+100)
-      .attr('height', height)
+      .attr('width', width + 100)
+      .attr('height', height + 200) //200 for legend
       .append('g')
         .attr('transform', 'translate(100, 0)');
 
@@ -114,6 +114,34 @@ export default class SvgMultipleLines extends React.Component {
       .attr("class", "axis axis--y")
       .attr("transform", `translate(0,0)`)
       .call(d3.axisLeft(y));
+
+    const legendContainer = chart
+      .append('g')
+        .attr('class', 'legend')
+        .attr("transform", `translate(0,${y(0)+20})`);
+
+    legendContainer.selectAll('rect')
+      .data(['apples', 'bananas'])
+      .enter()
+        .append('rect')
+        .attr('width', 15)
+        .attr('height', 15)
+        .attr('x', (d, i) => {
+          return i * 200;
+        })
+        .attr('fill', (d) => {
+          return colors(d);
+        });
+
+    legendContainer.selectAll('text')
+      .data(['apples', 'bananas'])
+      .enter()
+        .append('text')
+          .attr('x', (d, i) => {
+            return i * 200 + 25;
+          })
+          .attr('y', 12)
+          .text((d) => d);
   }
 
   render() {
