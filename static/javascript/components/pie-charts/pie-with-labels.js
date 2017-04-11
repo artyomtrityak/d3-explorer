@@ -44,6 +44,14 @@ export default class BasicPieChart extends React.Component {
       .append("g")
         .attr("transform", `translate(${width / 2}, ${height / 2})`);
 
+    //Center label
+    chart
+      .append('text')
+        .attr("text-anchor", "middle")
+        .attr('dy', '0.35em')
+        .style('font-size', '24px')
+        .text('1912');
+
     const pie = d3.pie()
       .sort(null)
       .value((d) => +d.apps_by_deployment_doc_count)

@@ -124,14 +124,12 @@ export default class SvgMultipleLines extends React.Component {
       .data(['apples', 'bananas'])
       .enter()
         .append('rect')
-        .attr('width', 15)
-        .attr('height', 15)
-        .attr('x', (d, i) => {
-          return i * 200;
-        })
-        .attr('fill', (d) => {
-          return colors(d);
-        });
+          .attr('width', 15)
+          .attr('height', 15)
+          .attr('x', (d, i) => {
+            return i * 200;
+          })
+          .attr('fill', colors);
 
     legendContainer.selectAll('text')
       .data(['apples', 'bananas'])
