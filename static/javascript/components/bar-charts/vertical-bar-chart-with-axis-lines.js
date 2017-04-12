@@ -17,7 +17,10 @@ export default class SvgVerticalBarChart extends React.Component {
 
     const { xScale, yScale } = this.getScales(width, height);
     const xAxis = d3.axisBottom(xScale);
-    const yAxis = d3.axisLeft(yScale).ticks(10);
+    const yAxis = d3.axisRight(yScale)
+      .ticks(10)
+      .tickSize(width)
+      .tickPadding(-1 * (width + 10));
 
     const chart = d3.select(this.chart)
       .attr("width", width + margin.left + margin.right)
@@ -38,16 +41,6 @@ export default class SvgVerticalBarChart extends React.Component {
         .attr("x", width + 20)
         .text("Labels");
 
-    chart.select('.chart-inner')
-      .append('g')
-        .attr("class", "y axis")
-        .call(yAxis)
-      .append("text")
-        .attr("transform", "rotate(-90)")
-        .attr("y", 6)
-        .attr("dy", ".71em")
-        .text("Frequency");
-
     const barsContainer = chart.select('.chart-inner')
       .append("g")
         .attr('class', 'chart-content');
@@ -67,6 +60,11 @@ export default class SvgVerticalBarChart extends React.Component {
       .attr('x', xScale.bandwidth() / 2)
       .attr('y', (x) => yScale(x.val) + 20)
       .text((x) => x.val);
+
+    chart.select('.chart-inner')
+      .append('g')
+        .attr("class", "y axis")
+        .call(yAxis);
   }
 
   getScales(width, height) {
@@ -85,7 +83,7 @@ export default class SvgVerticalBarChart extends React.Component {
   render() {
     return (
       <div>
-        <svg className="basic" ref={(r) => this.chart = r}></svg>
+        <svg className="basic bar-charts__axis-lines" ref={(r) => this.chart = r}></svg>
       </div>
     );
   }

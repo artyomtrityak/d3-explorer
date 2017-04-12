@@ -52,7 +52,9 @@ export default class SvgCircles extends React.Component {
   }
 
   onDragStart() {
-    d3.select(this).classed('active', true);
+    d3.select(this)
+      .raise() //move dragged element to last position in nodes list to layer element ontop other similar elements
+      .classed('active', true);
   }
 
   onDrag(d) {

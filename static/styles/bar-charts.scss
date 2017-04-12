@@ -1,26 +1,14 @@
 .bar-charts {
-  &__div {
-    background-color: green;
-    border: 1px solid white;
-    width: 0px;
-    text-align: right;
-  }
-
-  &__stack {
-    rect:hover {
-      stroke: blueviolet;
-      stroke-width: 2;
+  .basic {
+    rect {
+      fill: steelblue;
     }
-  }
 
-  .chart rect {
-    fill: steelblue;
-  }
-
-  .chart text {
-    fill: white;
-    font: 10px sans-serif;
-    text-anchor: end;
+    text {
+      fill: white;
+      font: 10px sans-serif;
+      text-anchor: end;
+    }
   }
 
   .axis {
@@ -42,5 +30,34 @@
 
   .updated {
     fill: cornflowerblue;
+  }
+
+  &__div {
+    background-color: green;
+    border: 1px solid white;
+    width: 0px;
+    text-align: right;
+  }
+
+  &__stack {
+    rect:hover {
+      stroke: blueviolet;
+      stroke-width: 2;
+    }
+  }
+
+  &__axis-lines {
+    .axis {
+      path,
+      line {
+        fill: none;
+        stroke: gray;;
+      }
+
+      text {
+        font: 10px sans-serif;
+        fill: #000;
+      }
+    }
   }
 }
