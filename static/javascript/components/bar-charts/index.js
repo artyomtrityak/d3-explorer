@@ -8,6 +8,7 @@ import DynamicBar from './dynamic-bar-chart';
 import StackVerticalBar from './stack-vertical-bar-chart';
 import StackHorisontalBar from './stack-horisontal-bar-chart';
 import VerticalWithAxisOnTop from './vertical-bar-chart-with-axis-lines';
+import HorisontallyStacked from './horisontally-stacked-bar-chart';
 
 
 export default class BarCharts extends React.Component {
@@ -46,6 +47,9 @@ export default class BarCharts extends React.Component {
           <li className="nav-item">
             <NavLink activeClassName="active" className="nav-link" to={`${match.url}/vertical-ontop-axis`}>Vertical with axis ontop</NavLink>
           </li>
+          <li className="nav-item">
+            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/horisontally-stacked`}>Horisontally stacked</NavLink>
+          </li>
         </ul>
 
         <div className="bar-charts">
@@ -56,6 +60,8 @@ export default class BarCharts extends React.Component {
           <Route path={`${match.url}/stack-vertical`} component={StackVerticalBar}/>
           <Route path={`${match.url}/stack-horisontal`} component={StackHorisontalBar}/>
           <Route path={`${match.url}/vertical-ontop-axis`} component={VerticalWithAxisOnTop}/>
+          <Route path={`${match.url}/horisontally-stacked`} component={HorisontallyStacked}/>
+
         </div>
       </div>
     );
