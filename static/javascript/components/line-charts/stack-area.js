@@ -82,6 +82,7 @@ export default class StackedAreaLine extends React.Component {
       .append('path')
         .attr("class", "area")
         .style("fill", (d) => {
+          console.log('KEY?', d);
           return z(d.key);
         })
         .attr("d", area);
