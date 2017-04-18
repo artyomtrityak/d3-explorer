@@ -81,7 +81,7 @@ export default class SvgVerticallyStackedBarChart extends React.Component {
     const width = 800 - margin.left - margin.right;
     const height = 500 - margin.top - margin.bottom;
 
-    const { xScale, xScaleGroup, yScale } = this.getScales(width, height);
+    const { xScaleGroup, yScale } = this.getScales(width, height);
     const xAxis = d3.axisBottom(xScaleGroup);
     const yAxis = d3.axisLeft(yScale).ticks(10);
 
@@ -104,15 +104,15 @@ export default class SvgVerticallyStackedBarChart extends React.Component {
         .attr("x", width + 20)
         .text("Labels");
 
-    // chart.select('.chart-inner')
-    //   .append('g')
-    //     .attr("class", "y axis")
-    //     .call(yAxis)
-    //   .append("text")
-    //     .attr("transform", "rotate(-90)")
-    //     .attr("y", 6)
-    //     .attr("dy", ".71em")
-    //     .text("Frequency");
+    chart.select('.chart-inner')
+      .append('g')
+        .attr("class", "y axis")
+        .call(yAxis)
+      .append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 6)
+        .attr("dy", ".71em")
+        .text("Frequency");
 
     const barsContainer = chart.select('.chart-inner')
       .append("g")
@@ -152,10 +152,6 @@ export default class SvgVerticallyStackedBarChart extends React.Component {
   }
 
   getScales(width, height) {
-    const xScale = d3.scaleBand()
-      .range([0, width])
-      .domain(d3.range(10)); // total items length;
-
     const xScaleGroup = d3.scaleBand()
       .range([0, width])
       .padding(0.2)
@@ -166,7 +162,7 @@ export default class SvgVerticallyStackedBarChart extends React.Component {
       .domain([0, 20])
       .range([height, 0]);
 
-    return { xScale, xScaleGroup, yScale };
+    return { xScaleGroup, yScale };
   }
 
   render() {
