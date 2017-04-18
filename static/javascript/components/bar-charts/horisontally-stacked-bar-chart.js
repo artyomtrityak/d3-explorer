@@ -125,7 +125,6 @@ export default class SvgVerticallyStackedBarChart extends React.Component {
           .attr("transform", (d, i) => {
             return `translate(${xScaleGroup(d.label)},0)`;
           });
-          //.attr('transform', (x, i) => `translate(${xScale(x.label)}, 0)`);
 
     const barContainer = barGroup.selectAll('rect')
       .data((d) => {
@@ -134,7 +133,7 @@ export default class SvgVerticallyStackedBarChart extends React.Component {
       .enter()
         .append('g')
           .attr("transform", (d, i) => {
-            return `translate(${i * (xScaleGroup.bandwidth() / 2)},0)`;
+            return `translate(${i * (xScaleGroup.bandwidth() / 2)},0)`; // 2 - number of items in group
           });
 
     barContainer.append('rect')
@@ -142,11 +141,11 @@ export default class SvgVerticallyStackedBarChart extends React.Component {
         return d.type === 'error' ? 'red' : 'green';
       })
       .attr('y', (d) => yScale(d.val))
-      .attr("width", xScaleGroup.bandwidth() / 2)
+      .attr("width", xScaleGroup.bandwidth() / 2) // 2 - number of items in group
       .attr("height", (x) => height - yScale(x.val));
 
     barContainer.append('text')
-      .attr('x', xScaleGroup.bandwidth() / 4)
+      .attr('x', xScaleGroup.bandwidth() / 4) // 4 - 2*number items in group to center label
       .attr('y', (x) => yScale(x.val) + 20)
       .text((x) => x.val);
   }
@@ -155,8 +154,7 @@ export default class SvgVerticallyStackedBarChart extends React.Component {
     const xScaleGroup = d3.scaleBand()
       .range([0, width])
       .padding(0.2)
-      .domain(this.state.data.map((d) => d.label)); // groups length
-
+      .domain(this.state.data.map((d) => d.label));
 
     const yScale = d3.scaleLinear()
       .domain([0, 20])

@@ -61,7 +61,6 @@ export default class BarCharts extends React.Component {
           <Route path={`${match.url}/stack-horisontal`} component={StackHorisontalBar}/>
           <Route path={`${match.url}/vertical-ontop-axis`} component={VerticalWithAxisOnTop}/>
           <Route path={`${match.url}/horisontally-stacked`} component={HorisontallyStacked}/>
-
         </div>
       </div>
     );
