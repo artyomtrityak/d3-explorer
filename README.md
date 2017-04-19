@@ -11,23 +11,23 @@ Allows to explore D3 v4 with modern stack.
 # Available charts
 
 ## Bar charts [<>](https://github.com/artyomtrityak/d3-explorer/tree/master/static/javascript/components/bar-charts "Source")
-<img src="https://raw.githubusercontent.com/artyomtrityak/d3-explorer/master/screenshots/bar-1.png" width="200">
+<img src="https://raw.githubusercontent.com/artyomtrityak/d3-explorer/master/screenshots/bar-1.png" width="300">
 
-![Bar 2](https://raw.githubusercontent.com/artyomtrityak/d3-explorer/master/screenshots/bar-2.png "Bar 2")
+<img src="https://raw.githubusercontent.com/artyomtrityak/d3-explorer/master/screenshots/bar-2.png" width="300">
 
-![Bar 3](https://raw.githubusercontent.com/artyomtrityak/d3-explorer/master/screenshots/bar-3.png "Bar 3")
+<img src="https://raw.githubusercontent.com/artyomtrityak/d3-explorer/master/screenshots/bar-3.png" width="300">
 
 ### Pie charts [<>](https://github.com/artyomtrityak/d3-explorer/tree/master/static/javascript/components/pie-charts "Source")
-![Pie 1](https://raw.githubusercontent.com/artyomtrityak/d3-explorer/master/screenshots/pie-1.png "Pie 1")
+<img src="https://raw.githubusercontent.com/artyomtrityak/d3-explorer/master/screenshots/pie-1.png" width="300">
 
 
 ## Line charts [<>](https://github.com/artyomtrityak/d3-explorer/tree/master/static/javascript/components/line-charts "Source")
-![Line 1](https://raw.githubusercontent.com/artyomtrityak/d3-explorer/master/screenshots/line-1.png "Line 1")
+<img src="https://raw.githubusercontent.com/artyomtrityak/d3-explorer/master/screenshots/line-1.png" width="300">
 
-![Line 2](https://raw.githubusercontent.com/artyomtrityak/d3-explorer/master/screenshots/line-2.png "LineBar 2")
+<img src="https://raw.githubusercontent.com/artyomtrityak/d3-explorer/master/screenshots/line-2.png" width="300">
 
 ## Circle charts [<>](https://github.com/artyomtrityak/d3-explorer/tree/master/static/javascript/components/circles-charts "Source")
-![Circle 1](https://raw.githubusercontent.com/artyomtrityak/d3-explorer/master/screenshots/circle-1.png "Circle 1")
+<img src="https://raw.githubusercontent.com/artyomtrityak/d3-explorer/master/screenshots/circle-1.png" width="300">
 
 
 ### Work in progress
