@@ -15,6 +15,8 @@ Allows to explore D3 v4 with modern stack.
 
 ![Bar 2](https://raw.githubusercontent.com/artyomtrityak/d3-explorer/master/screenshots/bar-2.png "Bar 2")
 
+![Bar 3](https://raw.githubusercontent.com/artyomtrityak/d3-explorer/master/screenshots/bar-3.png "Bar 3")
+
 ### Pie charts [<>](https://github.com/artyomtrityak/d3-explorer/tree/master/static/javascript/components/pie-charts "Source")
 ![Pie 1](https://raw.githubusercontent.com/artyomtrityak/d3-explorer/master/screenshots/pie-1.png "Pie 1")
 
