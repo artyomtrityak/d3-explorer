@@ -67,9 +67,7 @@ export default class SvgCircles extends React.Component {
 
   render() {
     return (
-      <div className="chart-container">
-        <svg className="chart" ref={(r) => this.chartRef = r}></svg>
-      </div>
+      <svg className="circle-chart" ref={(r) => this.chartRef = r}></svg>
     );
   }
 }

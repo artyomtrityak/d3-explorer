@@ -84,7 +84,7 @@ export default class BasicPieChart extends React.Component {
         return `translate(${x/h * labelRadius},${y/h * labelRadius})`;
       })
       .attr("text-anchor", (d) => {
-        // are we past the center?
+        // did we past the center?
         return (d.endAngle + d.startAngle) / 2 > Math.PI ? "end" : "start";
       })
       .attr("dy", ".35em")
@@ -95,7 +95,7 @@ export default class BasicPieChart extends React.Component {
 
   render() {
     return (
-      <svg className="pie-chart__basic" ref={(r) => this.chartRef = r}></svg>
+      <svg className="pie-chart--basic" ref={(r) => this.chartRef = r}></svg>
     );
   }
 }

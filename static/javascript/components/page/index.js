@@ -23,7 +23,7 @@ export default class Page extends React.Component {
           <Route path="/pie" component={PieCharts}/>
           <Route path="/circle" component={CircleCharts}/>
           <Route path="/line" component={LineCharts}/>
-          <Route path="/force" component={ForceCharts}/>
+          {/*<Route path="/force" component={ForceCharts}/>*/}
         </div>
       </HashRouter>
     );

@@ -144,7 +144,7 @@ export default class SvgMultipleLines extends React.Component {
 
   render() {
     return (
-      <svg className="line-charts__multiple" ref={(r) => this.chartRef = r}></svg>
+      <svg className="line-chart--multiple" ref={(r) => this.chartRef = r}></svg>
     );
   }
 }

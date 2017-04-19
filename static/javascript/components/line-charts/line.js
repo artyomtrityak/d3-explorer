@@ -32,7 +32,7 @@ export default class SvgLine extends React.Component {
 
   render() {
     return (
-      <svg className="line-charts__base" ref={(r) => this.chart = r}></svg>
+      <svg className="line-chart--base" ref={(r) => this.chart = r}></svg>
     );
   }
 }

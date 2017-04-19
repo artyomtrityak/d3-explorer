@@ -89,7 +89,7 @@ export default class StackedAreaLine extends React.Component {
 
   render() {
     return (
-      <svg className="line-charts__area" ref={(r) => this.chartRef = r}></svg>
+      <svg className="line-chart--area" ref={(r) => this.chartRef = r}></svg>
     );
   }
 }

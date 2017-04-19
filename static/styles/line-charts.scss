@@ -1,18 +1,18 @@
-.line-charts {
-  &__base {
+.line-chart {
+  &--base {
     path {
       fill: none;
       stroke: black;
     }
   }
 
-  &__area {
+  &--area {
     path {
       fill: cadetblue;
     }
   }
 
-  &__multiple {
+  &--multiple {
     .axis path,
     .axis line {
       fill: none;

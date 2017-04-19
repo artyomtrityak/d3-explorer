@@ -33,7 +33,7 @@ export default class SvgVerticalBarChart extends React.Component {
 
     chart.select('.chart-inner')
       .append('g')
-        .attr("class", "x axis")
+        .attr("class", "axis axis--x")
         .attr('transform', `translate(0, ${height})`)
         .call(xAxis)
       .append("text")
@@ -63,7 +63,7 @@ export default class SvgVerticalBarChart extends React.Component {
 
     chart.select('.chart-inner')
       .append('g')
-        .attr("class", "y axis")
+        .attr("class", "axis axis--y")
         .call(yAxis);
   }
 
@@ -83,7 +83,7 @@ export default class SvgVerticalBarChart extends React.Component {
   render() {
     return (
       <div>
-        <svg className="basic bar-charts__axis-lines" ref={(r) => this.chart = r}></svg>
+        <svg className="bar-chart--basic bar-charts--axis-with-lines" ref={(r) => this.chart = r}></svg>
       </div>
     );
   }

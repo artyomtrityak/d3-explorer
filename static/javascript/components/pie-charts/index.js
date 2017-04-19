@@ -31,7 +31,7 @@ export default class PieCharts extends React.Component {
           </li>
         </ul>
 
-        <div className="pie-chart">
+        <div>
           <Route path={`${match.url}/basic`} component={BasicPieChart}/>
           <Route path={`${match.url}/interactive`} component={InteractivePieChart}/>
           <Route path={`${match.url}/with-labels`} component={LabelsPieChart}/>

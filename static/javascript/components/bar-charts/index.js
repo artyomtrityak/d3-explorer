@@ -52,7 +52,7 @@ export default class BarCharts extends React.Component {
           </li>
         </ul>
 
-        <div className="bar-charts">
+        <div className="bar-chart">
           <Route path={`${match.url}/div`} component={DivHorisontalBar}/>
           <Route path={`${match.url}/svg`} component={SvgHorisontalBar}/>
           <Route path={`${match.url}/vertical`} component={SvgVerticalBar}/>

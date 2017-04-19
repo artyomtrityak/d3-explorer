@@ -98,7 +98,7 @@ export default class InteractivePieChart extends React.Component {
 
   render() {
     return (
-      <svg className="pie-chart__interactive" ref={(r) => this.chartRef = r}></svg>
+      <svg className="pie-chart--interactive" ref={(r) => this.chartRef = r}></svg>
     );
   }
 }

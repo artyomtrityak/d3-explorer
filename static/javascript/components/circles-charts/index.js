@@ -31,7 +31,7 @@ export default class CirclesCharts extends React.Component {
           </li>
         </ul>
 
-        <div className="circle-chart">
+        <div>
           <Route path={`${match.url}/basic`} component={SvgCircles}/>
           <Route path={`${match.url}/drag`} component={SvgCirclesDragNDrop}/>
           <Route path={`${match.url}/zoom`} component={Zoom}/>

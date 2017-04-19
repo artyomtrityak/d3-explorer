@@ -23,7 +23,7 @@ export default class DivHorisontalBarChart extends React.Component {
 
     p.enter()
      .append("div")
-     .attr('class', 'bar-charts__div')
+     .attr('class', 'bar-chart--div')
      .transition()
      .duration(1000)
      .style("width", d => scale(d) + "px")

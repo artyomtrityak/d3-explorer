@@ -43,7 +43,7 @@ export default class CirclesCharts extends React.Component {
           </li>
         </ul>
 
-        <div className="line-charts">
+        <div>
           <Route path={`${match.url}/line`} component={SvgLine}/>
           <Route path={`${match.url}/area`} component={SvgArea}/>
           <Route path={`${match.url}/dynamic-line`} component={DynamicLine}/>

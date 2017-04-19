@@ -60,7 +60,7 @@ export default class BasicPieChart extends React.Component {
 
   render() {
     return (
-      <svg className="pie-chart__basic" ref={(r) => this.chartRef = r}></svg>
+      <svg className="pie-chart--basic" ref={(r) => this.chartRef = r}></svg>
     );
   }
 }

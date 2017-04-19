@@ -1,5 +1,5 @@
-.bar-charts {
-  .basic {
+.bar-chart {
+  &--basic {
     rect {
       fill: steelblue;
     }
@@ -8,6 +8,35 @@
       fill: white;
       font: 10px sans-serif;
       text-anchor: end;
+    }
+  }
+
+  &--div {
+    background-color: green;
+    border: 1px solid white;
+    width: 0px;
+    text-align: right;
+  }
+
+  &--stack {
+    rect:hover {
+      stroke: blueviolet;
+      stroke-width: 2;
+    }
+  }
+
+  &--axis-with-lines {
+    .axis {
+      path,
+      line {
+        fill: none;
+        stroke: gray;;
+      }
+
+      text {
+        font: 10px sans-serif;
+        fill: #000;
+      }
     }
   }
 
@@ -25,39 +54,14 @@
   }
 
   .added {
-    fill: blueviolet;
-  }
-
-  .updated {
-    fill: cornflowerblue;
-  }
-
-  &__div {
-    background-color: green;
-    border: 1px solid white;
-    width: 0px;
-    text-align: right;
-  }
-
-  &__stack {
-    rect:hover {
-      stroke: blueviolet;
-      stroke-width: 2;
+    rect {
+      fill: blueviolet !important;
     }
   }
 
-  &__axis-lines {
-    .axis {
-      path,
-      line {
-        fill: none;
-        stroke: gray;;
-      }
-
-      text {
-        font: 10px sans-serif;
-        fill: #000;
-      }
+  .updated {
+    rect {
+      fill: orange !important;
     }
   }
 }
