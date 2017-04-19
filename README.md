@@ -11,7 +11,7 @@ Allows to explore D3 v4 with modern stack.
 # Available charts
 
 ## Bar charts [<>](https://github.com/artyomtrityak/d3-explorer/tree/master/static/javascript/components/bar-charts "Source")
-![Bar 1](https://raw.githubusercontent.com/artyomtrityak/d3-explorer/master/screenshots/bar-1.png "Bar 1")
+<img src="https://raw.githubusercontent.com/artyomtrityak/d3-explorer/master/screenshots/bar-1.png" width="200">
 
 ![Bar 2](https://raw.githubusercontent.com/artyomtrityak/d3-explorer/master/screenshots/bar-2.png "Bar 2")
 
