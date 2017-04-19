@@ -53,7 +53,7 @@ export default class StackedAreaLine extends React.Component {
       .range([height, 0])
       .domain([0, 50]); //max sum or all within one date
 
-    const z = d3.scaleOrdinal(d3.schemeCategory10)
+    const z = d3.scaleOrdinal()
       .domain(['successfull', 'failed', 'warning'])
       .range(['green', 'red', 'yellow']);
 
@@ -82,7 +82,6 @@ export default class StackedAreaLine extends React.Component {
       .append('path')
         .attr("class", "area")
         .style("fill", (d) => {
-          console.log('KEY?', d);
           return z(d.key);
         })
         .attr("d", area);

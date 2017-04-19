@@ -84,6 +84,9 @@ export default class SvgVerticallyStackedBarChart extends React.Component {
     const { xScaleGroup, yScale } = this.getScales(width, height);
     const xAxis = d3.axisBottom(xScaleGroup);
     const yAxis = d3.axisLeft(yScale).ticks(10);
+    const colors = d3.scaleOrdinal()
+      .domain(['error', 'success'])
+      .range(['red', 'green']);
 
     const chart = d3.select(this.chart)
       .attr("width", width + margin.left + margin.right)
@@ -138,7 +141,7 @@ export default class SvgVerticallyStackedBarChart extends React.Component {
 
     barContainer.append('rect')
       .style('fill', (d) => {
-        return d.type === 'error' ? 'red' : 'green';
+        return colors(d.type);
       })
       .attr('y', (d) => yScale(d.val))
       .attr("width", xScaleGroup.bandwidth() / 2) // 2 - number of items in group
