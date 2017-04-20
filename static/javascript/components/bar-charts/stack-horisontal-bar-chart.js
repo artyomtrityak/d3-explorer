@@ -33,7 +33,7 @@ export default class SvgVerticalBarChart extends React.Component {
 
     this.chartInner = chart
       .append("g")
-        .attr('class', 'chart-inner')
+        .attr("class", "chart-inner")
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
     const series = d3.stack()
@@ -47,13 +47,13 @@ export default class SvgVerticalBarChart extends React.Component {
       .call(d3.axisBottom(xScale).ticks(8));
 
     this.chartInner.append("g")
-      .attr("transform", "translate(" + margin.left + ",0)")
+      .attr("transform", `translate(${margin.left},0)`)
       .call(d3.axisLeft(yScale));
 
     const colors = d3.scaleOrdinal(d3.schemeCategory10);
 
     const gContainer = this.chartInner
-      .append('g')
+      .append("g")
         .selectAll("g")
         .data(series)
         .enter()
@@ -75,16 +75,16 @@ export default class SvgVerticalBarChart extends React.Component {
           })
           .attr("height", yScale.bandwidth);
 
-    gContainer.selectAll('.line')
-      .data((d) => d)
+    gContainer.selectAll(".line")
+      .data(d => d)
       .enter()
-        .append('rect')
-          .attr('class', 'line')
-          .style('fill', 'gray')
-          .attr('height', 1)
-          .attr('width', width - margin.right)
-          .attr('x', 0)
-          .attr('y', (d, i) => {
+        .append("rect")
+          .attr("class", "line")
+          .style("fill", "gray")
+          .attr("height", 1)
+          .attr("width", width - margin.right)
+          .attr("x", 0)
+          .attr("y", (d, i) => {
             return yScale(d.data.month) + yScale.bandwidth();
           });
   }

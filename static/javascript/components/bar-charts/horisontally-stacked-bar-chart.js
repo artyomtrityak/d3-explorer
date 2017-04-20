@@ -168,9 +168,7 @@ export default class SvgVerticallyStackedBarChart extends React.Component {
 
   render() {
     return (
-      <div>
-        <svg ref={(r) => this.chart = r}></svg>
-      </div>
+      <svg ref={(r) => this.chart = r}></svg>
     );
   }
 }
