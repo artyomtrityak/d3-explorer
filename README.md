@@ -32,7 +32,5 @@ Allows to explore D3 v4 with modern stack.
 <img src="https://raw.githubusercontent.com/artyomtrityak/d3-explorer/master/screenshots/circle-1.png" width="300">
 
 
-## Tree charts
-
-[<>](https://github.com/artyomtrityak/d3-explorer/tree/master/static/javascript/components/tree-charts "Source")
+## Tree charts [<>](https://github.com/artyomtrityak/d3-explorer/tree/master/static/javascript/components/tree-charts "Source")
 <img src="https://raw.githubusercontent.com/artyomtrityak/d3-explorer/master/screenshots/tree-1.png" width="300">
