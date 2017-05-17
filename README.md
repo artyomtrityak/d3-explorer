@@ -17,6 +17,7 @@ Allows to explore D3 v4 with modern stack.
 
 <img src="https://raw.githubusercontent.com/artyomtrityak/d3-explorer/master/screenshots/bar-3.png" width="300">
 
+
 ### Pie charts [<>](https://github.com/artyomtrityak/d3-explorer/tree/master/static/javascript/components/pie-charts "Source")
 <img src="https://raw.githubusercontent.com/artyomtrityak/d3-explorer/master/screenshots/pie-1.png" width="300">
 
@@ -26,10 +27,12 @@ Allows to explore D3 v4 with modern stack.
 
 <img src="https://raw.githubusercontent.com/artyomtrityak/d3-explorer/master/screenshots/line-2.png" width="300">
 
+
 ## Circle charts [<>](https://github.com/artyomtrityak/d3-explorer/tree/master/static/javascript/components/circles-charts "Source")
 <img src="https://raw.githubusercontent.com/artyomtrityak/d3-explorer/master/screenshots/circle-1.png" width="300">
 
 
-### Work in progress
-1. Force layout charts
-2. Hierarchy layout
+## Tree charts
+
+[<>](https://github.com/artyomtrityak/d3-explorer/tree/master/static/javascript/components/tree-charts "Source")
+<img src="https://raw.githubusercontent.com/artyomtrityak/d3-explorer/master/screenshots/tree-1.png" width="300">
