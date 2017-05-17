@@ -1,7 +1,7 @@
 import React from 'react';
 import * as d3 from "d3";
 import { NavLink, Route } from 'react-router-dom';
-import BasicChart from './basic-force-chart';
+import BasicChart from './tree-chart';
 
 export default class ForceCharts extends React.Component {
   constructor(props) {
@@ -23,7 +23,7 @@ export default class ForceCharts extends React.Component {
           </li>
         </ul>
 
-        <div className="force-charts-container">
+        <div className="tree-charts-container">
           <Route path={`${match.url}/basic`} component={BasicChart}/>
         </div>
       </div>

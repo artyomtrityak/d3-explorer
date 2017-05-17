@@ -35,9 +35,9 @@ export default class MainMenu extends React.Component {
               <Link className="nav-link" to="/line">Line charts</Link>
             </li>
 
-            {/*<li className={cn("nav-item", {"active": matchPath(pathname, {path: '/force'})})}>
-              <Link className="nav-link" to="/force">Force charts</Link>
-            </li>*/}
+            <li className={cn("nav-item", {"active": matchPath(pathname, {path: '/tree'})})}>
+              <Link className="nav-link" to="/tree">Tree charts</Link>
+            </li>
 
           </ul>
         </div>
