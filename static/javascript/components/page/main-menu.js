@@ -16,7 +16,7 @@ export default class MainMenu extends React.Component {
       <nav className="navbar navbar-toggleable-md navbar-light bg-faded">
         <a className="navbar-brand" href="#">D3 Explorer</a>
 
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+        <div className="navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav">
 
             <li className={cn("nav-item", {"active": matchPath(pathname, {path: '/bar'}) || pathname === '/'})}>
