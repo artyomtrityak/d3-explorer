@@ -15,8 +15,6 @@ export default class ForceCharts extends React.Component {
   render() {
     const { match } = this.props;
 
-    console.log('render');
-
     return (
       <div>
         <ul className="nav nav-tabs">

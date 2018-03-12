@@ -1,6 +1,6 @@
 # D3 Explorer
 
-Demo D3.js (v4) project: ES2015/ES6 and React.js
+Exploring D3.js (v4): ES2015/ES6, webpack, D3 and React.js
 
 ## How to run
 1. `npm install`
@@ -36,4 +36,4 @@ Demo D3.js (v4) project: ES2015/ES6 and React.js
 
 
 ## 3D D3js Charts [<>](https://github.com/artyomtrityak/d3-explorer/tree/master/static/javascript/components/3d-charts "Source")
-<img src="https://raw.githubusercontent.com/artyomtrityak/d3-explorer/master/screenshots/tree-1.png" width="300">
+<img src="https://raw.githubusercontent.com/artyomtrityak/d3-explorer/master/screenshots/3d-1.png" width="300">
