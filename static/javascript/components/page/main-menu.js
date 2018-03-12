@@ -1,6 +1,6 @@
-import React from "react";
+import React, { Fragment } from "react";
 import cn from 'classnames';
-import { Link, matchPath } from 'react-router-dom';
+import { NavLink, matchPath } from 'react-router-dom';
 
 
 export default class MainMenu extends React.Component {
@@ -13,36 +13,35 @@ export default class MainMenu extends React.Component {
     const { pathname } = this.props.location;
 
     return (
-      <nav className="navbar navbar-toggleable-md navbar-light bg-faded">
-        <a className="navbar-brand" href="#">D3 Explorer</a>
+      <Fragment>
+        <ul className="nav justify-content-center mb-5">
+          <a className="navbar-brand" href="#/">D3 Explorer</a>
 
-        <div className="navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav">
+          <li className={cn("nav-item", {"active": matchPath(pathname, {path: '/bar'}) || pathname === '/'})}>
+            <NavLink activeClassName="disabled" className="nav-link" to="/bar">Bar charts</NavLink>
+          </li>
 
-            <li className={cn("nav-item", {"active": matchPath(pathname, {path: '/bar'}) || pathname === '/'})}>
-              <Link className="nav-link" to="/bar">Bar charts</Link>
-            </li>
+          <li className={cn("nav-item", {"active": matchPath(pathname, {path: '/circle'})})}>
+            <NavLink activeClassName="disabled" className="nav-link" to="/circle">Circle charts</NavLink>
+          </li>
 
-            <li className={cn("nav-item", {"active": matchPath(pathname, {path: '/circle'})})}>
-              <Link className="nav-link" to="/circle">Circle charts</Link>
-            </li>
+          <li className={cn("nav-item", {"active": matchPath(pathname, {path: '/pie'})})}>
+            <NavLink activeClassName="disabled" className="nav-link" to="/pie">Pie charts</NavLink>
+          </li>
 
-            <li className={cn("nav-item", {"active": matchPath(pathname, {path: '/pie'})})}>
-              <Link className="nav-link" to="/pie">Pie charts</Link>
-            </li>
+          <li className={cn("nav-item", {"active": matchPath(pathname, {path: '/line'})})}>
+            <NavLink activeClassName="disabled" className="nav-link" to="/line">Line charts</NavLink>
+          </li>
 
-            <li className={cn("nav-item", {"active": matchPath(pathname, {path: '/line'})})}>
-              <Link className="nav-link" to="/line">Line charts</Link>
-            </li>
+          <li className={cn("nav-item", {"active": matchPath(pathname, {path: '/tree'})})}>
+            <NavLink activeClassName="disabled" className="nav-link" to="/tree">Tree charts</NavLink>
+          </li>
 
-            <li className={cn("nav-item", {"active": matchPath(pathname, {path: '/tree'})})}>
-              <Link className="nav-link" to="/tree">Tree charts</Link>
-            </li>
-
-          </ul>
-        </div>
-
-      </nav>
+          <li className={cn("nav-item", {"active": matchPath(pathname, {path: '/3d'})})}>
+            <NavLink activeClassName="disabled" className="nav-link" to="/3d">3D charts</NavLink>
+          </li>
+        </ul>
+      </Fragment>
     );
   }
 }

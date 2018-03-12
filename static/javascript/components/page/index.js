@@ -7,6 +7,7 @@ import CircleCharts from "../circles-charts";
 import PieCharts from "../pie-charts";
 import LineCharts from "../line-charts";
 import TreeCharts from "../tree-charts";
+import ThreeDCharts from "../3d";
 
 export default class Page extends React.Component {
   constructor(props) {
@@ -24,6 +25,7 @@ export default class Page extends React.Component {
           <Route path="/circle" component={CircleCharts}/>
           <Route path="/line" component={LineCharts}/>
           <Route path="/tree" component={TreeCharts}/>
+          <Route path="/3d" component={ThreeDCharts}/>
         </div>
       </HashRouter>
     );
