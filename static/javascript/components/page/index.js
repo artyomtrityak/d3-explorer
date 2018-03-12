@@ -7,7 +7,7 @@ import CircleCharts from "../circles-charts";
 import PieCharts from "../pie-charts";
 import LineCharts from "../line-charts";
 import TreeCharts from "../tree-charts";
-import ThreeDCharts from "../3d";
+import ThreeDCharts from "../3d-charts";
 
 export default class Page extends React.Component {
   constructor(props) {

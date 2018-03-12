@@ -1,7 +1,6 @@
 # D3 Explorer
 
-Demo D3.js (v4) project written with ES2015 and React
-Allows to explore D3 v4 with modern stack.
+Demo D3.js (v4) project: ES2015/ES6 and React.js
 
 ## How to run
 1. `npm install`
@@ -33,4 +32,8 @@ Allows to explore D3 v4 with modern stack.
 
 
 ## Tree charts [<>](https://github.com/artyomtrityak/d3-explorer/tree/master/static/javascript/components/tree-charts "Source")
+<img src="https://raw.githubusercontent.com/artyomtrityak/d3-explorer/master/screenshots/tree-1.png" width="300">
+
+
+## 3D D3js Charts [<>](https://github.com/artyomtrityak/d3-explorer/tree/master/static/javascript/components/3d-charts "Source")
 <img src="https://raw.githubusercontent.com/artyomtrityak/d3-explorer/master/screenshots/tree-1.png" width="300">
