@@ -2,11 +2,11 @@ import React, { Fragment } from "react";
 import * as d3 from "d3";
 import ForceGraph3D from "3d-force-graph";
 
-export default class TreeDBasicChart extends React.Component {
+export default class ThreeDCameraChart extends React.Component {
   constructor(props) {
     super(props);
 
-    const N = 100;
+    const N = 200;
     const GROUPS = 5;
 
     this.state = {
@@ -29,11 +29,30 @@ export default class TreeDBasicChart extends React.Component {
       .height(window.innerHeight - 200)
       .backgroundColor("#FFFFFF")
       .nodeAutoColorBy("group")
-      .linkWidth(2)
-      .linkColor((d, d2) => {
-        return d.source < 10 ? "#FF0000" : "#000000";
-      })
       .graphData(this.state.data);
+
+    this.startOrbit();
+  }
+
+  startOrbit() {
+    const distance = 700;
+    let angle = 0;
+
+    this.interval = setInterval(() => {
+      angle = angle + Math.PI / 300;
+      this.graph.cameraPosition({
+        x: distance * Math.sin(angle),
+        z: distance * Math.cos(angle)
+      });
+    }, 30);
+  }
+
+  stopOrbit() {
+    clearInterval(this.interval);
+  }
+
+  componentWillUnmount() {
+    this.stopOrbit();
   }
 
   render() {

@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import * as d3 from "d3";
 import ForceGraph3D from "3d-force-graph";
+import * as THREE from 'three';
 
 export default class TreeDBasicChart extends React.Component {
   constructor(props) {
@@ -33,6 +34,22 @@ export default class TreeDBasicChart extends React.Component {
       .linkColor((d, d2) => {
         return d.source < 10 ? "#FF0000" : "#000000";
       })
+      .nodeThreeObject(({ id }) => new THREE.Mesh(
+        [
+          new THREE.BoxGeometry(Math.random() * 20, Math.random() * 20, Math.random() * 20),
+          new THREE.ConeGeometry(Math.random() * 10, Math.random() * 20),
+          new THREE.CylinderGeometry(Math.random() * 10, Math.random() * 10, Math.random() * 20),
+          new THREE.DodecahedronGeometry(Math.random() * 10),
+          new THREE.SphereGeometry(Math.random() * 10),
+          new THREE.TorusGeometry(Math.random() * 10, Math.random() * 2),
+          new THREE.TorusKnotGeometry(Math.random() * 10, Math.random() * 2)
+        ][id%7],
+        new THREE.MeshLambertMaterial({
+          color: Math.round(Math.random() * Math.pow(2, 24)),
+          transparent: true,
+          opacity: 0.75
+        })
+      ))
       .graphData(this.state.data);
   }
 
