@@ -27,14 +27,14 @@ export default class ForceCharts extends React.Component {
             <NavLink activeClassName="active" className="nav-link" to={`${match.url}/force-camera`}>Force 3D camera</NavLink>
           </li>
           <li className="nav-item">
-            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/force-geomentries`}>3D nodes geometries</NavLink>
+            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/force-geometries`}>3D nodes geometries</NavLink>
           </li>
         </ul>
 
         <div className="3d-charts-container">
           <Route path={`${match.url}/force-basic`} component={Force3dBasic} />
           <Route path={`${match.url}/force-camera`} component={Force3dCamera} />
-          <Route path={`${match.url}/force-geomentries`} component={Force3dGeometries} />
+          <Route path={`${match.url}/force-geometries`} component={Force3dGeometries} />
         </div>
       </div>
     );

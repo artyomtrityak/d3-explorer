@@ -39,3 +39,5 @@ Exploring D3.js (v4): ES2015/ES6, webpack, D3 and React.js
 Dependency [3d-force-graph](https://github.com/vasturiano/3d-force-graph)
 
 <img src="https://raw.githubusercontent.com/artyomtrityak/d3-explorer/master/screenshots/3d-1.png" width="300">
+
+<img src="https://raw.githubusercontent.com/artyomtrityak/d3-explorer/master/screenshots/3d-2.gif" width="300">
