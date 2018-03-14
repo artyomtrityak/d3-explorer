@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import * as d3 from "d3";
 import ForceGraph3D from "3d-force-graph";
 import * as THREE from "three";
+import DATASET_1 from "./data-set-1";
 
 export default class TreeDBasicChart extends React.Component {
   constructor(props) {
@@ -11,17 +12,7 @@ export default class TreeDBasicChart extends React.Component {
     const GROUPS = 5;
 
     this.state = {
-      data: {
-        nodes: [...Array(N).keys()].map(i => ({
-          id: i,
-          group: Math.ceil(Math.random() * GROUPS),
-          val: Math.ceil(Math.random() * GROUPS)
-        })),
-        links: [...Array(N).keys()].filter(id => id).map(id => ({
-          source: id,
-          target: Math.round(Math.random() * (id - 1))
-        }))
-      }
+      data: DATASET_1
     };
   }
 
@@ -30,35 +21,63 @@ export default class TreeDBasicChart extends React.Component {
       .width(this.chartRef.clientWidth - 100)
       .height(window.innerHeight - 200)
       .backgroundColor("#FFFFFF")
-      .nodeAutoColorBy("group")
+      .nodeColor(d => {
+        switch (d.type) {
+          case "application":
+            return "blue";
+          case "environment":
+            return "yellow";
+          case "microservice":
+            return "purple";
+          case "K8Container":
+            return "green";
+          case "K8Pod":
+            return "red";
+          case "K8Cluster":
+            return "black";
+          default:
+            return "gray";
+        }
+      })
       .linkWidth(3)
-      .linkColor((d, d2) => {
-        return d.source < 20 ? "#FF0000" : "#000000";
+      .linkColor((d) => {
+        return d.type === "application" ? "#FF0000" : "#000000";
       })
       .graphData(this.state.data);
 
-    //this.graph.d3Force('charge').strength(-200);
-    // this.graph.d3Force('link').distance(function(d) {
-    //   if (d.index < 20) {
-    //     return 90;
-    //   }
-    //   return 50;
-    // });
-
-    this.graph.d3Force('link').strength((d) => {
-      if (d.index < 20) {
-        return 0.5;
+    this.graph.d3Force("charge").strength(-250);
+    this.graph.d3Force("charge").distanceMin(150);
+    this.graph.d3Force(
+      "r",
+      d3.forceRadial(function(d) {
+        if (d.type === "application" || d.type === "microservice") {
+          return 20;
+        } else {
+          return 100;
+        }
+      })
+    );
+    this.graph.d3Force("link").distance(d => {
+      if (d.type === "application" || d.type === "microservice") {
+        return 120;
       }
-      return 2;
+      return 20;
     });
 
-    this.graph.d3Force('charge').strength(-150);
-    //this.graph.d3Force('charge').distanceMin(100);
-    //this.graph.d3Force('radial', d3.forceRadial(150));
-    // this.graph.d3Force("r", d3.forceRadial(function(d) {
-    //   return d.index < 10 ? 100 : 300;
-    // }));
-    // this.graph.d3Force('link').distance(50).strength(1);
+    this.startOrbit();
+  }
+
+  startOrbit() {
+    const distance = 800;
+    let angle = 0;
+
+    this.interval = setInterval(() => {
+      angle = angle + Math.PI / 300;
+      this.graph.cameraPosition({
+        x: distance * Math.sin(angle),
+        z: distance * Math.cos(angle)
+      });
+    }, 30);
   }
 
   render() {
