@@ -27,6 +27,7 @@ export default class ThreeDCameraChart extends React.Component {
     this.graph = ForceGraph3D()(this.chartRef)
       .width(this.chartRef.clientWidth - 100)
       .height(window.innerHeight - 200)
+      .forceEngine("ngraph")
       .backgroundColor("#FFFFFF")
       .nodeAutoColorBy("group")
       .graphData(this.state.data);

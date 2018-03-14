@@ -36,6 +36,30 @@ export default class TreeDBasicChart extends React.Component {
         return d.source < 20 ? "#FF0000" : "#000000";
       })
       .graphData(this.state.data);
+
+    //this.graph.d3Force('charge').strength(-200);
+    // this.graph.d3Force('link').distance(function(d) {
+    //   if (d.index < 20) {
+    //     return 90;
+    //   }
+    //   return 50;
+    // });
+
+    this.graph.d3Force('link').strength((d) => {
+      console.log(d);
+      if (d.index < 20) {
+        return 0.5;
+      }
+      return 2;
+    });
+
+    this.graph.d3Force('charge').strength(-150);
+    //this.graph.d3Force('charge').distanceMin(100);
+    //this.graph.d3Force('radial', d3.forceRadial(150));
+    // this.graph.d3Force("r", d3.forceRadial(function(d) {
+    //   return d.index < 10 ? 100 : 300;
+    // }));
+    // this.graph.d3Force('link').distance(50).strength(1);
   }
 
   render() {

@@ -4,6 +4,7 @@ import { NavLink, Route } from 'react-router-dom';
 import Force3dBasic from './force-3d-basic';
 import Force3dCamera from './force-3d-camera';
 import Force3dGeometries from './force-3d-node-geometries';
+import Force3dD3 from './force-3d-d3';
 
 export default class ForceCharts extends React.Component {
   constructor(props) {
@@ -29,12 +30,16 @@ export default class ForceCharts extends React.Component {
           <li className="nav-item">
             <NavLink activeClassName="active" className="nav-link" to={`${match.url}/force-geometries`}>3D nodes geometries</NavLink>
           </li>
+          <li className="nav-item">
+            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/force-d3`}>3D D3 parameters</NavLink>
+          </li>
         </ul>
 
         <div className="3d-charts-container">
           <Route path={`${match.url}/force-basic`} component={Force3dBasic} />
           <Route path={`${match.url}/force-camera`} component={Force3dCamera} />
           <Route path={`${match.url}/force-geometries`} component={Force3dGeometries} />
+          <Route path={`${match.url}/force-d3`} component={Force3dD3} />
         </div>
       </div>
     );
