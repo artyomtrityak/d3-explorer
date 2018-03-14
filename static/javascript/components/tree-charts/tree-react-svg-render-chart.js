@@ -1,99 +1,93 @@
-import React from 'react';
+import React from "react";
 import * as d3 from "d3";
 
 export default class TreeChart extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      root: null,
+      width: 700,
+      height: 500,
       data: [
-        {"name": "ProjectA",   "parent": ""},
-        {"name": "ApplicationA",  "parent": "ProjectA"},
-        {"name": "EnvironmentB",  "parent": "ProjectA"},
+        { name: "ProjectA", parent: "" },
+        { name: "ApplicationA", parent: "ProjectA" },
+        { name: "EnvironmentB", parent: "ProjectA" },
 
-        {"name": "TierC",  "parent": "ApplicationA"},
-        {"name": "TierD",  "parent": "ApplicationA"},
-        {"name": "TierE",  "parent": "ApplicationA"},
+        { name: "TierC", parent: "ApplicationA" },
+        { name: "TierD", parent: "ApplicationA" },
+        { name: "TierE", parent: "ApplicationA" },
 
-        {"name": "ServiceF",  "parent": "EnvironmentB"},
+        { name: "ServiceF", parent: "EnvironmentB" },
 
-        {"name": "ContainerG", "parent": "TierE"},
-        {"name": "ContainerH", "parent": "TierE"}
+        { name: "ContainerG", parent: "TierE" },
+        { name: "ContainerH", parent: "TierE" }
       ]
     };
   }
 
   componentDidMount() {
-    const width = 700,
-          height = 500;
+    const tree = d3.tree().size([this.state.height, this.state.width - 160]);
 
-    const chart = d3.select(this.chartRef)
-      .attr('width', width+100)
-      .attr('height', height)
-      .append('g')
-        .attr('transform', 'translate(100, 0)');
-
-    const tree = d3.tree()
-      .size([height, width - 160]);
-
-    const stratify = d3.stratify()
-      .id((d) => {
+    const stratify = d3
+      .stratify()
+      .id(d => {
         return d.name;
       })
-      .parentId((d) => {
+      .parentId(d => {
         return d.parent;
       });
 
-    const root = stratify(this.state.data)
-      .sort((a, b) => {
-        return (a.height - b.height) || a.id.localeCompare(b.id);
-      });
+    const root = stratify(this.state.data).sort((a, b) => {
+      return a.height - b.height || a.id.localeCompare(b.id);
+    });
 
-    const link = chart.selectAll('.link')
-      .data(tree(root).links())
-      .enter()
-        .append('path')
-          .attr('class', 'link')
-          .attr("d", d3.linkHorizontal()
-            .x((d) => {
-              return d.y;
-            })
-            .y((d) => {
-              return d.x;
-            })
-          );
-
-    const node = chart.selectAll('.node')
-      .data(root.descendants())
-      .enter()
-        .append('g')
-          .attr("class", (d) => {
-            return "node" + (d.children ? " node--internal" : " node--leaf");
-          })
-          .attr("transform", (d) => {
-            return `translate(${d.y},${d.x})`;
-          });
-
-    node.append('circle')
-      .attr('r', 2.5);
-
-    node.append("text")
-      .attr("dy", 3)
-      .attr("x", (d) => {
-        return d.children ? -8 : 8;
-      })
-      .style("text-anchor", (d) => {
-        return d.children ? "end" : "start";
-      })
-      .text((d) => {
-        return d.id;
-      });
-
-    console.log('root data:', root);
+    this.setState({ root, links: tree(root).links() });
   }
 
   render() {
+    if (!this.state.links) {
+      return null;
+    }
+
     return (
-      <svg className="tree-chart-basic" ref={(r) => this.chartRef = r}></svg>
+      <svg
+        width={this.state.width + 100}
+        height={this.state.height}
+        className="tree-chart-basic"
+        ref={r => (this.chartRef = r)}
+      >
+        <g transform="translate(100, 0)">
+          {this.renderLinks()}
+          {this.renderNodes()}
+        </g>
+      </svg>
     );
+  }
+
+  renderLinks() {
+    return this.state.links.map(function(data, i) {
+      const link = d3
+        .linkHorizontal()
+        .x(d => {
+          return d.y;
+        })
+        .y(d => {
+          return d.x;
+        });
+      return <path key={`link${i}`} className="link" d={link(data)} />;
+    });
+  }
+
+  renderNodes() {
+    return this.state.root.descendants().map((d, i) => {
+      return (
+        <g key={`node${i}`} className="node" transform={`translate(${d.y},${d.x})`}>
+          <circle r="5" />
+          <text dy={20} x={-8} textAnchor={d.children ? "start" : "end"}>
+            {d.id}
+          </text>
+        </g>
+      );
+    });
   }
 }

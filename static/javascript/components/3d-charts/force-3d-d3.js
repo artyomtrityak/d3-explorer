@@ -46,7 +46,6 @@ export default class TreeDBasicChart extends React.Component {
     // });
 
     this.graph.d3Force('link').strength((d) => {
-      console.log(d);
       if (d.index < 20) {
         return 0.5;
       }
