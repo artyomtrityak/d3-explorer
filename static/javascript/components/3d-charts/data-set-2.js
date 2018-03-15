@@ -2,39 +2,33 @@ module.exports = () => ({
   nodes: [
     {
       id: "App1",
-      type: "application",
-      val: 30
+      type: "application"
     },
+
     {
       id: "Service1",
-      type: "microservice",
-      val: 10
+      type: "microservice"
     },
     {
       id: "Service2",
-      type: "microservice",
-      val: 10
+      type: "microservice"
     },
     {
       id: "Service3",
-      type: "microservice",
-      val: 10
+      type: "microservice"
     },
     {
       id: "Service11",
-      type: "microservice",
-      val: 10
+      type: "microservice"
     },
     {
       id: "Service21",
-      type: "microservice",
-      val: 10
+      type: "microservice"
     },
 
     {
       id: "DEV-ENV",
-      type: "environment",
-      val: 10
+      type: "environment"
     },
     {
       id: "DEV-K8Cluster",
@@ -188,10 +182,10 @@ module.exports = () => ({
       id: "DEV-K8Service21-Pod2-Container2",
       type: "K8Container"
     },
+
     {
       id: "PROD-ENV",
-      type: "environment",
-      val: 10
+      type: "environment"
     },
     {
       id: "PROD-K8Cluster",
@@ -287,6 +281,7 @@ module.exports = () => ({
       id: "PROD-K8Service3-Pod2-Container1",
       type: "K8Container"
     },
+
     {
       id: "PROD-K8Service11",
       type: "K8Service"
@@ -315,6 +310,7 @@ module.exports = () => ({
       id: "PROD-K8Service11-Pod2-Container2",
       type: "K8Container"
     },
+
     {
       id: "PROD-K8Service21",
       type: "K8Service"
@@ -373,29 +369,30 @@ module.exports = () => ({
       source: "Service2",
       target: "Service21"
     },
+
     {
       source: "DEV-ENV",
       target: "DEV-K8Cluster"
     },
     {
       source: "Service1",
-      target: "DEV-K8Service1"
+      target: "DEV-ENV"
     },
     {
       source: "Service2",
-      target: "DEV-K8Service2"
+      target: "DEV-ENV"
     },
     {
       source: "Service3",
-      target: "DEV-K8Service3"
+      target: "DEV-ENV"
     },
     {
       source: "Service11",
-      target: "DEV-K8Service11"
+      target: "DEV-ENV"
     },
     {
       source: "Service21",
-      target: "DEV-K8Service21"
+      target: "DEV-ENV"
     },
     {
       source: "DEV-K8Cluster",
@@ -453,6 +450,7 @@ module.exports = () => ({
       source: "DEV-K8Service1-Pod3",
       target: "DEV-K8Service1-Pod3-Container2"
     },
+
     {
       source: "DEV-K8Service2",
       target: "DEV-K8Service2-Pod1"
@@ -477,6 +475,7 @@ module.exports = () => ({
       source: "DEV-K8Service2-Pod2",
       target: "DEV-K8Service2-Pod2-Container2"
     },
+
     {
       source: "DEV-K8Service3",
       target: "DEV-K8Service3-Pod1"
@@ -493,6 +492,7 @@ module.exports = () => ({
       source: "DEV-K8Service3-Pod2",
       target: "DEV-K8Service3-Pod2-Container1"
     },
+
     {
       source: "DEV-K8Service11",
       target: "DEV-K8Service11-Pod1"
@@ -517,6 +517,7 @@ module.exports = () => ({
       source: "DEV-K8Service11-Pod2",
       target: "DEV-K8Service11-Pod2-Container2"
     },
+
     {
       source: "DEV-K8Service21",
       target: "DEV-K8Service21-Pod1"
@@ -541,29 +542,30 @@ module.exports = () => ({
       source: "DEV-K8Service21-Pod2",
       target: "DEV-K8Service21-Pod2-Container2"
     },
+
     {
       source: "PROD-ENV",
       target: "PROD-K8Cluster"
     },
     {
       source: "Service1",
-      target: "DEV-K8Service1"
+      target: "PROD-ENV"
     },
     {
       source: "Service2",
-      target: "PROD-K8Service2"
+      target: "PROD-ENV"
     },
     {
       source: "Service3",
-      target: "PROD-K8Service3"
+      target: "PROD-ENV"
     },
     {
       source: "Service11",
-      target: "PROD-K8Service11"
+      target: "PROD-ENV"
     },
     {
       source: "Service21",
-      target: "PROD-K8Service21"
+      target: "PROD-ENV"
     },
     {
       source: "PROD-K8Cluster",
@@ -621,6 +623,7 @@ module.exports = () => ({
       source: "PROD-K8Service1-Pod3",
       target: "PROD-K8Service1-Pod3-Container2"
     },
+
     {
       source: "PROD-K8Service2",
       target: "PROD-K8Service2-Pod1"

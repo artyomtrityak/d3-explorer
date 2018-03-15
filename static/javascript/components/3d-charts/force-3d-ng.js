@@ -1,14 +1,11 @@
 import React, { Fragment } from "react";
-//import * as d3 from "d3";
+import * as d3 from "d3";
 import ForceGraph3D from "3d-force-graph";
 import * as THREE from "three";
 import DATASET_1 from "./data-set-1";
 import DATASET_2 from "./data-set-2";
-import * as d3 from "d3-force-3d";
 
-//console.log(d33d);
-
-export default class TreeDD3Chart extends React.Component {
+export default class TreeDNgChart extends React.Component {
   constructor(props) {
     super(props);
 
@@ -22,6 +19,7 @@ export default class TreeDD3Chart extends React.Component {
       .width(this.chartRef.clientWidth - 100)
       .height(window.innerHeight - 200)
       .backgroundColor("#FFFFFF")
+      .forceEngine("ngraph")
       .nodeColor(d => {
         switch (d.type) {
           case "application":
@@ -41,26 +39,13 @@ export default class TreeDD3Chart extends React.Component {
         }
       })
       .linkWidth(3)
-      .linkColor(d => {
-        return d.type === "application" ? "#FF0000" : "#000000";
-      })
       .graphData(this.state.data);
-
-    this.graph.d3AlphaDecay(0.02);
-    this.graph.d3VelocityDecay(0.1);
-
-    this.graph.d3Force('link').distance((d) => {
-      if (d.source.type === "application" || d.source.type === 'microservice') {
-        return 70;
-      }
-      return 30;
-    }).strength(1);
 
     this.startOrbit();
   }
 
   startOrbit() {
-    const distance = 600;
+    const distance = 700;
     let angle = 0;
 
     this.interval = setInterval(() => {
@@ -77,6 +62,6 @@ export default class TreeDD3Chart extends React.Component {
   }
 
   render() {
-    return <div className="basic-3d" ref={r => (this.chartRef = r)} />;
+    return <div className="basic-3d-ng" ref={r => (this.chartRef = r)} />;
   }
 }
