@@ -49,6 +49,12 @@ var webpackConfig = {
     publicPath: 'http://localhost:9000/static/build/'
   },
 
+  plugins: [
+    new webpack.ProvidePlugin({
+      THREE: 'three'
+    })
+  ],
+
   stats: true,
 
   devServer: {

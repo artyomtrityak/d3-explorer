@@ -4,6 +4,7 @@ import ForceGraph3D from "3d-force-graph";
 import * as THREE from "three";
 import DATASET_1 from "./data-set-1";
 import DATASET_2 from "./data-set-2";
+import DATASET_3 from "./data-set-3";
 
 export default class TreeDNgChart extends React.Component {
   constructor(props) {
