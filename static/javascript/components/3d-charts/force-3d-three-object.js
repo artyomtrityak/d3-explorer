@@ -25,10 +25,67 @@ export default class TreeDBasicChart extends React.Component {
       .nodeAutoColorBy("type")
       .linkWidth(1)
       .nodeThreeObject(node => {
-        if (node.type === 'application' || node.type === 'microservice') {
+        if (node.type === 'application') {
           var geometry = new THREE.DodecahedronGeometry( 10 );
 
-          var diffuseColor = new THREE.Color().setHSL( 0.9, 0.5, 0.25 );
+          var diffuseColor = new THREE.Color( 0x5e9ccb );
+          var material = new THREE.MeshPhysicalMaterial( {
+            color: diffuseColor,
+            metalness: 0,
+            roughness: 0.5,
+            clearCoat:  1.0,
+            clearCoatRoughness: 1.0,
+            reflectivity: 1.0,
+          } );
+          return new THREE.Mesh( geometry, material );
+        }
+
+        if (node.type === 'microservice') {
+          var geometry = new THREE.DodecahedronGeometry( 10 );
+
+          var diffuseColor = new THREE.Color( 0xc563cb );
+          var material = new THREE.MeshPhysicalMaterial( {
+            color: diffuseColor,
+            metalness: 0,
+            roughness: 0.5,
+            clearCoat:  1.0,
+            clearCoatRoughness: 1.0,
+            reflectivity: 1.0,
+          } );
+          return new THREE.Mesh( geometry, material );
+        }
+
+        if (node.type === 'environment') {
+          var geometry = new THREE.CylinderBufferGeometry( 5, 5, 20, 32 );
+          var diffuseColor = new THREE.Color(0xff8912);
+          var material = new THREE.MeshPhysicalMaterial( {
+            color: diffuseColor,
+            metalness: 0,
+            roughness: 0.5,
+            clearCoat:  1.0,
+            clearCoatRoughness: 1.0,
+            reflectivity: 1.0,
+          } );
+          return new THREE.Mesh( geometry, material );
+        }
+
+        if (node.type === 'K8Cluster') {
+          var geometry = new THREE.BoxGeometry( 10, 10, 10 );
+          var diffuseColor = new THREE.Color(0xff4900);
+          var material = new THREE.MeshPhysicalMaterial( {
+            color: diffuseColor,
+            metalness: 0,
+            roughness: 0.5,
+            clearCoat:  1.0,
+            clearCoatRoughness: 1.0,
+            reflectivity: 1.0,
+          } );
+          return new THREE.Mesh( geometry, material );
+        }
+
+        if (node.type === 'K8Pod') {
+          var geometry = new THREE.TetrahedronGeometry( 10 );
+          var diffuseColor = new THREE.Color(0x124900);
           var material = new THREE.MeshPhysicalMaterial( {
             color: diffuseColor,
             metalness: 0,
@@ -48,7 +105,7 @@ export default class TreeDBasicChart extends React.Component {
 
 
 startOrbit() {
-  const distance = 700;
+  const distance = 500;
   let angle = 0;
 
   this.interval = setInterval(() => {
