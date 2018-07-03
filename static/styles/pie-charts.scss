@@ -1,8 +1,11 @@
 .pie-chart { 
+  text {
+    fill: white;
+  }
 }
 
-.pie-chart--interactive {
+.pie-chart--out-labels {
   text {
-    fill: #FFF;
+    fill: black;
   }
 }
