@@ -1,9 +1,7 @@
-import React from 'react';
+import React from "react";
 import * as d3 from "d3";
 
-
 const colors = d3.scaleOrdinal(d3.schemeCategory10);
-
 
 export default class InteractivePieChart extends React.Component {
   constructor(props) {
@@ -37,44 +35,48 @@ export default class InteractivePieChart extends React.Component {
       innerRadius = outerRadius / 3,
       cornerRadius = 10;
 
-    const arc = d3.arc()
+    const arc = d3
+      .arc()
       .padRadius(outerRadius)
       .innerRadius(innerRadius);
 
-    const chart = d3.select(this.chartRef)
+    const chart = d3
+      .select(this.chartRef)
       .attr("width", window.innerWidth - 100)
       .attr("height", 500)
       .append("g")
-        .attr("transform", `translate(${width / 2}, ${height / 2})`);
+      .attr("transform", `translate(${width / 2}, ${height / 2})`);
 
-    const pie = d3.pie()
+    const pie = d3
+      .pie()
       .sort(null)
-      .value((d) => +d.apps_by_deployment_doc_count)
-      .padAngle(.02);
+      .value(d => +d.apps_by_deployment_doc_count)
+      .padAngle(0.02);
 
-    const arcContainer = chart.selectAll("path")
+    const arcContainer = chart
+      .selectAll("path")
       .data(pie(this.state.data))
       .enter()
-        .append('g')
-          .attr('class', 'arc');
+      .append("g")
+      .attr("class", "arc");
 
     arcContainer
       .append("path")
-        .attr("fill", (d, i) => colors(i))
-        .each((d) => {
-          d.outerRadius = outerRadius - 20;
-        })
-        .attr("d", arc)
-        .on("mouseover", this.arcTween(arc, outerRadius, true))
-        .on("mouseout", this.arcTween(arc, outerRadius - 20));
+      .attr("fill", (d, i) => colors(i))
+      .each(d => {
+        d.outerRadius = outerRadius - 20;
+      })
+      .attr("d", arc)
+      .on("mouseover", this.arcTween(arc, outerRadius, true))
+      .on("mouseout", this.arcTween(arc, outerRadius - 20));
 
     arcContainer
       .append("text")
-        .attr("transform", (d) => {
-          return `translate(${arc.centroid(d)})`;
-        })
-        .attr("dy", "0.35em")
-        .text(d => d.data.apps_by_deployment_doc_count);
+      .attr("transform", d => {
+        return `translate(${arc.centroid(d)})`;
+      })
+      .attr("dy", "0.35em")
+      .text(d => d.data.apps_by_deployment_doc_count);
   }
 
   arcTween(arc, newOuterRadius, isMouseOver) {
@@ -82,23 +84,21 @@ export default class InteractivePieChart extends React.Component {
       d3.select(this)
         .transition()
         .duration(1000)
-        .attrTween("d", (d) => {
+        .attrTween("d", d => {
           const interpolator = d3.interpolate(d.outerRadius, newOuterRadius);
-          return (t) => {
+          return t => {
             d.outerRadius = interpolator(t);
             return arc(d);
           };
         })
-        .attrTween('fill', (d) => {
-          const to = isMouseOver ? 'blue' : colors(i);
+        .attrTween("fill", d => {
+          const to = isMouseOver ? "blue" : colors(i);
           return d3.interpolateRgb(this.getAttribute("fill"), to);
         });
     };
   }
 
   render() {
-    return (
-      <svg className="pie-chart" ref={(r) => this.chartRef = r}></svg>
-    );
+    return <svg className="pie-chart" ref={r => (this.chartRef = r)} />;
   }
 }

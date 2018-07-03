@@ -7,7 +7,6 @@ import DATASET_2 from "./data-set-2";
 import DATASET_3 from "./data-set-3";
 import * as d3 from "d3-force-3d";
 
-
 export default class TreeDD3Chart extends React.Component {
   constructor(props) {
     super(props);
@@ -49,12 +48,18 @@ export default class TreeDD3Chart extends React.Component {
     this.graph.d3AlphaDecay(0.02);
     this.graph.d3VelocityDecay(0.1);
 
-    this.graph.d3Force('link').distance((d) => {
-      if (d.source.type === "application" || d.source.type === 'microservice') {
-        return 70;
-      }
-      return 30;
-    }).strength(1);
+    this.graph
+      .d3Force("link")
+      .distance(d => {
+        if (
+          d.source.type === "application" ||
+          d.source.type === "microservice"
+        ) {
+          return 70;
+        }
+        return 30;
+      })
+      .strength(1);
 
     this.startOrbit();
   }

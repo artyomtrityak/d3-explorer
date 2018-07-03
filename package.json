@@ -5,7 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "eslint .",
-    "start": "webpack-dev-server --colors --progress --inline --hot"
+    "start": "webpack-dev-server --colors --progress --inline --hot",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,scss}": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "repository": {
     "type": "git",
@@ -35,9 +42,12 @@
     "eslint-loader": "^1.6.1",
     "eslint-plugin-react": "^6.9.0",
     "file-loader": "^0.10.0",
+    "husky": "^0.14.3",
     "image-webpack-loader": "^3.2.0",
     "jquery": "^3.1.1",
+    "lint-staged": "^7.2.0",
     "node-sass": "^4.5.0",
+    "prettier": "^1.13.7",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-router": "^4.0.0",

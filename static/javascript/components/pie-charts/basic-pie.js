@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import * as d3 from "d3";
 
 export default class BasicPieChart extends React.Component {
@@ -35,32 +35,34 @@ export default class BasicPieChart extends React.Component {
 
     const colors = d3.scaleOrdinal(d3.schemeCategory10);
 
-    const chart = d3.select(this.chartRef)
+    const chart = d3
+      .select(this.chartRef)
       .attr("width", window.innerWidth - 100)
       .attr("height", 500)
       .append("g")
-        .attr("transform", `translate(${width / 2}, ${height / 2})`);
+      .attr("transform", `translate(${width / 2}, ${height / 2})`);
 
-    const pie = d3.pie()
+    const pie = d3
+      .pie()
       .sort(null)
-      .value((d) => +d.apps_by_deployment_doc_count)
-      .padAngle(.02);
+      .value(d => +d.apps_by_deployment_doc_count)
+      .padAngle(0.02);
 
-    var arc = d3.arc()
+    var arc = d3
+      .arc()
       .outerRadius(outerRadius - 20)
       .innerRadius(innerRadius);
 
-    chart.selectAll("path")
+    chart
+      .selectAll("path")
       .data(pie(this.state.data))
       .enter()
-        .append("path")
-          .attr("fill", (d, i) => colors(i))
-          .attr("d", arc);
+      .append("path")
+      .attr("fill", (d, i) => colors(i))
+      .attr("d", arc);
   }
 
   render() {
-    return (
-      <svg className="pie-chart" ref={(r) => this.chartRef = r}></svg>
-    );
+    return <svg className="pie-chart" ref={r => (this.chartRef = r)} />;
   }
 }

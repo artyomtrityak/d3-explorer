@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import * as d3 from "d3";
 
 export default class BasicPieChart extends React.Component {
@@ -34,68 +34,77 @@ export default class BasicPieChart extends React.Component {
       cornerRadius = 10;
 
     const radius = Math.min(width, height) / 2,
-          labelRadius = radius - 10;
+      labelRadius = radius - 10;
 
     const colors = d3.scaleOrdinal(d3.schemeCategory10);
 
-    const chart = d3.select(this.chartRef)
+    const chart = d3
+      .select(this.chartRef)
       .attr("width", window.innerWidth - 100)
       .attr("height", height + 100)
       .append("g")
-        .attr("transform", `translate(${width / 2}, ${height / 2})`);
+      .attr("transform", `translate(${width / 2}, ${height / 2})`);
 
     //Center label
     chart
-      .append('text')
-        .attr("text-anchor", "middle")
-        .attr('dy', '0.35em')
-        .style('font-size', '24px')
-        .text('1912');
+      .append("text")
+      .attr("text-anchor", "middle")
+      .attr("dy", "0.35em")
+      .style("font-size", "24px")
+      .text("1912");
 
-    const pie = d3.pie()
+    const pie = d3
+      .pie()
       .sort(null)
-      .value((d) => +d.apps_by_deployment_doc_count)
-      .padAngle(.02);
+      .value(d => +d.apps_by_deployment_doc_count)
+      .padAngle(0.02);
 
-    const arc = d3.arc()
+    const arc = d3
+      .arc()
       .outerRadius(outerRadius - 20)
       .innerRadius(innerRadius);
 
     const arcsWithData = pie(this.state.data);
 
-    const gContainer = chart.selectAll("path")
+    const gContainer = chart
+      .selectAll("path")
       .data(arcsWithData)
       .enter()
-        .append('g');
+      .append("g");
 
     gContainer
       .append("path")
-        .attr("fill", (d, i) => colors(i))
-        .attr("d", arc);
+      .attr("fill", (d, i) => colors(i))
+      .attr("d", arc);
 
     //Add outside labels
     gContainer
-      .append('text')
-      .attr("transform", (d) => {
+      .append("text")
+      .attr("transform", d => {
         const c = arc.centroid(d);
         const x = c[0];
         const y = c[1];
-        const h = Math.sqrt(x*x + y*y);
-        return `translate(${x/h * labelRadius},${y/h * labelRadius})`;
+        const h = Math.sqrt(x * x + y * y);
+        return `translate(${(x / h) * labelRadius},${(y / h) * labelRadius})`;
       })
-      .attr("text-anchor", (d) => {
+      .attr("text-anchor", d => {
         // did we past the center?
         return (d.endAngle + d.startAngle) / 2 > Math.PI ? "end" : "start";
       })
       .attr("dy", ".35em")
-      .text((d) => {
-        return `${d.data.apps_by_deployment}: ${d.data.apps_by_deployment_doc_count}`;
+      .text(d => {
+        return `${d.data.apps_by_deployment}: ${
+          d.data.apps_by_deployment_doc_count
+        }`;
       });
   }
 
   render() {
     return (
-      <svg className="pie-chart pie-chart--out-labels" ref={(r) => this.chartRef = r}></svg>
+      <svg
+        className="pie-chart pie-chart--out-labels"
+        ref={r => (this.chartRef = r)}
+      />
     );
   }
 }

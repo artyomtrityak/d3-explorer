@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import * as d3 from "d3";
 
 export default class SvgCircles extends React.Component {
@@ -17,34 +17,32 @@ export default class SvgCircles extends React.Component {
   }
 
   componentDidMount() {
-    const chart = d3.select(this.chart)
-      .attr('width', window.innerWidth-100)
-      .attr('height', 500);
+    const chart = d3
+      .select(this.chart)
+      .attr("width", window.innerWidth - 100)
+      .attr("height", 500);
 
-    const circles = chart.selectAll('circle')
-      .data(this.state.data);
+    const circles = chart.selectAll("circle").data(this.state.data);
 
     circles
       .enter()
-        .append('circle')
-          .attr('class', 'circle-chart__element')
-          .attr('cy', 100)
-          .attr('cx', (el, i) => i*100 + 50)
-        .merge(circles) //merges enter() and update()
-          .transition()
-          .duration(1000)
-          .attr('r', (el) => el.val);
+      .append("circle")
+      .attr("class", "circle-chart__element")
+      .attr("cy", 100)
+      .attr("cx", (el, i) => i * 100 + 50)
+      .merge(circles) //merges enter() and update()
+      .transition()
+      .duration(1000)
+      .attr("r", el => el.val);
 
     circles
       .exit()
-        .transition()
-        .attr('r', 0)
-        .remove();
+      .transition()
+      .attr("r", 0)
+      .remove();
   }
 
   render() {
-    return (
-      <svg className="circle-chart" ref={(r) => this.chart = r}></svg>
-    );
+    return <svg className="circle-chart" ref={r => (this.chart = r)} />;
   }
 }

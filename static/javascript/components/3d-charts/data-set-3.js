@@ -184,7 +184,6 @@ module.exports = () => ({
       type: "K8Container"
     },
 
-
     //QA
     {
       id: "QA-ENV",
@@ -343,8 +342,6 @@ module.exports = () => ({
       type: "K8Container"
     },
 
-
-
     //STAGING
     {
       id: "STAGING-ENV",
@@ -502,7 +499,6 @@ module.exports = () => ({
       id: "STAGING-K8Service21-Pod2-Container2",
       type: "K8Container"
     },
-
 
     {
       id: "PROD-ENV",
@@ -1214,7 +1210,6 @@ module.exports = () => ({
       source: "STAGING-K8Service21-Pod2",
       target: "STAGING-K8Service21-Pod2-Container2"
     },
-
 
     //PROD
 

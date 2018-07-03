@@ -74,14 +74,20 @@ export default class TreeChart extends React.Component {
         .y(d => {
           return d.x;
         });
-      return <path key={`link${i}`} className="tree-chart__link" d={link(data)} />;
+      return (
+        <path key={`link${i}`} className="tree-chart__link" d={link(data)} />
+      );
     });
   }
 
   renderNodes() {
     return this.state.root.descendants().map((d, i) => {
       return (
-        <g key={`node${i}`} className="tree-chart__node" transform={`translate(${d.y},${d.x})`}>
+        <g
+          key={`node${i}`}
+          className="tree-chart__node"
+          transform={`translate(${d.y},${d.x})`}
+        >
           <circle r="5" />
           <text dy={20} x={-8} textAnchor={d.children ? "start" : "end"}>
             {d.id}

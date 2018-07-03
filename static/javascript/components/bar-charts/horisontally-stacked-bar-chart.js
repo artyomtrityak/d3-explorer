@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 import * as d3 from "d3";
-import { generateArray } from '../../data-layer/array-processors';
+import { generateArray } from "../../data-layer/array-processors";
 
 export default class SvgVerticallyStackedBarChart extends React.Component {
   constructor(props) {
@@ -8,66 +8,66 @@ export default class SvgVerticallyStackedBarChart extends React.Component {
     this.state = {
       data: [
         {
-          label: 'Group A',
+          label: "Group A",
           vals: [
             {
-              type: 'error',
+              type: "error",
               val: 12
             },
             {
-              type: 'success',
+              type: "success",
               val: 16
             }
           ]
         },
         {
-          label: 'Group B',
+          label: "Group B",
           vals: [
             {
-              type: 'error',
+              type: "error",
               val: 8
             },
             {
-              type: 'success',
+              type: "success",
               val: 16
             }
           ]
         },
         {
-          label: 'Group C',
+          label: "Group C",
           vals: [
             {
-              type: 'error',
+              type: "error",
               val: 8
             },
             {
-              type: 'success',
+              type: "success",
               val: 4
             }
           ]
         },
         {
-          label: 'Group D',
+          label: "Group D",
           vals: [
             {
-              type: 'error',
+              type: "error",
               val: 15
             },
             {
-              type: 'success',
+              type: "success",
               val: 4
             }
           ]
         },
         {
-          label: 'Group E',
+          label: "Group E",
           vals: [
             {
-              type: 'error',
+              type: "error",
               val: 8
             },
             {
-              type: 'success',
+              type: "success",
               val: 4
             }
           ]
@@ -84,82 +84,93 @@ export default class SvgVerticallyStackedBarChart extends React.Component {
     const { xScaleGroup, yScale } = this.getScales(width, height);
     const xAxis = d3.axisBottom(xScaleGroup);
     const yAxis = d3.axisLeft(yScale).ticks(10);
-    const colors = d3.scaleOrdinal()
-      .domain(['error', 'success'])
-      .range(['red', 'green']);
+    const colors = d3
+      .scaleOrdinal()
+      .domain(["error", "success"])
+      .range(["red", "green"]);
 
-    const chart = d3.select(this.chart)
+    const chart = d3
+      .select(this.chart)
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom);
 
     chart
       .append("g")
-        .attr('class', 'chart-inner')
-        .attr("transform", `translate(${margin.left},${margin.top})`);
+      .attr("class", "chart-inner")
+      .attr("transform", `translate(${margin.left},${margin.top})`);
 
-    chart.select('.chart-inner')
-      .append('g')
-        .attr("class", "bar-chart__axis")
-        .attr('transform', `translate(0, ${height})`)
-        .call(xAxis)
-      .append("text")
-        .attr("y", 16)
-        .attr("x", width + 20)
-        .text("Labels");
-
-    chart.select('.chart-inner')
-      .append('g')
-        .attr("class", "bar-chart__axis")
-        .call(yAxis)
-      .append("text")
-        .attr("transform", "rotate(-90)")
-        .attr("y", 6)
-        .attr("dy", ".71em")
-        .text("Frequency");
-
-    const barsContainer = chart.select('.chart-inner')
+    chart
+      .select(".chart-inner")
       .append("g")
-        .attr('class', 'chart-content');
+      .attr("class", "bar-chart__axis")
+      .attr("transform", `translate(0, ${height})`)
+      .call(xAxis)
+      .append("text")
+      .attr("y", 16)
+      .attr("x", width + 20)
+      .text("Labels");
 
-    const barGroup = barsContainer.selectAll('g')
+    chart
+      .select(".chart-inner")
+      .append("g")
+      .attr("class", "bar-chart__axis")
+      .call(yAxis)
+      .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      .attr("dy", ".71em")
+      .text("Frequency");
+
+    const barsContainer = chart
+      .select(".chart-inner")
+      .append("g")
+      .attr("class", "chart-content");
+
+    const barGroup = barsContainer
+      .selectAll("g")
       .data(this.state.data)
       .enter()
-        .append('g')
-          .attr("transform", (d, i) => {
-            return `translate(${xScaleGroup(d.label)},0)`;
-          });
+      .append("g")
+      .attr("transform", (d, i) => {
+        return `translate(${xScaleGroup(d.label)},0)`;
+      });
 
-    const barContainer = barGroup.selectAll('rect')
-      .data((d) => {
+    const barContainer = barGroup
+      .selectAll("rect")
+      .data(d => {
         return d.vals;
       })
       .enter()
-        .append('g')
-          .attr("transform", (d, i) => {
-            return `translate(${i * (xScaleGroup.bandwidth() / 2)},0)`; // 2 - number of items in group
-          });
+      .append("g")
+      .attr("transform", (d, i) => {
+        return `translate(${i * (xScaleGroup.bandwidth() / 2)},0)`; // 2 - number of items in group
+      });
 
-    barContainer.append('rect')
-      .style('fill', (d) => {
+    barContainer
+      .append("rect")
+      .style("fill", d => {
         return colors(d.type);
       })
-      .attr('y', (d) => yScale(d.val))
+      .attr("y", d => yScale(d.val))
       .attr("width", xScaleGroup.bandwidth() / 2) // 2 - number of items in group
-      .attr("height", (d) => height - yScale(d.val));
+      .attr("height", d => height - yScale(d.val));
 
-    barContainer.append('text')
-      .attr('x', xScaleGroup.bandwidth() / 4) // 4 - 2*number items in group to center label
-      .attr('y', (d) => yScale(d.val) + 20)
-      .text((d) => d.val);
+    barContainer
+      .append("text")
+      .attr("x", xScaleGroup.bandwidth() / 4) // 4 - 2*number items in group to center label
+      .attr("y", d => yScale(d.val) + 20)
+      .text(d => d.val);
   }
 
   getScales(width, height) {
-    const xScaleGroup = d3.scaleBand()
+    const xScaleGroup = d3
+      .scaleBand()
       .range([0, width])
       .padding(0.2)
-      .domain(this.state.data.map((d) => d.label));
+      .domain(this.state.data.map(d => d.label));
 
-    const yScale = d3.scaleLinear()
+    const yScale = d3
+      .scaleLinear()
       .domain([0, 20])
       .range([height, 0]);
 
@@ -167,8 +178,6 @@ export default class SvgVerticallyStackedBarChart extends React.Component {
   }
 
   render() {
-    return (
-      <svg className="bar-chart" ref={(r) => this.chart = r}></svg>
-    );
+    return <svg className="bar-chart" ref={r => (this.chart = r)} />;
   }
 }

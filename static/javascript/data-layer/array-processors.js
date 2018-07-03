@@ -10,7 +10,6 @@ export function getRandomlyChangedValuesArray(basicArray) {
   });
 }
 
-
 export function generateArray(size = 10) {
   let result = [];
   for (let i = 0; i < size; i++) {

@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 import * as d3 from "d3";
-import { generateArray } from '../../data-layer/array-processors';
+import { generateArray } from "../../data-layer/array-processors";
 
 export default class SvgVerticalBarChart extends React.Component {
   constructor(props) {
@@ -17,63 +17,73 @@ export default class SvgVerticalBarChart extends React.Component {
 
     const { xScale, yScale } = this.getScales(width, height);
     const xAxis = d3.axisBottom(xScale);
-    const yAxis = d3.axisRight(yScale)
+    const yAxis = d3
+      .axisRight(yScale)
       .ticks(10)
       .tickSize(width)
       .tickPadding(-1 * (width + 10));
 
-    const chart = d3.select(this.chart)
+    const chart = d3
+      .select(this.chart)
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom);
 
     chart
       .append("g")
-        .attr('class', 'chart-inner')
-        .attr("transform", `translate(${margin.left},${margin.top})`);
+      .attr("class", "chart-inner")
+      .attr("transform", `translate(${margin.left},${margin.top})`);
 
-    chart.select('.chart-inner')
-      .append('g')
-        .attr("class", "bar-chart__axis")
-        .attr('transform', `translate(0, ${height})`)
-        .call(xAxis)
-      .append("text")
-        .attr("y", 16)
-        .attr("x", width + 20)
-        .text("Labels");
-
-    const barsContainer = chart.select('.chart-inner')
+    chart
+      .select(".chart-inner")
       .append("g")
-        .attr('class', 'chart-content');
+      .attr("class", "bar-chart__axis")
+      .attr("transform", `translate(0, ${height})`)
+      .call(xAxis)
+      .append("text")
+      .attr("y", 16)
+      .attr("x", width + 20)
+      .text("Labels");
 
-    const bar = barsContainer.selectAll('g')
+    const barsContainer = chart
+      .select(".chart-inner")
+      .append("g")
+      .attr("class", "chart-content");
+
+    const bar = barsContainer
+      .selectAll("g")
       .data(this.state.data)
       .enter()
-        .append('g')
-          .attr('transform', (x, i) => `translate(${xScale(x.label)}, 0)`);
+      .append("g")
+      .attr("transform", (x, i) => `translate(${xScale(x.label)}, 0)`);
 
-    bar.append('rect')
+    bar
+      .append("rect")
       .attr("width", xScale.bandwidth())
-      .attr("height", (x) => height - yScale(x.val))
-      .attr('y', (x) => yScale(x.val));
+      .attr("height", x => height - yScale(x.val))
+      .attr("y", x => yScale(x.val));
 
-    bar.append('text')
-      .attr('x', xScale.bandwidth() / 2)
-      .attr('y', (x) => yScale(x.val) + 20)
-      .text((x) => x.val);
+    bar
+      .append("text")
+      .attr("x", xScale.bandwidth() / 2)
+      .attr("y", x => yScale(x.val) + 20)
+      .text(x => x.val);
 
-    chart.select('.chart-inner')
-      .append('g')
-        .attr("class", "bar-chart__axis")
-        .call(yAxis);
+    chart
+      .select(".chart-inner")
+      .append("g")
+      .attr("class", "bar-chart__axis")
+      .call(yAxis);
   }
 
   getScales(width, height) {
-    const xScale = d3.scaleBand()
+    const xScale = d3
+      .scaleBand()
       .range([0, width])
       .padding(0.1)
-      .domain(this.state.data.map((x) => x.label));
+      .domain(this.state.data.map(x => x.label));
 
-    const yScale = d3.scaleLinear()
+    const yScale = d3
+      .scaleLinear()
       .domain([0, d3.max(this.state.data, x => x.val)])
       .range([height, 0]);
 
@@ -83,7 +93,10 @@ export default class SvgVerticalBarChart extends React.Component {
   render() {
     return (
       <div>
-        <svg className="bar-chart bar-charts--axis-with-lines" ref={(r) => this.chart = r}></svg>
+        <svg
+          className="bar-chart bar-charts--axis-with-lines"
+          ref={r => (this.chart = r)}
+        />
       </div>
     );
   }

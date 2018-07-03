@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import * as d3 from "d3";
 
 export default class SvgCircles extends React.Component {
@@ -17,47 +17,47 @@ export default class SvgCircles extends React.Component {
   }
 
   componentDidMount() {
-    const zoom = d3.zoom()
-      .on("zoom", () => this.onZoom());
+    const zoom = d3.zoom().on("zoom", () => this.onZoom());
 
-    this.chart = d3.select(this.chartRef)
-      .attr('width', window.innerWidth-100)
-      .attr('height', 500)
-      .append('g')
-        .call(zoom);
+    this.chart = d3
+      .select(this.chartRef)
+      .attr("width", window.innerWidth - 100)
+      .attr("height", 500)
+      .append("g")
+      .call(zoom);
 
-    const color = d3.scaleOrdinal()
-      .range(d3.schemeCategory10);
+    const color = d3.scaleOrdinal().range(d3.schemeCategory10);
 
-    const circles = this.chart.selectAll('circle')
-      .data(this.state.data);
+    const circles = this.chart.selectAll("circle").data(this.state.data);
 
     circles
       .enter()
-        .append('circle')
-          .attr('cy', 100)
-          .attr('cx', (el, i) => i*100 + 50)
-          .attr('fill', (d, i) => color(i))
-        .merge(circles) //merges enter() and update()
-          .transition()
-          .duration(1000)
-          .attr('r', (el) => el.val);
+      .append("circle")
+      .attr("cy", 100)
+      .attr("cx", (el, i) => i * 100 + 50)
+      .attr("fill", (d, i) => color(i))
+      .merge(circles) //merges enter() and update()
+      .transition()
+      .duration(1000)
+      .attr("r", el => el.val);
 
     circles
       .exit()
-        .transition()
-        .attr('r', 0)
-        .remove();
+      .transition()
+      .attr("r", 0)
+      .remove();
   }
 
   onZoom() {
-    this.chart
-      .attr("transform", `translate(${d3.event.transform.x},${d3.event.transform.y}) scale(${d3.event.transform.k})`);
+    this.chart.attr(
+      "transform",
+      `translate(${d3.event.transform.x},${d3.event.transform.y}) scale(${
+        d3.event.transform.k
+      })`
+    );
   }
 
   render() {
-    return (
-      <svg className="circle-chart" ref={(r) => this.chartRef = r}></svg>
-    );
+    return <svg className="circle-chart" ref={r => (this.chartRef = r)} />;
   }
 }
