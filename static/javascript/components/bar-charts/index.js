@@ -1,7 +1,7 @@
 import React from "react";
 import * as d3 from "d3";
 import { NavLink, Route } from "react-router-dom";
-import DivHorisontalBar from "./div-horisontal-bar-chart";
+import DivHorisontalBar from "./react-div-horisontal-bar-chart";
 import SvgHorisontalBar from "./svg-horisontal-bar-chart";
 import SvgVerticalBar from "./svg-vertical-bar-chart";
 import DynamicBar from "./dynamic-bar-chart";
@@ -27,7 +27,12 @@ export default class BarCharts extends React.Component {
         <ul className="nav nav-tabs">
           <li className="nav-item">
             <NavLink activeClassName="active" className="nav-link" to={`${match.url}/div`}>
-              Div Horisontal
+              React Div Horisontal
+            </NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/react-vertical`}>
+              React Svg Vertical
             </NavLink>
           </li>
           <li className="nav-item">
@@ -63,11 +68,6 @@ export default class BarCharts extends React.Component {
           <li className="nav-item">
             <NavLink activeClassName="active" className="nav-link" to={`${match.url}/horisontally-stacked`}>
               Horisontally stacked
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/react-vertical`}>
-              Full React render
             </NavLink>
           </li>
         </ul>

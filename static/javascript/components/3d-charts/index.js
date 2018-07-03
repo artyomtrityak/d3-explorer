@@ -8,7 +8,7 @@ import Force3dD3 from "./force-3d-d3";
 import Force3dNgraph from "./force-3d-ng";
 import Force3dThreeObject from "./force-3d-three-object";
 
-export default class ForceCharts extends React.Component {
+export default class ThreeDCharts extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
