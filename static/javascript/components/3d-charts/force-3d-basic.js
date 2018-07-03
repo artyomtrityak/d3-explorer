@@ -39,6 +39,6 @@ export default class TreeDBasicChart extends React.Component {
   }
 
   render() {
-    return <div className="basic-3d" ref={r => (this.chartRef = r)} />;
+    return <div className="chart-3d" ref={r => (this.chartRef = r)} />;
   }
 }

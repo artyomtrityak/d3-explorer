@@ -41,3 +41,5 @@ Dependency [3d-force-graph](https://github.com/vasturiano/3d-force-graph)
 <img src="https://raw.githubusercontent.com/artyomtrityak/d3-explorer/master/screenshots/3d-1.png" width="300">
 
 <img src="https://raw.githubusercontent.com/artyomtrityak/d3-explorer/master/screenshots/3d-2.gif" width="300">
+
+<img src="https://raw.githubusercontent.com/artyomtrityak/d3-explorer/master/screenshots/3d-3.gif" width="300">
