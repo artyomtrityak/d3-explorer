@@ -1,6 +1,6 @@
 # D3 Explorer
 
-Exploring D3.js (v4): ES2015/ES6, webpack, D3 and React.js
+Exploring D3.js (v5): ES2015/ES6, webpack, D3 and React.js
 
 ## How to run
 1. `npm install`
