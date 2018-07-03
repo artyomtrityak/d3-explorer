@@ -1,67 +1,61 @@
 .bar-chart {
-  &--basic {
-    rect {
-      fill: steelblue;
-    }
+  color: white;
 
-    text {
-      fill: white;
-      font: 10px sans-serif;
-      text-anchor: end;
-    }
+  rect {
+    fill: steelblue;
   }
 
-  &--div {
-    background-color: green;
-    border: 1px solid white;
-    width: 0px;
-    text-align: right;
+  text {
+    fill: white;
   }
 
-  &--stack {
-    rect:hover {
-      stroke: blueviolet;
-      stroke-width: 2;
-    }
-  }
-
-  &--axis-with-lines {
-    .axis {
-      path,
-      line {
-        fill: none;
-        stroke: gray;;
-      }
-
-      text {
-        font: 10px sans-serif;
-        fill: #000;
-      }
-    }
-  }
-
-  .axis {
+  .bar-chart__axis {
     path,
     line {
       fill: none;
       stroke: #000;
     }
+  }
+}
 
-    text {
-      font: 10px sans-serif;
-      fill: #000;
+.bar-chart--div {
+  background-color: green;
+  border: 1px solid white;
+  width: 0px;
+  text-align: right;
+}
+
+.bar-chart--stack {
+  rect {
+    fill: unset;
+
+    &:hover {
+      stroke: blueviolet;
+      stroke-width: 2;
     }
   }
+}
 
-  .added {
-    rect {
-      fill: blueviolet !important;
+.bar-chart--axis-with-lines {
+  .axis {
+    path,
+    line {
+      fill: none;
+      stroke: gray;;
     }
   }
+}
 
-  .updated {
+.bar-chart--dynamic {
+  .bar-chart__added {
     rect {
-      fill: orange !important;
+      fill: blueviolet;
+    }
+  }
+  
+  .bar-chart__updated {
+    rect {
+      fill: orange;
     }
   }
 }

@@ -23,7 +23,7 @@ export default class TreeDBasicChart extends React.Component {
       .height(window.innerHeight - 200)
       .backgroundColor("#FFFFFF")
       .nodeAutoColorBy("type")
-      .linkWidth(1)
+      .linkWidth(2)
       .nodeThreeObject(node => {
         if (node.type === 'application') {
           var geometry = new THREE.DodecahedronGeometry( 10 );

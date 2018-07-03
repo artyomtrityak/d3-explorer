@@ -1,6 +1,9 @@
 .circle-chart {
-  &__element {
-    fill: steelblue;
+  circle {
+    opacity: 0.9;
   }
 }
 
+.circle-chart__element {
+  fill: steelblue;
+}

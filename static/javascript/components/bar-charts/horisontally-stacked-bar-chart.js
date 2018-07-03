@@ -99,7 +99,7 @@ export default class SvgVerticallyStackedBarChart extends React.Component {
 
     chart.select('.chart-inner')
       .append('g')
-        .attr("class", "axis axis--x")
+        .attr("class", "bar-chart__axis")
         .attr('transform', `translate(0, ${height})`)
         .call(xAxis)
       .append("text")
@@ -109,7 +109,7 @@ export default class SvgVerticallyStackedBarChart extends React.Component {
 
     chart.select('.chart-inner')
       .append('g')
-        .attr("class", "axis axis--y")
+        .attr("class", "bar-chart__axis")
         .call(yAxis)
       .append("text")
         .attr("transform", "rotate(-90)")
@@ -168,7 +168,7 @@ export default class SvgVerticallyStackedBarChart extends React.Component {
 
   render() {
     return (
-      <svg ref={(r) => this.chart = r}></svg>
+      <svg className="bar-chart" ref={(r) => this.chart = r}></svg>
     );
   }
 }

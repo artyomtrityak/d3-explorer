@@ -47,11 +47,11 @@ export default class DynamicBarChart extends React.Component {
     const enterGElements = bars
       .enter()
         .append('g')
-          .attr('class', 'added')
+          .attr('class', 'bar-chart__added')
           .attr('transform', (x, i) => `translate(${xScale(x.label)}, 0)`);
 
     bars
-      .attr('class', 'updated');
+      .attr('class', 'bar-chart__updated');
 
     enterGElements
       .append('rect')
@@ -79,7 +79,7 @@ export default class DynamicBarChart extends React.Component {
 
   render() {
     return (
-      <svg className="bar-chart--basic" ref={(r) => this.chartRef = r}></svg>
+      <svg className="bar-chart bar-chart--dynamic" ref={(r) => this.chartRef = r}></svg>
     );
   }
 };
