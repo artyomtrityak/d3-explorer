@@ -48,11 +48,11 @@ export default class TreeChart extends React.Component {
         return (a.height - b.height) || a.id.localeCompare(b.id);
       });
 
-    const link = chart.selectAll('.link')
+    const link = chart.selectAll('.tree-chart__link')
       .data(tree(root).links())
       .enter()
         .append('path')
-          .attr('class', 'link')
+          .attr('class', 'tree-chart__link')
           .attr("d", d3.linkHorizontal()
             .x((d) => {
               return d.y;
@@ -62,12 +62,12 @@ export default class TreeChart extends React.Component {
             })
           );
 
-    const node = chart.selectAll('.node')
+    const node = chart.selectAll('.tree-chart__node')
       .data(root.descendants())
       .enter()
         .append('g')
           .attr("class", (d) => {
-            return "node" + (d.children ? " node--internal" : " node--leaf");
+            return "tree-chart__node" + (d.children ? " tree-chart__node--internal" : " tree-chart__node--leaf");
           })
           .attr("transform", (d) => {
             return `translate(${d.y},${d.x})`;
@@ -87,13 +87,11 @@ export default class TreeChart extends React.Component {
       .text((d) => {
         return d.id;
       });
-
-    console.log('root data:', root);
   }
 
   render() {
     return (
-      <svg className="tree-chart-basic" ref={(r) => this.chartRef = r}></svg>
+      <svg className="tree-chart" ref={(r) => this.chartRef = r}></svg>
     );
   }
 }

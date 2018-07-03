@@ -1,5 +1,5 @@
-.tree-charts-container {
-  .node {
+.tree-chart {
+  .tree-chart__node {
     circle {
       fill: #999;
     }
@@ -9,7 +9,7 @@
     }
   }
 
-  .node--internal {
+  .tree-chart__node--internal {
     circle {
       fill: #555;
     }
@@ -19,7 +19,7 @@
     }
   }
 
-  .link {
+  .tree-chart__link {
     fill: none;
     stroke: #555;
     stroke-opacity: 0.4;

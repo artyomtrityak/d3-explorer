@@ -14,8 +14,8 @@ export default class MainMenu extends React.Component {
 
     return (
       <Fragment>
-        <ul className="nav justify-content-center mb-5">
-          <a className="navbar-brand" href="#/">D3 Explorer</a>
+        <ul className="nav ml-3 mb-5">
+          <span className="navbar-brand">D3 Explorer</span>
 
           <li className={cn("nav-item", {"active": matchPath(pathname, {path: '/bar'}) || pathname === '/'})}>
             <NavLink activeClassName="disabled" className="nav-link" to="/bar">Bar charts</NavLink>
