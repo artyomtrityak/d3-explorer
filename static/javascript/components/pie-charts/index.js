@@ -11,8 +11,6 @@ export default class PieCharts extends React.Component {
     this.state = {};
   }
 
-  componentDidMount() {}
-
   render() {
     const { match } = this.props;
 
@@ -20,29 +18,17 @@ export default class PieCharts extends React.Component {
       <div>
         <ul className="nav nav-tabs">
           <li className="nav-item">
-            <NavLink
-              activeClassName="active"
-              className="nav-link"
-              to={`${match.url}/basic`}
-            >
+            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/basic`}>
               Basic
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink
-              activeClassName="active"
-              className="nav-link"
-              to={`${match.url}/interactive`}
-            >
+            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/interactive`}>
               Interactive Pie
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink
-              activeClassName="active"
-              className="nav-link"
-              to={`${match.url}/with-labels`}
-            >
+            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/with-labels`}>
               Pie with outside labels
             </NavLink>
           </li>
@@ -50,10 +36,7 @@ export default class PieCharts extends React.Component {
 
         <div>
           <Route path={`${match.url}/basic`} component={BasicPieChart} />
-          <Route
-            path={`${match.url}/interactive`}
-            component={InteractivePieChart}
-          />
+          <Route path={`${match.url}/interactive`} component={InteractivePieChart} />
           <Route path={`${match.url}/with-labels`} component={LabelsPieChart} />
         </div>
       </div>

@@ -3,5 +3,5 @@
     "react",
     "env"
   ],
-  "plugins": ["transform-object-assign"]
+  "plugins": ["transform-object-assign", "transform-class-properties"]
 }

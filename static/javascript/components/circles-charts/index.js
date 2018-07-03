@@ -20,29 +20,17 @@ export default class CirclesCharts extends React.Component {
       <div>
         <ul className="nav nav-tabs">
           <li className="nav-item">
-            <NavLink
-              activeClassName="active"
-              className="nav-link"
-              to={`${match.url}/basic`}
-            >
+            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/basic`}>
               Basic
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink
-              activeClassName="active"
-              className="nav-link"
-              to={`${match.url}/drag`}
-            >
+            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/drag`}>
               Drag'n'Drop
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink
-              activeClassName="active"
-              className="nav-link"
-              to={`${match.url}/zoom`}
-            >
+            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/zoom`}>
               Zoom
             </NavLink>
           </li>

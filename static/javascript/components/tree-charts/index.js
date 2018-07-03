@@ -10,8 +10,6 @@ export default class ForceCharts extends React.Component {
     this.state = {};
   }
 
-  componentDidMount() {}
-
   render() {
     const { match } = this.props;
 
@@ -19,20 +17,12 @@ export default class ForceCharts extends React.Component {
       <div>
         <ul className="nav nav-tabs">
           <li className="nav-item">
-            <NavLink
-              activeClassName="active"
-              className="nav-link"
-              to={`${match.url}/basic`}
-            >
+            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/basic`}>
               Basic
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink
-              activeClassName="active"
-              className="nav-link"
-              to={`${match.url}/react-svg-render`}
-            >
+            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/react-svg-render`}>
               Pure React SVG D3 render
             </NavLink>
           </li>
@@ -40,10 +30,7 @@ export default class ForceCharts extends React.Component {
 
         <div className="tree-charts-container">
           <Route path={`${match.url}/basic`} component={BasicChart} />
-          <Route
-            path={`${match.url}/react-svg-render`}
-            component={ReactSVGRenderChart}
-          />
+          <Route path={`${match.url}/react-svg-render`} component={ReactSVGRenderChart} />
         </div>
       </div>
     );

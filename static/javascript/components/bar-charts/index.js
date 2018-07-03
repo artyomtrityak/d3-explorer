@@ -9,6 +9,7 @@ import StackVerticalBar from "./stack-vertical-bar-chart";
 import StackHorisontalBar from "./stack-horisontal-bar-chart";
 import VerticalWithAxisOnTop from "./vertical-bar-chart-with-axis-lines";
 import HorisontallyStacked from "./horisontally-stacked-bar-chart";
+import ReactVertical from "./react-vertical-bar-chart";
 
 export default class BarCharts extends React.Component {
   constructor(props) {
@@ -25,75 +26,48 @@ export default class BarCharts extends React.Component {
       <div>
         <ul className="nav nav-tabs">
           <li className="nav-item">
-            <NavLink
-              activeClassName="active"
-              className="nav-link"
-              to={`${match.url}/div`}
-            >
+            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/div`}>
               Div Horisontal
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink
-              activeClassName="active"
-              className="nav-link"
-              to={`${match.url}/svg`}
-            >
+            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/svg`}>
               Svg Horisontal
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink
-              activeClassName="active"
-              className="nav-link"
-              to={`${match.url}/vertical`}
-            >
+            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/vertical`}>
               Vertical
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink
-              activeClassName="active"
-              className="nav-link"
-              to={`${match.url}/dynamic`}
-            >
+            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/dynamic`}>
               Dynamic
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink
-              activeClassName="active"
-              className="nav-link"
-              to={`${match.url}/stack-vertical`}
-            >
+            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/stack-vertical`}>
               Stack Vertical
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink
-              activeClassName="active"
-              className="nav-link"
-              to={`${match.url}/stack-horisontal`}
-            >
+            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/stack-horisontal`}>
               Stack Horisontal
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink
-              activeClassName="active"
-              className="nav-link"
-              to={`${match.url}/vertical-ontop-axis`}
-            >
+            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/vertical-ontop-axis`}>
               Vertical with axis ontop
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink
-              activeClassName="active"
-              className="nav-link"
-              to={`${match.url}/horisontally-stacked`}
-            >
+            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/horisontally-stacked`}>
               Horisontally stacked
+            </NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/react-vertical`}>
+              Full React render
             </NavLink>
           </li>
         </ul>
@@ -103,22 +77,11 @@ export default class BarCharts extends React.Component {
           <Route path={`${match.url}/svg`} component={SvgHorisontalBar} />
           <Route path={`${match.url}/vertical`} component={SvgVerticalBar} />
           <Route path={`${match.url}/dynamic`} component={DynamicBar} />
-          <Route
-            path={`${match.url}/stack-vertical`}
-            component={StackVerticalBar}
-          />
-          <Route
-            path={`${match.url}/stack-horisontal`}
-            component={StackHorisontalBar}
-          />
-          <Route
-            path={`${match.url}/vertical-ontop-axis`}
-            component={VerticalWithAxisOnTop}
-          />
-          <Route
-            path={`${match.url}/horisontally-stacked`}
-            component={HorisontallyStacked}
-          />
+          <Route path={`${match.url}/stack-vertical`} component={StackVerticalBar} />
+          <Route path={`${match.url}/stack-horisontal`} component={StackHorisontalBar} />
+          <Route path={`${match.url}/vertical-ontop-axis`} component={VerticalWithAxisOnTop} />
+          <Route path={`${match.url}/horisontally-stacked`} component={HorisontallyStacked} />
+          <Route path={`${match.url}/react-vertical`} component={ReactVertical} />
         </div>
       </div>
     );

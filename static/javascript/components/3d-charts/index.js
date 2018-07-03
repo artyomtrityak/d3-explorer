@@ -23,56 +23,32 @@ export default class ForceCharts extends React.Component {
       <div>
         <ul className="nav nav-tabs">
           <li className="nav-item">
-            <NavLink
-              activeClassName="active"
-              className="nav-link"
-              to={`${match.url}/force-basic`}
-            >
+            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/force-basic`}>
               Force 3D basic
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink
-              activeClassName="active"
-              className="nav-link"
-              to={`${match.url}/force-camera`}
-            >
+            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/force-camera`}>
               Force 3D camera
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink
-              activeClassName="active"
-              className="nav-link"
-              to={`${match.url}/force-geometries`}
-            >
+            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/force-geometries`}>
               3D nodes geometries
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink
-              activeClassName="active"
-              className="nav-link"
-              to={`${match.url}/force-d3`}
-            >
+            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/force-d3`}>
               3D D3 parameters
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink
-              activeClassName="active"
-              className="nav-link"
-              to={`${match.url}/force-ng`}
-            >
+            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/force-ng`}>
               3D NGraph
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink
-              activeClassName="active"
-              className="nav-link"
-              to={`${match.url}/force-three-object`}
-            >
+            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/force-three-object`}>
               3D With Custom Object
             </NavLink>
           </li>
@@ -81,16 +57,10 @@ export default class ForceCharts extends React.Component {
         <div className="3d-charts-container">
           <Route path={`${match.url}/force-basic`} component={Force3dBasic} />
           <Route path={`${match.url}/force-camera`} component={Force3dCamera} />
-          <Route
-            path={`${match.url}/force-geometries`}
-            component={Force3dGeometries}
-          />
+          <Route path={`${match.url}/force-geometries`} component={Force3dGeometries} />
           <Route path={`${match.url}/force-d3`} component={Force3dD3} />
           <Route path={`${match.url}/force-ng`} component={Force3dNgraph} />
-          <Route
-            path={`${match.url}/force-three-object`}
-            component={Force3dThreeObject}
-          />
+          <Route path={`${match.url}/force-three-object`} component={Force3dThreeObject} />
         </div>
       </div>
     );
