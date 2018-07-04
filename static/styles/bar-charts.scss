@@ -41,7 +41,7 @@
     path,
     line {
       fill: none;
-      stroke: gray;;
+      stroke: gray;
     }
   }
 }
@@ -52,10 +52,30 @@
       fill: blueviolet;
     }
   }
-  
+
   .bar-chart__updated {
     rect {
       fill: orange;
     }
+  }
+}
+
+.bar-chart--full-width {
+  width: 100%;
+  height: 500px;
+
+  .bar-chart__bar {
+    stroke-width: 5px;
+    stroke: goldenrod;
+    fill: steelblue;
+    transition: fill 1s;
+
+    &:hover {
+      fill: goldenrod;
+    }
+  }
+
+  .bar-chart__text {
+    transform: translate(5px, 20px);
   }
 }
