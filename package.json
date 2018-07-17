@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "eslint .",
+    "build": "webpack",
     "start": "webpack-dev-server --colors --progress --inline --hot",
     "precommit": "lint-staged"
   },

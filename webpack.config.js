@@ -45,7 +45,7 @@ var webpackConfig = {
   },
 
   output: {
-    path: path.join(__dirname, "/static/build/"),
+    path: path.join(__dirname, "/static", "build"),
     filename: "bundle.js",
     publicPath: "http://localhost:9000/static/build/"
   },
@@ -60,21 +60,15 @@ var webpackConfig = {
 
   devServer: {
     port: 9000,
-    contentBase: "static/"
+    contentBase: "./"
   },
 
   resolve: {
-    modules: [
-      path.join(__dirname, "static/javascript/"),
-      path.join(__dirname, "node_modules")
-    ],
+    modules: [path.join(__dirname, "static/javascript/"), path.join(__dirname, "node_modules")],
 
     extensions: [".js"]
   },
-  devtool:
-    process.env.NODE_ENV === "production"
-      ? false
-      : "eval-cheap-module-source-map"
+  devtool: process.env.NODE_ENV === "production" ? false : "eval-cheap-module-source-map"
   //devtool: 'eval'
 };
 
