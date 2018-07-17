@@ -2,6 +2,8 @@
 
 Exploring D3.js (v5): ES2015/ES6, webpack, D3 and React.js
 
+[Demo Website](https://artyomtrityak.github.io/d3-explorer/)
+
 ## How to run
 1. `npm install`
 2. `npm start`
