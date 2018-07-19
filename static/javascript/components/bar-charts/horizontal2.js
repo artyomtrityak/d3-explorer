@@ -44,7 +44,7 @@ export default class HorisontalBarChart2 extends React.Component {
       .data(this.state.data)
       .enter()
       .append("g")
-      .attr("transform", (el, i) => `translate(0, ${i * 40})`);
+      .attr("transform", (el, i) => `translate(0, ${i * scaleY.step()})`);
 
     bar
       .append("rect")

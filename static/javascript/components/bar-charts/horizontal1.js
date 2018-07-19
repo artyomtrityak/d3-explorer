@@ -11,7 +11,7 @@ export default class HorisontalBarChart1 extends React.Component {
 
   componentDidMount() {
     const margin = { left: 0, right: 50 };
-    const width = ReactDOM.findDOMNode(this).clientWidth;
+    const width = ReactDOM.findDOMNode(this).parentNode.clientWidth;
     const xScale = d3
       .scaleLinear()
       .domain([0, d3.max(this.state.data)])
