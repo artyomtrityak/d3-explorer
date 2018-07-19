@@ -8,17 +8,17 @@
   text {
     fill: white;
   }
+}
 
-  .bar-chart__axis {
-    path,
-    line {
-      fill: none;
-      stroke: black;
-    }
+.bar-chart__axis {
+  path,
+  line {
+    fill: none;
+    stroke: black;
   }
 }
 
-.bar-chart--div {
+.bar-chart__div {
   background-color: green;
   border: 1px solid white;
   width: 0px;
