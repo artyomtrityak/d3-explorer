@@ -14,21 +14,19 @@ export default class ForceCharts extends React.Component {
     const { match } = this.props;
 
     return (
-      <div>
-        <ul className="nav nav-tabs">
-          <li className="nav-item">
-            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/basic`}>
+      <div className="row">
+        <div className="col-3">
+          <div className="list-group">
+            <NavLink activeClassName="active" className="list-group-item list-group-item-action" to={`${match.url}/basic`}>
               Basic
             </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/react-svg-render`}>
-              Pure React SVG D3 render
+            <NavLink activeClassName="active" className="list-group-item list-group-item-action" to={`${match.url}/react-svg-render`}>
+              Pure React SVG render
             </NavLink>
-          </li>
-        </ul>
+          </div>
+        </div>
 
-        <div className="tree-charts-container">
+        <div className="col-9 tree-charts-container">
           <Route path={`${match.url}/basic`} component={BasicChart} />
           <Route path={`${match.url}/react-svg-render`} component={ReactSVGRenderChart} />
         </div>

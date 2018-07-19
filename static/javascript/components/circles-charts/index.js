@@ -17,26 +17,22 @@ export default class CirclesCharts extends React.Component {
     const { match } = this.props;
 
     return (
-      <div>
-        <ul className="nav nav-tabs">
-          <li className="nav-item">
-            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/basic`}>
+      <div className="row">
+        <div className="col-3">
+          <div className="list-group">
+            <NavLink activeClassName="active" className="list-group-item list-group-item-action" to={`${match.url}/basic`}>
               Basic
             </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/drag`}>
+            <NavLink activeClassName="active" className="list-group-item list-group-item-action" to={`${match.url}/drag`}>
               Drag'n'Drop
             </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/zoom`}>
+            <NavLink activeClassName="active" className="list-group-item list-group-item-action" to={`${match.url}/zoom`}>
               Zoom
             </NavLink>
-          </li>
-        </ul>
+          </div>
+        </div>
 
-        <div>
+        <div className="col-9">
           <Route path={`${match.url}/basic`} component={SvgCircles} />
           <Route path={`${match.url}/drag`} component={SvgCirclesDragNDrop} />
           <Route path={`${match.url}/zoom`} component={Zoom} />

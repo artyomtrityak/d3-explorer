@@ -1,7 +1,7 @@
-var webpack = require("webpack"),
-  path = require("path");
+const webpack = require("webpack");
+const path = require("path");
 
-var webpackConfig = {
+module.exports = {
   entry: {
     app: ["./static/javascript/index.js"]
   },
@@ -69,7 +69,4 @@ var webpackConfig = {
     extensions: [".js"]
   },
   devtool: process.env.NODE_ENV === "production" ? false : "eval-cheap-module-source-map"
-  //devtool: 'eval'
 };
-
-module.exports = webpackConfig;

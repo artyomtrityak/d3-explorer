@@ -3,25 +3,17 @@
     circle {
       fill: #999;
     }
-
-    text {
-      font: 10px sans-serif;
-    }
   }
 
   .tree-chart__node--internal {
     circle {
-      fill: #555;
-    }
-
-    text {
-      text-shadow: 0 1px 0 #fff, 0 -1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff;
+      fill: gray;
     }
   }
 
   .tree-chart__link {
     fill: none;
-    stroke: #555;
+    stroke: gray;
     stroke-opacity: 0.4;
     stroke-width: 1.5px;
   }

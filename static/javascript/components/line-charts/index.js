@@ -18,41 +18,31 @@ export default class CirclesCharts extends React.Component {
     const { match } = this.props;
 
     return (
-      <div>
-        <ul className="nav nav-tabs">
-          <li className="nav-item">
-            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/line`}>
+      <div className="row">
+        <div className="col-3">
+          <div className="list-group">
+            <NavLink activeClassName="active" className="list-group-item list-group-item-action" to={`${match.url}/line`}>
               Line
             </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/area`}>
-              Area
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/dynamic-line`}>
+            <NavLink activeClassName="active" className="list-group-item list-group-item-action" to={`${match.url}/dynamic-line`}>
               Dynamic Line
             </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/line-over-time`}>
+            <NavLink activeClassName="active" className="list-group-item list-group-item-action" to={`${match.url}/line-over-time`}>
               Line over time
             </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/multiple`}>
+            <NavLink activeClassName="active" className="list-group-item list-group-item-action" to={`${match.url}/multiple`}>
               Multiple lines with legend
             </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/stack-area`}>
+            <NavLink activeClassName="active" className="list-group-item list-group-item-action" to={`${match.url}/area`}>
+              Area
+            </NavLink>
+            <NavLink activeClassName="active" className="list-group-item list-group-item-action" to={`${match.url}/stack-area`}>
               Stacked area
             </NavLink>
-          </li>
-        </ul>
+          </div>
+        </div>
 
-        <div>
+        <div className="col-9">
           <Route path={`${match.url}/line`} component={SvgLine} />
           <Route path={`${match.url}/area`} component={SvgArea} />
           <Route path={`${match.url}/dynamic-line`} component={DynamicLine} />

@@ -21,13 +21,15 @@ export default class Page extends React.Component {
       <HashRouter>
         <div>
           <Route path="/" component={MainMenu} />
-          <Route path="/bar" component={BarCharts} />
-          <Route path="/pie" component={PieCharts} />
-          <Route path="/circle" component={CircleCharts} />
-          <Route path="/line" component={LineCharts} />
-          <Route path="/tree" component={TreeCharts} />
-          <Route path="/3d" component={ThreeDCharts} />
-          <Route path="/force" component={ForceCharts} />
+          <div className="container-fluid mt-2">
+            <Route path="/bar" component={BarCharts} />
+            <Route path="/pie" component={PieCharts} />
+            <Route path="/circle" component={CircleCharts} />
+            <Route path="/line" component={LineCharts} />
+            <Route path="/tree" component={TreeCharts} />
+            <Route path="/3d" component={ThreeDCharts} />
+            <Route path="/force" component={ForceCharts} />
+          </div>
         </div>
       </HashRouter>
     );

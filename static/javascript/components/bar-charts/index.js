@@ -23,56 +23,40 @@ export default class BarCharts extends React.Component {
     const { match } = this.props;
 
     return (
-      <div>
-        <ul className="nav nav-tabs">
-          <li className="nav-item">
-            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/div`}>
+      <div className="row">
+        <div className="col-3">
+          <div className="list-group">
+            <NavLink activeClassName="active" className="list-group-item list-group-item-action" to={`${match.url}/div`}>
               React Div Horisontal
             </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/react-vertical`}>
+            <NavLink activeClassName="active" className="list-group-item list-group-item-action" to={`${match.url}/react-vertical`}>
               React Svg Vertical
             </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/svg`}>
+            <NavLink activeClassName="active" className="list-group-item list-group-item-action" to={`${match.url}/svg`}>
               Svg Horisontal
             </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/vertical`}>
+            <NavLink activeClassName="active" className="list-group-item list-group-item-action" to={`${match.url}/vertical`}>
               Vertical
             </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/dynamic`}>
+            <NavLink activeClassName="active" className="list-group-item list-group-item-action" to={`${match.url}/dynamic`}>
               Dynamic
             </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/stack-vertical`}>
+            <NavLink activeClassName="active" className="list-group-item list-group-item-action" to={`${match.url}/stack-vertical`}>
               Stack Vertical
             </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/stack-horisontal`}>
+            <NavLink activeClassName="active" className="list-group-item list-group-item-action" to={`${match.url}/stack-horisontal`}>
               Stack Horisontal
             </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/vertical-ontop-axis`}>
-              Vertical with axis ontop
+            <NavLink activeClassName="active" className="list-group-item list-group-item-action" to={`${match.url}/vertical-ontop-axis`}>
+              Vertical with axis
             </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/horisontally-stacked`}>
-              Horisontally stacked
+            <NavLink activeClassName="active" className="list-group-item list-group-item-action" to={`${match.url}/horisontally-stacked`}>
+              Vertical with axis
             </NavLink>
-          </li>
-        </ul>
+          </div>
+        </div>
 
-        <div className="bar-chart">
+        <div className="col-9 bar-chart">
           <Route path={`${match.url}/div`} component={DivHorisontalBar} />
           <Route path={`${match.url}/svg`} component={SvgHorisontalBar} />
           <Route path={`${match.url}/vertical`} component={SvgVerticalBar} />

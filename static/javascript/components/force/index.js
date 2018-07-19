@@ -12,16 +12,16 @@ export default class ForceCharts extends React.Component {
     const { match } = this.props;
 
     return (
-      <div>
-        <ul className="nav nav-tabs">
-          <li className="nav-item">
-            <NavLink activeClassName="active" className="nav-link" to={`${match.url}/basic`}>
-              Force basic
+      <div className="row">
+        <div className="col-3">
+          <div className="list-group">
+            <NavLink activeClassName="active" className="list-group-item list-group-item-action" to={`${match.url}/basic`}>
+              Basic
             </NavLink>
-          </li>
-        </ul>
+          </div>
+        </div>
 
-        <div className="3d-charts-container">
+        <div className="col-9">
           <Route path={`${match.url}/basic`} component={ForceBasic} />
         </div>
       </div>
