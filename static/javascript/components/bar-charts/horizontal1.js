@@ -2,8 +2,8 @@ import ReactDOM from "react-dom";
 import React from "react";
 import * as d3 from "d3";
 
-export default class DivHorisontalBarChart extends React.Component {
-  static displayName = "DivHorisontalBarChart";
+export default class HorisontalBarChart1 extends React.Component {
+  static displayName = "HorisontalBarChart1";
   state = {
     data: [4, 8, 15, 16, 23, 42],
     xScale: null
