@@ -1,8 +1,7 @@
 import React from "react";
-import * as d3 from "d3";
 import { NavLink, Route } from "react-router-dom";
-import SvgLine from "./line";
-import SvgArea from "./area";
+import Line1 from "./line1";
+import Area from "./area";
 import DynamicLine from "./dynamic-line";
 import LineOverTime from "./line-over-time";
 import MultipleLines from "./multiple-lines";
@@ -43,8 +42,8 @@ export default class CirclesCharts extends React.Component {
         </div>
 
         <div className="col-9">
-          <Route path={`${match.url}/line`} component={SvgLine} />
-          <Route path={`${match.url}/area`} component={SvgArea} />
+          <Route path={`${match.url}/line`} component={Line1} />
+          <Route path={`${match.url}/area`} component={Area} />
           <Route path={`${match.url}/dynamic-line`} component={DynamicLine} />
           <Route path={`${match.url}/line-over-time`} component={LineOverTime} />
           <Route path={`${match.url}/multiple`} component={MultipleLines} />

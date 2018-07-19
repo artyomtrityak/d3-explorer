@@ -1,8 +1,7 @@
 import React from "react";
-import * as d3 from "d3";
 import { NavLink, Route } from "react-router-dom";
-import BasicChart from "./tree-chart";
-import ReactSVGRenderChart from "./tree-react-svg-render-chart";
+import Tree1 from "./tree-chart1";
+import Tree2 from "./tree-chart2";
 
 export default class ForceCharts extends React.Component {
   constructor(props) {
@@ -27,8 +26,8 @@ export default class ForceCharts extends React.Component {
         </div>
 
         <div className="col-9 tree-charts-container">
-          <Route path={`${match.url}/tree1`} component={BasicChart} />
-          <Route path={`${match.url}/tree2`} component={ReactSVGRenderChart} />
+          <Route path={`${match.url}/tree1`} component={Tree1} />
+          <Route path={`${match.url}/tree2`} component={Tree2} />
         </div>
       </div>
     );

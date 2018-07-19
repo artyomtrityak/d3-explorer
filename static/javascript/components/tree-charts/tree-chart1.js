@@ -2,25 +2,22 @@ import React from "react";
 import * as d3 from "d3";
 
 export default class TreeChart extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: [
-        { name: "ProjectA", parent: "" },
-        { name: "ApplicationA", parent: "ProjectA" },
-        { name: "EnvironmentB", parent: "ProjectA" },
+  state = {
+    data: [
+      { name: "ProjectA", parent: "" },
+      { name: "ApplicationA", parent: "ProjectA" },
+      { name: "EnvironmentB", parent: "ProjectA" },
 
-        { name: "TierC", parent: "ApplicationA" },
-        { name: "TierD", parent: "ApplicationA" },
-        { name: "TierE", parent: "ApplicationA" },
+      { name: "TierC", parent: "ApplicationA" },
+      { name: "TierD", parent: "ApplicationA" },
+      { name: "TierE", parent: "ApplicationA" },
 
-        { name: "ServiceF", parent: "EnvironmentB" },
+      { name: "ServiceF", parent: "EnvironmentB" },
 
-        { name: "ContainerG", parent: "TierE" },
-        { name: "ContainerH", parent: "TierE" }
-      ]
-    };
-  }
+      { name: "ContainerG", parent: "TierE" },
+      { name: "ContainerH", parent: "TierE" }
+    ]
+  };
 
   componentDidMount() {
     const width = 700,
@@ -72,12 +69,7 @@ export default class TreeChart extends React.Component {
       .enter()
       .append("g")
       .attr("class", d => {
-        return (
-          "tree-chart__node" +
-          (d.children
-            ? " tree-chart__node--internal"
-            : " tree-chart__node--leaf")
-        );
+        return "tree-chart__node" + (d.children ? " tree-chart__node--internal" : " tree-chart__node--leaf");
       })
       .attr("transform", d => {
         return `translate(${d.y},${d.x})`;

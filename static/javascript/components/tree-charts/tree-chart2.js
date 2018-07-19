@@ -2,28 +2,25 @@ import React from "react";
 import * as d3 from "d3";
 
 export default class TreeChart extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      root: null,
-      width: 700,
-      height: 500,
-      data: [
-        { name: "ProjectA", parent: "" },
-        { name: "ApplicationA", parent: "ProjectA" },
-        { name: "EnvironmentB", parent: "ProjectA" },
+  state = {
+    root: null,
+    width: 700,
+    height: 500,
+    data: [
+      { name: "ProjectA", parent: "" },
+      { name: "ApplicationA", parent: "ProjectA" },
+      { name: "EnvironmentB", parent: "ProjectA" },
 
-        { name: "TierC", parent: "ApplicationA" },
-        { name: "TierD", parent: "ApplicationA" },
-        { name: "TierE", parent: "ApplicationA" },
+      { name: "TierC", parent: "ApplicationA" },
+      { name: "TierD", parent: "ApplicationA" },
+      { name: "TierE", parent: "ApplicationA" },
 
-        { name: "ServiceF", parent: "EnvironmentB" },
+      { name: "ServiceF", parent: "EnvironmentB" },
 
-        { name: "ContainerG", parent: "TierE" },
-        { name: "ContainerH", parent: "TierE" }
-      ]
-    };
-  }
+      { name: "ContainerG", parent: "TierE" },
+      { name: "ContainerH", parent: "TierE" }
+    ]
+  };
 
   componentDidMount() {
     const tree = d3.tree().size([this.state.height, this.state.width - 160]);
@@ -50,12 +47,7 @@ export default class TreeChart extends React.Component {
     }
 
     return (
-      <svg
-        width={this.state.width + 100}
-        height={this.state.height}
-        className="tree-chart"
-        ref={r => (this.chartRef = r)}
-      >
+      <svg width={this.state.width + 100} height={this.state.height} className="tree-chart" ref={r => (this.chartRef = r)}>
         <g transform="translate(100, 0)">
           {this.renderLinks()}
           {this.renderNodes()}
@@ -74,20 +66,14 @@ export default class TreeChart extends React.Component {
         .y(d => {
           return d.x;
         });
-      return (
-        <path key={`link${i}`} className="tree-chart__link" d={link(data)} />
-      );
+      return <path key={`link${i}`} className="tree-chart__link" d={link(data)} />;
     });
   }
 
   renderNodes() {
     return this.state.root.descendants().map((d, i) => {
       return (
-        <g
-          key={`node${i}`}
-          className="tree-chart__node"
-          transform={`translate(${d.y},${d.x})`}
-        >
+        <g key={`node${i}`} className="tree-chart__node" transform={`translate(${d.y},${d.x})`}>
           <circle r="5" />
           <text dy={20} x={-8} textAnchor={d.children ? "start" : "end"}>
             {d.id}

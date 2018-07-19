@@ -1,17 +1,14 @@
 import React from "react";
-import * as d3 from "d3";
 import { NavLink, Route } from "react-router-dom";
-import SvgCircles from "./svg-circles";
-import SvgCirclesDragNDrop from "./circles-drag-n-drop";
-import Zoom from "./circles-zoom";
+import Circles1 from "./circles1";
+import CirclesDragNDrop from "./circles-drag-n-drop";
+import CirclesZoom from "./circles-zoom";
 
 export default class CirclesCharts extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
-
-  componentDidMount() {}
 
   render() {
     const { match } = this.props;
@@ -33,9 +30,9 @@ export default class CirclesCharts extends React.Component {
         </div>
 
         <div className="col-9">
-          <Route path={`${match.url}/circles1`} component={SvgCircles} />
-          <Route path={`${match.url}/drag`} component={SvgCirclesDragNDrop} />
-          <Route path={`${match.url}/zoom`} component={Zoom} />
+          <Route path={`${match.url}/circles1`} component={Circles1} />
+          <Route path={`${match.url}/drag`} component={CirclesDragNDrop} />
+          <Route path={`${match.url}/zoom`} component={CirclesZoom} />
         </div>
       </div>
     );

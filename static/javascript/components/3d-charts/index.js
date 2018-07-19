@@ -1,7 +1,6 @@
 import React from "react";
-import * as d3 from "d3";
 import { NavLink, Route } from "react-router-dom";
-import Force3dBasic from "./force-3d-basic";
+import Force3d1 from "./force-3d-1";
 import Force3dCamera from "./force-3d-camera";
 import Force3dGeometries from "./force-3d-node-geometries";
 import Force3dD3 from "./force-3d-d3";
@@ -45,7 +44,7 @@ export default class ThreeDCharts extends React.Component {
         </div>
 
         <div className="col-9 3d-charts-container">
-          <Route path={`${match.url}/force1`} component={Force3dBasic} />
+          <Route path={`${match.url}/force1`} component={Force3d1} />
           <Route path={`${match.url}/force-camera`} component={Force3dCamera} />
           <Route path={`${match.url}/force-geometries`} component={Force3dGeometries} />
           <Route path={`${match.url}/force-d3`} component={Force3dD3} />

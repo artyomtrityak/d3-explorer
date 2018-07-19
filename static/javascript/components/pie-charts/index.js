@@ -1,9 +1,8 @@
 import React from "react";
-import * as d3 from "d3";
 import { NavLink, Route } from "react-router-dom";
-import BasicPieChart from "./basic-pie";
-import InteractivePieChart from "./interactive-pie";
-import LabelsPieChart from "./pie-with-labels";
+import Pie1 from "./pie1";
+import InteractivePie from "./interactive-pie";
+import LabelsPie from "./pie-with-labels";
 
 export default class PieCharts extends React.Component {
   constructor(props) {
@@ -30,9 +29,9 @@ export default class PieCharts extends React.Component {
           </div>
         </div>
         <div className="col-9">
-          <Route path={`${match.url}/pie1`} component={BasicPieChart} />
-          <Route path={`${match.url}/interactive`} component={InteractivePieChart} />
-          <Route path={`${match.url}/with-labels`} component={LabelsPieChart} />
+          <Route path={`${match.url}/pie1`} component={Pie1} />
+          <Route path={`${match.url}/interactive`} component={InteractivePie} />
+          <Route path={`${match.url}/with-labels`} component={LabelsPie} />
         </div>
       </div>
     );

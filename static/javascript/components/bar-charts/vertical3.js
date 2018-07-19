@@ -93,10 +93,7 @@ export default class SvgVerticalBarChart extends React.Component {
   render() {
     return (
       <div>
-        <svg
-          className="bar-chart bar-charts--axis-with-lines"
-          ref={r => (this.chart = r)}
-        />
+        <svg className="bar-chart bar-charts--axis-with-lines" ref={r => (this.chart = r)} />
       </div>
     );
   }
