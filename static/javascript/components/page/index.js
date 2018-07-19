@@ -1,5 +1,5 @@
 import React from "react";
-import { HashRouter, Route } from "react-router-dom";
+import { HashRouter, Route, Switch, Redirect } from "react-router-dom";
 
 import MainMenu from "./main-menu";
 import BarCharts from "../bar-charts";
@@ -22,13 +22,17 @@ export default class Page extends React.Component {
         <div>
           <Route path="/" component={MainMenu} />
           <div className="container-fluid mt-2">
-            <Route path="/bar" component={BarCharts} />
-            <Route path="/pie" component={PieCharts} />
-            <Route path="/circle" component={CircleCharts} />
-            <Route path="/line" component={LineCharts} />
-            <Route path="/tree" component={TreeCharts} />
-            <Route path="/3d" component={ThreeDCharts} />
-            <Route path="/force" component={ForceCharts} />
+            <Switch>
+              <Route path="/bar" component={BarCharts} />
+              <Route path="/pie" component={PieCharts} />
+              <Route path="/circle" component={CircleCharts} />
+              <Route path="/line" component={LineCharts} />
+              <Route path="/tree" component={TreeCharts} />
+              <Route path="/3d" component={ThreeDCharts} />
+              <Route path="/force" component={ForceCharts} />
+
+              <Redirect from="/" to="/bar" />
+            </Switch>
           </div>
         </div>
       </HashRouter>

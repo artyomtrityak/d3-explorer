@@ -14,7 +14,7 @@ export default class MainMenu extends React.Component {
     return (
       <Fragment>
         <nav className="navbar navbar-expand navbar-dark bg-dark">
-          <a className="navbar-brand" href="#">
+          <a className="navbar-brand" href="https://github.com/artyomtrityak/d3-explorer">
             D3 Explorer
           </a>
           <ul className="navbar-nav">
