@@ -20,20 +20,20 @@ export default class CirclesCharts extends React.Component {
       <div className="row">
         <div className="col-3">
           <div className="list-group">
-            <NavLink activeClassName="active" className="list-group-item list-group-item-action" to={`${match.url}/basic`}>
-              Basic
+            <NavLink activeClassName="active" className="list-group-item list-group-item-action" to={`${match.url}/circles1`}>
+              Circles 1
             </NavLink>
             <NavLink activeClassName="active" className="list-group-item list-group-item-action" to={`${match.url}/drag`}>
-              Drag'n'Drop
+              Circles Drag'n'Drop
             </NavLink>
             <NavLink activeClassName="active" className="list-group-item list-group-item-action" to={`${match.url}/zoom`}>
-              Zoom
+              Circles Zoom
             </NavLink>
           </div>
         </div>
 
         <div className="col-9">
-          <Route path={`${match.url}/basic`} component={SvgCircles} />
+          <Route path={`${match.url}/circles1`} component={SvgCircles} />
           <Route path={`${match.url}/drag`} component={SvgCirclesDragNDrop} />
           <Route path={`${match.url}/zoom`} component={Zoom} />
         </div>

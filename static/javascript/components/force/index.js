@@ -15,14 +15,14 @@ export default class ForceCharts extends React.Component {
       <div className="row">
         <div className="col-3">
           <div className="list-group">
-            <NavLink activeClassName="active" className="list-group-item list-group-item-action" to={`${match.url}/basic`}>
-              Basic
+            <NavLink activeClassName="active" className="list-group-item list-group-item-action" to={`${match.url}/force1`}>
+              Force 1
             </NavLink>
           </div>
         </div>
 
         <div className="col-9">
-          <Route path={`${match.url}/basic`} component={ForceBasic} />
+          <Route path={`${match.url}/force1`} component={ForceBasic} />
         </div>
       </div>
     );

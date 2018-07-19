@@ -18,11 +18,11 @@ export default class PieCharts extends React.Component {
       <div className="row">
         <div className="col-3">
           <div className="list-group">
-            <NavLink activeClassName="active" className="list-group-item list-group-item-action" to={`${match.url}/basic`}>
-              Basic
+            <NavLink activeClassName="active" className="list-group-item list-group-item-action" to={`${match.url}/pie1`}>
+              Pie 1
             </NavLink>
             <NavLink activeClassName="active" className="list-group-item list-group-item-action" to={`${match.url}/interactive`}>
-              Interactive Pie
+              Pie Interactive
             </NavLink>
             <NavLink activeClassName="active" className="list-group-item list-group-item-action" to={`${match.url}/with-labels`}>
               Pie with outside labels
@@ -30,7 +30,7 @@ export default class PieCharts extends React.Component {
           </div>
         </div>
         <div className="col-9">
-          <Route path={`${match.url}/basic`} component={BasicPieChart} />
+          <Route path={`${match.url}/pie1`} component={BasicPieChart} />
           <Route path={`${match.url}/interactive`} component={InteractivePieChart} />
           <Route path={`${match.url}/with-labels`} component={LabelsPieChart} />
         </div>

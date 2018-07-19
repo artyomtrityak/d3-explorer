@@ -23,8 +23,8 @@ export default class ThreeDCharts extends React.Component {
       <div className="row">
         <div className="col-3">
           <div className="list-group">
-            <NavLink activeClassName="active" className="list-group-item list-group-item-action" to={`${match.url}/force-basic`}>
-              Force 3D basic
+            <NavLink activeClassName="active" className="list-group-item list-group-item-action" to={`${match.url}/force1`}>
+              Force 3D 1
             </NavLink>
             <NavLink activeClassName="active" className="list-group-item list-group-item-action" to={`${match.url}/force-camera`}>
               Force 3D camera
@@ -45,7 +45,7 @@ export default class ThreeDCharts extends React.Component {
         </div>
 
         <div className="col-9 3d-charts-container">
-          <Route path={`${match.url}/force-basic`} component={Force3dBasic} />
+          <Route path={`${match.url}/force1`} component={Force3dBasic} />
           <Route path={`${match.url}/force-camera`} component={Force3dCamera} />
           <Route path={`${match.url}/force-geometries`} component={Force3dGeometries} />
           <Route path={`${match.url}/force-d3`} component={Force3dD3} />
