@@ -2,72 +2,89 @@ import ReactDOM from "react-dom";
 import React from "react";
 import * as d3 from "d3";
 import { generateArray } from "../../data-layer/array-processors";
+import WithSize from "../../shared/with-size";
+import Axis from "../../shared/axis";
 
-export default class HorisontalBarChart2 extends React.Component {
+const OFFSETS = {
+  top: 50,
+  bottom: 50,
+  left: 100,
+  right: 50
+};
+
+class HorisontalBarChart2 extends React.Component {
   static displayName = "HorisontalBarChart2";
+
   state = {
     data: generateArray()
   };
 
-  constructor(props) {
-    super(props);
-    this.chartRef = React.createRef();
+  componentDidMount() {
+    this.setState({
+      scaleX: this.createScaleX(),
+      scaleY: this.createScaleY()
+    });
   }
 
-  componentDidMount() {
-    const margins = { left: 0, right: 50 };
-    const width = ReactDOM.findDOMNode(this).parentNode.clientWidth - margins.left - margins.right;
-    const height = ReactDOM.findDOMNode(this).parentNode.clientHeight;
+  compomentDidUpdate(prevProps) {
+    if (prevProps.width !== this.props.width || prevProps.height !== this.props.height) {
+      this.setState({
+        scaleX: this.createScaleX(),
+        scaleY: this.createScaleY()
+      });
+    }
+  }
 
-    // Scales
-
-    const scaleX = d3
+  createScaleX() {
+    let minX = d3.min(this.state.data, x => x.val);
+    // Add nevative support
+    minX = minX > 0 ? 0 : minX;
+    return d3
       .scaleLinear()
-      .domain([0, d3.max(this.state.data, x => x.val)])
-      .range([0, width]);
+      .domain([minX, d3.max(this.state.data, x => x.val) + 10])
+      .rangeRound([0, this.props.width - OFFSETS.left - OFFSETS.right]);
+  }
 
-    const scaleY = d3
+  createScaleY() {
+    return d3
       .scaleBand()
       .domain(this.state.data.map(d => d.label))
-      .range([0, height])
+      .range([0, this.props.height - OFFSETS.top - OFFSETS.bottom])
       .padding(0.2);
-
-    // Rendering
-
-    const chart = d3
-      .select(this.chartRef.current)
-      .attr("height", height)
-      .attr("width", width);
-
-    const bar = chart
-      .selectAll("g")
-      .data(this.state.data)
-      .enter()
-      .append("g")
-      .attr("transform", (el, i) => `translate(0, ${i * scaleY.step()})`);
-
-    bar
-      .append("rect")
-      .attr("width", d => scaleX(d.val))
-      .attr("height", scaleY.bandwidth());
-
-    bar
-      .append("text")
-      .attr("x", x => scaleX(x.val) - 100)
-      .attr("y", scaleY.bandwidth() / 2)
-      .attr("dy", "0.35em")
-      .text(x => `${x.label} - ${x.val}`);
-  }
-
-  shouldComponentUpdate() {
-    return false;
   }
 
   render() {
+    const { data, scaleX, scaleY } = this.state;
+    const { width, height } = this.props;
+
+    if (!data || !scaleX || !scaleY) {
+      return <div>Loading...</div>;
+    }
+
     return (
       <div>
-        <svg className="bar-chart" ref={this.chartRef} />
+        <svg className="bar-chart" width={width} height={height}>
+          <g transform={`translate(${OFFSETS.left}, ${OFFSETS.top})`}>
+            <g>
+              <Axis scaleX={scaleX} scaleY={scaleY} />
+            </g>
+            <g>{this.renderBars()}</g>
+          </g>
+        </svg>
       </div>
     );
   }
+
+  renderBars() {
+    const { scaleX, scaleY, data } = this.state;
+    return data.map(d => {
+      return (
+        <g key={`key_${d.label}`} transform={`translate(0, ${scaleY(d.label)})`}>
+          <rect width={scaleX(d.val)} height={scaleY.bandwidth()} />
+        </g>
+      );
+    });
+  }
 }
+
+export default WithSize(HorisontalBarChart2);
