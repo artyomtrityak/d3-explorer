@@ -1,33 +1,69 @@
-import ReactDOM from "react-dom";
 import React from "react";
 import * as d3 from "d3";
+import WithSize from "../../shared/with-size";
 
-export default class HorisontalBarChart1 extends React.Component {
+const OFFSETS = {
+  left: 0,
+  right: 50,
+  top: 0,
+  bottom: 0
+};
+
+class HorisontalBarChart1 extends React.Component {
   static displayName = "HorisontalBarChart1";
   state = {
     data: [4, 8, 15, 16, 23, 42],
-    xScale: null
+    scaleX: null,
+    scaleY: null
   };
 
   componentDidMount() {
-    const margin = { left: 0, right: 50 };
-    const width = ReactDOM.findDOMNode(this).parentNode.clientWidth;
-    const xScale = d3
+    this.setState({
+      scaleX: this.createScaleX(),
+      scaleY: this.createScaleY()
+    });
+  }
+
+  compomentDidUpdate(prevProps) {
+    if (prevProps.width !== this.props.width || prevProps.height !== this.props.height) {
+      this.setState({
+        scaleX: this.createScaleX(),
+        scaleY: this.createScaleY()
+      });
+    }
+  }
+
+  createScaleX() {
+    return d3
       .scaleLinear()
       .domain([0, d3.max(this.state.data)])
-      .range([0, width - margin.left - margin.right]);
-    this.setState({ xScale });
+      .range([0, this.props.width - OFFSETS.left - OFFSETS.right]);
+  }
+
+  createScaleY() {
+    return d3
+      .scaleBand()
+      .domain(this.state.data)
+      .range([0, this.props.height - OFFSETS.top - OFFSETS.bottom])
+      .padding(0.1);
   }
 
   render() {
-    return <div className="bar-chart">{this.state.xScale ? this.renderBars() : null}</div>;
+    const { scaleX, scaleY } = this.state;
+    if (!scaleX || !scaleY) {
+      return <div>Loadng...</div>;
+    }
+    return <div className="bar-chart">{this.renderBars()}</div>;
   }
 
   renderBars() {
+    const { scaleX, scaleY } = this.state;
     return this.state.data.map((d, i) => (
-      <div key={i} className="bar-chart__div" style={{ width: this.state.xScale(d) }}>
+      <div key={i} className="bar-chart__div" style={{ width: scaleX(d), height: scaleY.bandwidth() }}>
         {d}
       </div>
     ));
   }
 }
+
+export default WithSize(HorisontalBarChart1);

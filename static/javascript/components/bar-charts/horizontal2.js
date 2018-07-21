@@ -1,4 +1,3 @@
-import ReactDOM from "react-dom";
 import React from "react";
 import * as d3 from "d3";
 import { generateArray } from "../../data-layer/array-processors";
