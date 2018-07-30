@@ -2,7 +2,8 @@ import ReactDOM from "react-dom";
 import React from "react";
 import _ from "lodash";
 
-module.exports = Child =>
+// With HOC
+const WithSize = Child =>
   class extends React.Component {
     state = {
       width: null,
@@ -11,7 +12,6 @@ module.exports = Child =>
 
     constructor(props) {
       super(props);
-      this.containerRef = React.createRef();
       this.setSize = this.setSize.bind(this);
       this.setSizeDebounced = _.debounce(this.setSize, 1000);
       window.addEventListener("resize", this.setSizeDebounced);
@@ -40,3 +40,5 @@ module.exports = Child =>
       );
     }
   };
+
+export default WithSize;
