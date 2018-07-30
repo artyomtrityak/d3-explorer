@@ -1,8 +1,9 @@
 import React from "react";
 import * as d3 from "d3";
 import WithSize from "../../shared/with-size";
+import Axis from "./axis";
 
-const MARGINS = { top: 20, right: 30, bottom: 30, left: 40 };
+const MARGINS = { top: 20, right: 30, bottom: 30, left: 100 };
 
 class StackHorisontalBarChart extends React.Component {
   state = {
@@ -67,6 +68,10 @@ class StackHorisontalBarChart extends React.Component {
 
     return (
       <svg ref={this.axisRef} className="bar-chart bar-chart--stack" width={width} height={height}>
+        <g transform={`translate(${MARGINS.left},${MARGINS.top})`}>
+          <Axis scaleX={scaleX} scaleY={scaleY} />
+        </g>
+
         <g transform={`translate(${MARGINS.left},${MARGINS.top})`}>{series.map(this.renderStacks)}</g>
       </svg>
     );
