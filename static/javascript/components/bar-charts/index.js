@@ -47,7 +47,7 @@ export default class BarCharts extends React.Component {
           </div>
         </div>
 
-        <div className="col-9 bar-chart">
+        <div className="col-9 chart chart--bar-chart">
           <Route path={`${match.url}/horizontal1`} component={Horisontal1} />
           <Route path={`${match.url}/horizontal2`} component={Horisontal2} />
           <Route path={`${match.url}/stacked-horisontal1`} component={StackHorisontalBar} />

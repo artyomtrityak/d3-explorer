@@ -31,7 +31,7 @@ class StackHorisontalBarChart extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    // You might want to add also data change check here to rebuild scales if your data id dynamic
+    // You might want to add also data change check here to rebuild scales if your data is dynamic
     if (prevProps.width !== this.props.width || prevProps.height !== this.props.height) {
       this.setState({
         scaleX: this.createScaleX(),
@@ -52,7 +52,7 @@ class StackHorisontalBarChart extends React.Component {
     return d3
       .scaleBand()
       .domain(this.state.data.map(d => d.month))
-      .rangeRound([0, this.props.height - MARGINS.bottom - MARGINS.top])
+      .rangeRound([this.props.height - MARGINS.bottom - MARGINS.top, 0])
       .padding(0.1);
   }
 

@@ -3,6 +3,10 @@
     text-anchor: end;
   }
 
+  .chart-axis__label--x {
+    text-anchor: middle;
+  }
+
   .chart-axis__axis {
     stroke-opacity: 0.3;
   }

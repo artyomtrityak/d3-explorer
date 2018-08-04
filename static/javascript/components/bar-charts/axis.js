@@ -18,14 +18,15 @@ export default class HorisontalBarChart2 extends React.Component {
   createXAxis() {
     const xAxis = d3
       .axisTop(this.props.scaleX)
-      .tickSize(this.props.scaleY.range()[1])
+      .tickSize(this.props.scaleY.range()[0])
       .tickFormat(d => d);
 
     d3.select(this.axisXRef.current).call(g => {
       g.call(xAxis);
       g.selectAll(".tick text")
         .attr("y", 20)
-        .classed("chart-axis__label", true);
+        .classed("chart-axis__label", true)
+        .classed("chart-axis__label--x", true);
 
       g.selectAll(".tick line")
         .attr("y1", 5)
@@ -60,7 +61,7 @@ export default class HorisontalBarChart2 extends React.Component {
 
     return (
       <g className="axis">
-        <g ref={this.axisXRef} transform={`translate(0, ${scaleY.range()[1]})`} />
+        <g ref={this.axisXRef} transform={`translate(0, ${scaleY.range()[0]})`} />
         <g ref={this.axisYRef} />
       </g>
     );

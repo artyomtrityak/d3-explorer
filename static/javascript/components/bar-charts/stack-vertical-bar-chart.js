@@ -1,6 +1,7 @@
 import React from "react";
 import * as d3 from "d3";
 import WithSize from "../../shared/with-size";
+import Axis from "./axis";
 
 function stackMin(serie) {
   return d3.min(serie, d => d[0]);
@@ -10,13 +11,14 @@ function stackMax(serie) {
   return d3.max(serie, d => d[1]);
 }
 
-const MARGINS = { top: 20, right: 30, bottom: 30, left: 40 };
+const MARGINS = { top: 20, right: 30, bottom: 50, left: 40 };
 
 class StackVerticalBarChart extends React.Component {
   static displayName = "StackVerticalBarChart";
 
   constructor(props) {
     super(props);
+    this.renderStacks = this.renderStacks.bind(this);
     this.state = {
       keys: ["apples", "bananas", "cherries"],
       data: [
@@ -32,77 +34,76 @@ class StackVerticalBarChart extends React.Component {
   }
 
   componentDidMount() {
-    const chart = d3
-      .select(this.chartRef)
-      .attr("width", this.props.width)
-      .attr("height", this.props.height);
-
-    this.chartInner = chart
-      .append("g")
-      .attr("class", "chart-inner")
-      .attr("transform", `translate(${MARGINS.left},${MARGINS.top})`);
-
-    const series = d3.stack().keys(this.state.keys)(this.state.data);
-
-    const { xScale, yScale } = this.getScales(this.props.width, this.props.height, series);
-
-    this.chartInner
-      .append("g")
-      .attr("transform", "translate(0," + yScale(0) + ")")
-      .call(d3.axisBottom(xScale));
-
-    this.chartInner
-      .append("g")
-      .attr("transform", "translate(" + MARGINS.left + ",0)")
-      .call(d3.axisLeft(yScale));
-
-    const colors = d3.scaleOrdinal(d3.schemeCategory10);
-
-    this.chartInner
-      .append("g")
-      .selectAll("g")
-      .data(series)
-      .enter()
-      .append("g")
-      .attr("fill", d => colors(d.key))
-      .selectAll("rect")
-      .data(d => d)
-      .enter()
-      .append("rect")
-      .attr("width", xScale.bandwidth)
-      .attr("x", d => xScale(d.data.month))
-      .attr("y", d => yScale(d[1]))
-      .attr("height", d => yScale(d[0]) - yScale(d[1]));
+    this.setState({
+      colors: d3.scaleOrdinal(d3.schemeCategory10),
+      scaleX: this.createScaleX(),
+      scaleY: this.createScaleY()
+    });
   }
 
-  getScales(width, height, series) {
-    const xScale = d3
+  componentDidUpdate(prevProps) {
+    // You might want to add also data change check here to rebuild scales if your data is dynamic
+    if (prevProps.width !== this.props.width || prevProps.height !== this.props.height) {
+      this.setState({
+        scaleX: this.createScaleX(),
+        scaleY: this.createScaleY()
+      });
+    }
+  }
+
+  createScaleX() {
+    return d3
       .scaleBand()
       .domain(this.state.data.map(d => d.month))
-      .rangeRound([MARGINS.left, width - MARGINS.right])
+      .range([0, this.props.width - MARGINS.left - MARGINS.right])
       .padding(0.1);
-
-    const yScale = d3
-      .scaleLinear()
-      .domain([d3.min(series, stackMin), d3.max(series, stackMax)])
-      .rangeRound([height - MARGINS.bottom, MARGINS.top]);
-
-    return { xScale, yScale };
   }
 
-  createScaleX() {}
+  createScaleY() {
+    const yValues = this.state.data.map(d => d.total);
 
-  createScaleY() {}
+    return d3
+      .scaleLinear()
+      .domain([0, d3.max(yValues)])
+      .range([this.props.height - MARGINS.top - MARGINS.bottom, 0]);
+  }
 
   render() {
+    const { width, height } = this.props;
+    const { scaleX, scaleY } = this.state;
+
+    if (!scaleX || !scaleY) {
+      return <div>Loading...</div>;
+    }
+
+    const series = d3.stack().keys(this.state.keys)(this.state.data);
     return (
-      <div>
-        <svg className="bar-chart bar-chart--stack" ref={r => (this.chartRef = r)} />
-      </div>
+      <svg width={width} height={height} className="bar-chart bar-chart--stack">
+        <g transform={`translate(${MARGINS.left},${MARGINS.top})`}>
+          <Axis scaleX={scaleX} scaleY={scaleY} />
+        </g>
+        <g transform={`translate(${MARGINS.left},${MARGINS.top})`}>{series.map(this.renderStacks)}</g>
+      </svg>
     );
   }
 
-  renderStack(stack) {}
+  renderStacks(stack) {
+    const { colors, scaleX, scaleY } = this.state;
+    return (
+      <g key={stack.key} fill={colors(stack.key)}>
+        {stack.map(d => {
+          const height = scaleY(d[0]) - scaleY(d[1]);
+          return (
+            <rect key={String(d.data.month)} x={scaleX(d.data.month)} y={scaleY(d[1])} width={scaleX.bandwidth()} height={height}>
+              <title>
+                {stack.key}: {d.data[stack.key]}
+              </title>
+            </rect>
+          );
+        })}
+      </g>
+    );
+  }
 }
 
 export default WithSize(StackVerticalBarChart);
