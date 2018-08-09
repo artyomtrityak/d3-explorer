@@ -15,6 +15,11 @@ export default class HorisontalBarChart2 extends React.Component {
     this.createYAxis();
   }
 
+  componentDidUpdate() {
+    this.createXAxis();
+    this.createYAxis();
+  }
+
   createXAxis() {
     const xAxis = d3
       .axisTop(this.props.scaleX)

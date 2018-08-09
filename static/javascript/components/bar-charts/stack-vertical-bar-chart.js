@@ -3,14 +3,6 @@ import * as d3 from "d3";
 import WithSize from "../../shared/with-size";
 import Axis from "./axis";
 
-function stackMin(serie) {
-  return d3.min(serie, d => d[0]);
-}
-
-function stackMax(serie) {
-  return d3.max(serie, d => d[1]);
-}
-
 const MARGINS = { top: 20, right: 30, bottom: 50, left: 40 };
 
 class StackVerticalBarChart extends React.Component {

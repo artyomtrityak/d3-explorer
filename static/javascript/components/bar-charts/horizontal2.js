@@ -25,7 +25,7 @@ class HorisontalBarChart2 extends React.Component {
     });
   }
 
-  compomentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps) {
     // You might want to add also data change check here to rebuild scales if your data is dynamic
     if (prevProps.width !== this.props.width || prevProps.height !== this.props.height) {
       this.setState({
@@ -80,7 +80,7 @@ class HorisontalBarChart2 extends React.Component {
     return data.map(d => {
       return (
         <g key={`key_${d.label}`} transform={`translate(0, ${scaleY(d.label)})`}>
-          <rect width={scaleX(d.val)} height={scaleY.bandwidth()} />
+          <rect width={scaleX(d.val)} height={scaleY.bandwidth()} fill={`steelblue`} />
         </g>
       );
     });

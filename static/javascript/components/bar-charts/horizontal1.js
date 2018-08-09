@@ -24,7 +24,7 @@ class HorisontalBarChart1 extends React.Component {
     });
   }
 
-  compomentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps) {
     // You might want to add also data change check here to rebuild scales if your data is dynamic
     if (prevProps.width !== this.props.width || prevProps.height !== this.props.height) {
       this.setState({
