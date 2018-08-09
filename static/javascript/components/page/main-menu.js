@@ -24,12 +24,6 @@ export default class MainMenu extends React.Component {
               </NavLink>
             </li>
 
-            <li className={cn("nav-item", { active: matchPath(pathname, { path: "/circle" }) })}>
-              <NavLink activeClassName="disabled" className="nav-link" to="/circle">
-                Circle charts
-              </NavLink>
-            </li>
-
             <li className={cn("nav-item", { active: matchPath(pathname, { path: "/pie" }) })}>
               <NavLink activeClassName="disabled" className="nav-link" to="/pie">
                 Pie charts
@@ -48,11 +42,11 @@ export default class MainMenu extends React.Component {
               </NavLink>
             </li>
 
-            <li className={cn("nav-item", { active: matchPath(pathname, { path: "/force" }) })}>
+            {/* <li className={cn("nav-item", { active: matchPath(pathname, { path: "/force" }) })}>
               <NavLink activeClassName="disabled" className="nav-link" to="/force">
                 Force charts
               </NavLink>
-            </li>
+            </li> */}
 
             <li className={cn("nav-item", { active: matchPath(pathname, { path: "/3d" }) })}>
               <NavLink activeClassName="disabled" className="nav-link" to="/3d">

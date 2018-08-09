@@ -12,71 +12,10 @@ const MARGINS = {
 };
 
 const DATA = [
-  {
-    label: "Group A",
-    vals: [
-      {
-        type: "error",
-        val: 12
-      },
-      {
-        type: "success",
-        val: 16
-      }
-    ]
-  },
-  {
-    label: "Group B",
-    vals: [
-      {
-        type: "error",
-        val: 8
-      },
-      {
-        type: "success",
-        val: 16
-      }
-    ]
-  },
-  {
-    label: "Group C",
-    vals: [
-      {
-        type: "error",
-        val: 8
-      },
-      {
-        type: "success",
-        val: 4
-      }
-    ]
-  },
-  {
-    label: "Group D",
-    vals: [
-      {
-        type: "error",
-        val: 15
-      },
-      {
-        type: "success",
-        val: 4
-      }
-    ]
-  },
-  {
-    label: "Group E",
-    vals: [
-      {
-        type: "error",
-        val: 8
-      },
-      {
-        type: "success",
-        val: 4
-      }
-    ]
-  }
+  { label: "Group A", vals: [{ type: "error", val: 12 }, { type: "success", val: 16 }] },
+  { label: "Group B", vals: [{ type: "error", val: 8 }, { type: "success", val: 16 }] },
+  { label: "Group C", vals: [{ type: "error", val: 2 }, { type: "success", val: 21 }] },
+  { label: "Group D", vals: [{ type: "error", val: 14 }, { type: "success", val: 11 }] }
 ];
 
 class SvgVerticalGroupedBarChart extends React.Component {
@@ -105,7 +44,6 @@ class SvgVerticalGroupedBarChart extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    console.log("DID update");
     // You might want to add also data change check here to rebuild scales if your data is dynamic
     if (prevProps.width !== this.props.width || prevProps.height !== this.props.height) {
       const scaleX = this.createScaleX();
@@ -163,7 +101,6 @@ class SvgVerticalGroupedBarChart extends React.Component {
     return (
       <g key={group.label} transform={`translate(${scaleX(group.label)}, 0)`}>
         {group.vals.map(d => {
-          console.log(colors(d.type));
           return (
             <rect
               key={d.type}
@@ -172,7 +109,9 @@ class SvgVerticalGroupedBarChart extends React.Component {
               fill={colors(d.type)}
               x={subscaleX(d.type)}
               y={scaleY(d.val)}
-            />
+            >
+              <title>{d.val}</title>
+            </rect>
           );
         })}
       </g>

@@ -12,7 +12,7 @@ const OFFSETS = {
 class HorisontalBarChart1 extends React.Component {
   static displayName = "HorisontalBarChart1";
   state = {
-    data: [4, 8, 15, 16, 23, 42],
+    data: [4, 8, 15, 16, 23, 42, 44, 22, 11, 2],
     scaleX: null,
     scaleY: null
   };
