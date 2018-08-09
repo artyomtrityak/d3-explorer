@@ -1,97 +1,94 @@
 import React from "react";
 import * as d3 from "d3";
 import { generateArray } from "../../data-layer/array-processors";
+import WithSize from "../../shared/with-size";
+import Axis from "./axis";
 
-export default class SvgVerticalBarChart extends React.Component {
+const MARGINS = {
+  left: 50,
+  right: 50,
+  top: 50,
+  bottom: 50
+};
+
+class SvgVerticalBarChart extends React.Component {
+  static displayName = "SvgVerticalBarChart";
+  state = {
+    data: generateArray(),
+    scaleX: null,
+    scaleY: null
+  };
+
   constructor(props) {
     super(props);
-    this.state = {
-      data: generateArray()
-    };
+    this.renderBar = this.renderBar.bind(this);
   }
 
   componentDidMount() {
-    const margin = { top: 20, right: 30, bottom: 30, left: 40 };
-    const width = 500 - margin.left - margin.right;
-    const height = 500 - margin.top - margin.bottom;
-
-    const { xScale, yScale } = this.getScales(width, height);
-    const xAxis = d3.axisBottom(xScale);
-    const yAxis = d3.axisLeft(yScale).ticks(10);
-
-    const chart = d3
-      .select(this.chart)
-      .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom);
-
-    chart
-      .append("g")
-      .attr("class", "chart-inner")
-      .attr("transform", `translate(${margin.left},${margin.top})`);
-
-    chart
-      .select(".chart-inner")
-      .append("g")
-      .attr("class", "bar-chart__axis")
-      .attr("transform", `translate(0, ${height})`)
-      .call(xAxis)
-      .append("text")
-      .attr("y", 16)
-      .attr("x", width + 20)
-      .text("Labels");
-
-    chart
-      .select(".chart-inner")
-      .append("g")
-      .attr("class", "bar-chart__axis")
-      .call(yAxis)
-      .append("text")
-      .attr("transform", "rotate(-90)")
-      .attr("y", 6)
-      .attr("dy", ".71em")
-      .text("Frequency");
-
-    const barsContainer = chart
-      .select(".chart-inner")
-      .append("g")
-      .attr("class", "chart-content");
-
-    const bar = barsContainer
-      .selectAll("g")
-      .data(this.state.data)
-      .enter()
-      .append("g")
-      .attr("transform", (x, i) => `translate(${xScale(x.label)}, 0)`);
-
-    bar
-      .append("rect")
-      .attr("width", xScale.bandwidth())
-      .attr("height", x => height - yScale(x.val))
-      .attr("y", x => yScale(x.val));
-
-    bar
-      .append("text")
-      .attr("x", xScale.bandwidth() / 2 - 10)
-      .attr("y", x => yScale(x.val) + 20)
-      .text(x => x.val);
+    const scaleX = this.createScaleX();
+    const scaleY = this.createScaleY();
+    this.setState({ scaleX, scaleY });
   }
 
-  getScales(width, height) {
-    const xScale = d3
+  componentDidUpdate(prevProps) {
+    // You might want to add also data change check here to rebuild scales if your data is dynamic
+    if (prevProps.width !== this.props.width || prevProps.height !== this.props.height) {
+      const scaleX = this.createScaleX();
+      const scaleY = this.createScaleY();
+      this.setState({ scaleX, scaleY });
+    }
+  }
+
+  createScaleX() {
+    return d3
       .scaleBand()
-      .range([0, width])
-      .padding(0.1)
-      .domain(this.state.data.map(x => x.label));
+      .domain(this.state.data.map(d => d.label))
+      .range([0, this.props.width - MARGINS.left - MARGINS.right])
+      .padding(0.1);
+  }
 
-    const yScale = d3
+  createScaleY() {
+    return d3
       .scaleLinear()
-      .domain([0, d3.max(this.state.data, x => x.val)])
-      .range([height, 0]);
-
-    return { xScale, yScale };
+      .domain([0, d3.max(this.state.data.map(d => d.val))])
+      .range([this.props.height - MARGINS.top - MARGINS.bottom, 0]);
   }
 
   render() {
-    return <svg className="bar-chart" ref={r => (this.chart = r)} />;
+    const { width, height } = this.props;
+    const { scaleX, scaleY } = this.state;
+    if (!width || !height || !scaleX || !scaleY) {
+      return null;
+    }
+
+    return (
+      <svg className="bar-chart bar-chart--group" width={width} height={height}>
+        <g transform={`translate(${MARGINS.left},${MARGINS.top})`}>
+          <Axis scaleX={scaleX} scaleY={scaleY} />
+        </g>
+        <g transform={`translate(${MARGINS.left},${MARGINS.top})`}>{this.state.data.map(this.renderBar)}</g>
+      </svg>
+    );
+  }
+
+  renderBar(d) {
+    const { scaleX, scaleY } = this.state;
+
+    return (
+      <g key={d.label}>
+        <rect
+          key={d.type}
+          width={scaleX.bandwidth()}
+          height={scaleY.range()[0] - scaleY(d.val)}
+          fill={`steelblue`}
+          x={scaleX(d.label)}
+          y={scaleY(d.val)}
+        >
+          <title>{d.val}</title>
+        </rect>
+      </g>
+    );
   }
 }
+
+export default WithSize(SvgVerticalBarChart);
