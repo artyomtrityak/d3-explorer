@@ -1,104 +1,125 @@
 import React from "react";
 import * as d3 from "d3";
+import WithSize from "../../shared/with-size";
 
-const colors = d3.scaleOrdinal(d3.schemeCategory10);
+class PieChart1 extends React.Component {
+  svgRef = React.createRef();
 
-export default class InteractivePieChart extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       data: [
-        {
-          apps_by_deployment: "error",
-          apps_by_deployment_doc_count: "5"
-        },
-        {
-          apps_by_deployment: "success",
-          apps_by_deployment_doc_count: "15"
-        },
-        {
-          apps_by_deployment: "warning",
-          apps_by_deployment_doc_count: "3"
-        },
-        {
-          apps_by_deployment: "aborted",
-          apps_by_deployment_doc_count: "2"
-        }
-      ]
+        { type: "error", count: "5" },
+        { type: "success", count: "15" },
+        { type: "warning", count: "3" },
+        { type: "aborted", count: "2" }
+      ],
+      arc: null,
+      pie: null,
+      hovered: null
     };
   }
 
   componentDidMount() {
-    const width = 960,
-      height = 500,
-      outerRadius = height / 2 - 20,
-      innerRadius = outerRadius / 3,
-      cornerRadius = 10;
-
-    const arc = d3
-      .arc()
-      .padRadius(outerRadius)
-      .innerRadius(innerRadius);
-
-    const chart = d3
-      .select(this.chartRef)
-      .attr("width", window.innerWidth - 100)
-      .attr("height", 500)
-      .append("g")
-      .attr("transform", `translate(${width / 2}, ${height / 2})`);
-
-    const pie = d3
-      .pie()
-      .sort(null)
-      .value(d => +d.apps_by_deployment_doc_count)
-      .padAngle(0.02);
-
-    const arcContainer = chart
-      .selectAll("path")
-      .data(pie(this.state.data))
-      .enter()
-      .append("g")
-      .attr("class", "arc");
-
-    arcContainer
-      .append("path")
-      .attr("fill", (d, i) => colors(i))
-      .each(d => {
-        d.outerRadius = outerRadius - 20;
-      })
-      .attr("d", arc)
-      .on("mouseover", this.arcTween(arc, outerRadius, true))
-      .on("mouseout", this.arcTween(arc, outerRadius - 20));
-
-    arcContainer
-      .append("text")
-      .attr("transform", d => {
-        return `translate(${arc.centroid(d)})`;
-      })
-      .attr("dy", "0.35em")
-      .text(d => d.data.apps_by_deployment_doc_count);
+    this.setState({
+      arc: this.createArc(),
+      pie: this.createPie(),
+      colors: this.createColors()
+    });
   }
 
-  arcTween(arc, newOuterRadius, isMouseOver) {
-    return function interpolateFn(data, i) {
-      d3.select(this)
-        .transition()
-        .duration(1000)
-        .attrTween("d", d => {
-          const interpolator = d3.interpolate(d.outerRadius, newOuterRadius);
-          return t => {
-            d.outerRadius = interpolator(t);
-            return arc(d);
-          };
-        })
-        .attrTween("fill", d => {
-          const to = isMouseOver ? "blue" : colors(i);
-          return d3.interpolateRgb(this.getAttribute("fill"), to);
-        });
-    };
+  componentDidUpdate(prevProps, prevState) {
+    // You might want to add also data change check here to rebuild scales if your data is dynamic
+    if (prevProps.width !== this.props.width || prevProps.height !== this.props.height) {
+      this.setState({
+        arc: this.createArc(),
+        pie: this.createPie()
+      });
+    }
+  }
+
+  getOuterRadius() {
+    return this.props.height / 2 - 100;
+  }
+
+  createArc() {
+    return d3.arc().innerRadius(0);
+  }
+
+  createPie() {
+    return d3
+      .pie()
+      .sort(null)
+      .value(d => +d.count)
+      .padAngle(0.02);
+  }
+
+  createColors() {
+    return d3.scaleOrdinal(d3.schemeCategory10).domain(this.state.data.map(d => d.type));
+  }
+
+  arcOver({ event, d }) {
+    event.persist();
+    d3.select(event.target)
+      .transition()
+      .duration(1000)
+      .attrTween("fill", () => {
+        return d3.interpolateRgb(event.target.getAttribute("fill"), "pink");
+      })
+      .attrTween("d", () => {
+        const interpolator = d3.interpolate(d.outerRadius, d.outerRadius + 50);
+        return t => {
+          d.outerRadius = interpolator(t);
+          return this.state.arc(d);
+        };
+      });
+  }
+
+  arcOut({ event, d }) {
+    event.persist();
+    const color = this.state.colors(d.data.type);
+    d3.select(event.target)
+      .transition()
+      .duration(1000)
+      .attrTween("fill", () => {
+        return d3.interpolateRgb(event.target.getAttribute("fill"), color);
+      })
+      .attrTween("d", () => {
+        const interpolator = d3.interpolate(d.outerRadius, this.getOuterRadius());
+        return t => {
+          d.outerRadius = interpolator(t);
+          return this.state.arc(d);
+        };
+      });
   }
 
   render() {
-    return <svg className="pie-chart" ref={r => (this.chartRef = r)} />;
+    const { width, height } = this.props;
+    const { colors, arc, pie, data } = this.state;
+
+    if (!arc || !pie || !colors) {
+      return <div>Loading...</div>;
+    }
+
+    return (
+      <svg ref={this.svgRef} width={width} height={height} className="pie-chart">
+        <g transform={`translate(${width / 2}, ${height / 2})`}>
+          {pie(data).map(d => {
+            d.outerRadius = this.getOuterRadius();
+            return (
+              <path
+                key={d.data.type}
+                fill={colors(d.data.type)}
+                d={arc(d)}
+                onMouseOver={event => this.arcOver({ event, d })}
+                onMouseOut={event => this.arcOut({ event, d })}
+              />
+            );
+          })}
+        </g>
+      </svg>
+    );
   }
 }
+
+export default WithSize(PieChart1);
