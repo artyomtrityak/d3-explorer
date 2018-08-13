@@ -28,7 +28,7 @@ export default class PieCharts extends React.Component {
             </NavLink>
           </div>
         </div>
-        <div className="col-9">
+        <div className="col-9 chart">
           <Route path={`${match.url}/pie1`} component={Pie1} />
           <Route path={`${match.url}/interactive`} component={InteractivePie} />
           <Route path={`${match.url}/with-labels`} component={LabelsPie} />

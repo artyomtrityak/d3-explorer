@@ -1,68 +1,76 @@
 import React from "react";
 import * as d3 from "d3";
+import WithSize from "../../shared/with-size";
 
-export default class BasicPieChart extends React.Component {
+class PieChart1 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       data: [
-        {
-          apps_by_deployment: "error",
-          apps_by_deployment_doc_count: "5"
-        },
-        {
-          apps_by_deployment: "success",
-          apps_by_deployment_doc_count: "15"
-        },
-        {
-          apps_by_deployment: "warning",
-          apps_by_deployment_doc_count: "3"
-        },
-        {
-          apps_by_deployment: "aborted",
-          apps_by_deployment_doc_count: "2"
-        }
+        { type: "error", count: "5" },
+        { type: "success", count: "15" },
+        { type: "warning", count: "3" },
+        { type: "aborted", count: "2" }
       ]
     };
   }
 
   componentDidMount() {
-    const width = 960,
-      height = 500,
-      outerRadius = height / 2 - 20,
-      innerRadius = outerRadius / 3,
-      cornerRadius = 10;
+    this.setState({
+      arc: this.createArc(),
+      pie: this.createPie(),
+      colors: this.createColors()
+    });
+  }
 
-    const colors = d3.scaleOrdinal(d3.schemeCategory10);
+  componentDidUpdate(prevProps) {
+    // You might want to add also data change check here to rebuild scales if your data is dynamic
+    if (prevProps.width !== this.props.width || prevProps.height !== this.props.height) {
+      this.setState({
+        arc: this.createArc(),
+        pie: this.createPie()
+      });
+    }
+  }
 
-    const chart = d3
-      .select(this.chartRef)
-      .attr("width", window.innerWidth - 100)
-      .attr("height", 500)
-      .append("g")
-      .attr("transform", `translate(${width / 2}, ${height / 2})`);
-
-    const pie = d3
-      .pie()
-      .sort(null)
-      .value(d => +d.apps_by_deployment_doc_count)
-      .padAngle(0.02);
-
-    var arc = d3
+  createArc() {
+    const outerRadius = this.props.height / 2;
+    return d3
       .arc()
       .outerRadius(outerRadius - 20)
-      .innerRadius(innerRadius);
+      .innerRadius(0);
+  }
 
-    chart
-      .selectAll("path")
-      .data(pie(this.state.data))
-      .enter()
-      .append("path")
-      .attr("fill", (d, i) => colors(i))
-      .attr("d", arc);
+  createPie() {
+    return d3
+      .pie()
+      .sort(null)
+      .value(d => +d.count)
+      .padAngle(0.02);
+  }
+
+  createColors() {
+    return d3.scaleOrdinal(d3.schemeCategory10).domain(this.state.data.map(d => d.type));
   }
 
   render() {
-    return <svg className="pie-chart" ref={r => (this.chartRef = r)} />;
+    const { width, height } = this.props;
+    const { colors, arc, pie, data } = this.state;
+
+    if (!arc || !pie || !colors) {
+      return <div>Loading...</div>;
+    }
+
+    return (
+      <svg width={width} height={height} className="pie-chart">
+        <g transform={`translate(${width / 2}, ${height / 2})`}>
+          {pie(data).map(d => {
+            return <path key={d.data.type} fill={colors(d.data.type)} d={arc(d)} />;
+          })}
+        </g>
+      </svg>
+    );
   }
 }
+
+export default WithSize(PieChart1);
