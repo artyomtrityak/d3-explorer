@@ -43,7 +43,7 @@ class PieChart1 extends React.Component {
   }
 
   createArc() {
-    return d3.arc().innerRadius(0);
+    return d3.arc().innerRadius(this.getOuterRadius() - 100);
   }
 
   createPie() {
