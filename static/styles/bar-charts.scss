@@ -1,75 +1,23 @@
-.chart--bar-chart {
+.bar-chart {
   color: white;
-}
 
-.bar-chart__axis {
-  path,
-  line {
-    fill: none;
-    stroke: black;
-  }
-}
-
-.bar-chart__div {
-  background-color: steelblue;
-  border: 1px solid white;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  padding-right: 10px;
-}
-
-.bar-chart--stack {
-  rect {
-    fill: unset;
-
-    &:hover {
-      stroke: blueviolet;
-      stroke-width: 2;
-    }
-  }
-}
-
-.bar-chart--axis-with-lines {
-  .axis {
-    path,
-    line {
-      fill: none;
-      stroke: gray;
-    }
-  }
-}
-
-.bar-chart--dynamic {
-  .bar-chart__added {
+  &.bar-chart--stack {
     rect {
-      fill: blueviolet;
+      fill: unset;
+
+      &:hover {
+        stroke: blueviolet;
+        stroke-width: 2;
+      }
     }
   }
 
-  .bar-chart__updated {
-    rect {
-      fill: orange;
-    }
-  }
-}
-
-.bar-chart--full-width {
-  width: 100%;
-  height: 500px;
-
-  .bar-chart__bar {
-    stroke-width: 5px;
-    stroke: goldenrod;
-    fill: steelblue;
-    transition: fill 1s;
-
-    &:hover {
-      fill: goldenrod;
-    }
-  }
-
-  .bar-chart__text {
-    transform: translate(5px, 20px);
+  .bar-chart__div {
+    background-color: steelblue;
+    border: 1px solid white;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 10px;
   }
 }

@@ -1,110 +1,105 @@
 import React from "react";
 import * as d3 from "d3";
+import WithSize from "../../shared/with-size";
 
-export default class BasicPieChart extends React.Component {
+class PieChartWithLabelsOutside extends React.Component {
+  svgRef = React.createRef();
+
   constructor(props) {
     super(props);
     this.state = {
-      data: [
-        {
-          apps_by_deployment: "error",
-          apps_by_deployment_doc_count: "5"
-        },
-        {
-          apps_by_deployment: "success",
-          apps_by_deployment_doc_count: "15"
-        },
-        {
-          apps_by_deployment: "warning",
-          apps_by_deployment_doc_count: "3"
-        },
-        {
-          apps_by_deployment: "aborted",
-          apps_by_deployment_doc_count: "2"
-        }
-      ]
+      data: [{ type: "error", count: 5 }, { type: "success", count: 15 }, { type: "warning", count: 3 }, { type: "aborted", count: 2 }],
+      arc: null,
+      pie: null,
+      hovered: null
     };
   }
 
   componentDidMount() {
-    const width = 960,
-      height = 500,
-      outerRadius = height / 2 - 20,
-      innerRadius = outerRadius / 3,
-      cornerRadius = 10;
+    this.setState({
+      arc: this.createArc(),
+      pie: this.createPie(),
+      colors: this.createColors()
+    });
+  }
 
-    const radius = Math.min(width, height) / 2,
-      labelRadius = radius - 10;
+  componentDidUpdate(prevProps, prevState) {
+    // You might want to add also data change check here to rebuild scales if your data is dynamic
+    if (prevProps.width !== this.props.width || prevProps.height !== this.props.height) {
+      this.setState({
+        arc: this.createArc(),
+        pie: this.createPie()
+      });
+    }
+  }
 
-    const colors = d3.scaleOrdinal(d3.schemeCategory10);
+  getOuterRadius() {
+    return this.props.height / 2 - 100;
+  }
 
-    const chart = d3
-      .select(this.chartRef)
-      .attr("width", window.innerWidth - 100)
-      .attr("height", height + 100)
-      .append("g")
-      .attr("transform", `translate(${width / 2}, ${height / 2})`);
+  createArc() {
+    return d3
+      .arc()
+      .outerRadius(this.getOuterRadius())
+      .innerRadius(this.getOuterRadius() - 100);
+  }
 
-    //Center label
-    chart
-      .append("text")
-      .attr("text-anchor", "middle")
-      .attr("dy", "0.35em")
-      .style("font-size", "24px")
-      .text("1912");
-
-    const pie = d3
+  createPie() {
+    return d3
       .pie()
       .sort(null)
-      .value(d => +d.apps_by_deployment_doc_count)
+      .value(d => d.count)
       .padAngle(0.02);
+  }
 
-    const arc = d3
-      .arc()
-      .outerRadius(outerRadius - 20)
-      .innerRadius(innerRadius);
+  createColors() {
+    return d3.scaleOrdinal(d3.schemeCategory10).domain(this.state.data.map(d => d.type));
+  }
 
-    const arcsWithData = pie(this.state.data);
+  getTextPosition({ arc, d }) {
+    const radius = Math.min(this.props.width, this.props.height) / 2;
+    const labelRadius = radius - 50;
 
-    const gContainer = chart
-      .selectAll("path")
-      .data(arcsWithData)
-      .enter()
-      .append("g");
-
-    gContainer
-      .append("path")
-      .attr("fill", (d, i) => colors(i))
-      .attr("d", arc);
-
-    //Add outside labels
-    gContainer
-      .append("text")
-      .attr("transform", d => {
-        const c = arc.centroid(d);
-        const x = c[0];
-        const y = c[1];
-        const h = Math.sqrt(x * x + y * y);
-        return `translate(${(x / h) * labelRadius},${(y / h) * labelRadius})`;
-      })
-      .attr("text-anchor", d => {
-        // did we past the center?
-        return (d.endAngle + d.startAngle) / 2 > Math.PI ? "end" : "start";
-      })
-      .attr("dy", ".35em")
-      .text(d => {
-        return `${d.data.apps_by_deployment}: ${
-          d.data.apps_by_deployment_doc_count
-        }`;
-      });
+    const c = arc.centroid(d);
+    const x = c[0];
+    const y = c[1];
+    const h = Math.sqrt(x * x + y * y);
+    return `translate(${(x / h) * labelRadius},${(y / h) * labelRadius})`;
   }
 
   render() {
+    const { width, height } = this.props;
+    const { colors, arc, pie, data } = this.state;
+
+    if (!arc || !pie || !colors) {
+      return <div>Loading...</div>;
+    }
+
     return (
-      <svg
-        className="pie-chart pie-chart--out-labels"
-        ref={r => (this.chartRef = r)}
-      />
+      <svg ref={this.svgRef} width={width} height={height} className="pie-chart">
+        <g transform={`translate(${width / 2}, ${height / 2})`}>
+          {pie(data).map(d => {
+            return (
+              <React.Fragment key={d.data.type}>
+                <path fill={colors(d.data.type)} d={arc(d)} />
+                {/* Label */}
+                <text transform={this.getTextPosition({ arc, d })} textAnchor={(d.endAngle + d.startAngle) / 2 > Math.PI ? "end" : "start"}>
+                  {`${d.data.type}: ${d.data.count}`}
+                </text>
+              </React.Fragment>
+            );
+          })}
+
+          {/* Center label */}
+          <g>
+            <text textAnchor="middle" fontSize="24px">
+              Total: {data.reduce((result, d) => result + d.count, 0)}
+            </text>
+          </g>
+        </g>
+      </svg>
     );
   }
 }
+
+export default WithSize(PieChartWithLabelsOutside);

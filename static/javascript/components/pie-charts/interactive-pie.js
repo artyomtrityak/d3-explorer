@@ -2,7 +2,7 @@ import React from "react";
 import * as d3 from "d3";
 import WithSize from "../../shared/with-size";
 
-class PieChart1 extends React.Component {
+class InteractivePieChart extends React.Component {
   svgRef = React.createRef();
 
   constructor(props) {
@@ -122,4 +122,4 @@ class PieChart1 extends React.Component {
   }
 }
 
-export default WithSize(PieChart1);
+export default WithSize(InteractivePieChart);
